@@ -5,6 +5,10 @@ class HomePostPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Text('data'),
+    return Container(
+      child: Center(
+        child: Text('HomePostPage'),
+      ),
     );
   }
 }
