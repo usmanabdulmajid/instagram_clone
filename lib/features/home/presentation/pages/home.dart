@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/features/activity/presentation/pages/activity_page.dart';
 import 'package:instagram_clone/features/home/presentation/pages/home_post_page.dart';
+import 'package:instagram_clone/features/message/presentation/pages/message.dart';
+import 'package:instagram_clone/features/new_post/presentation/pages/new_post.dart';
 import 'package:instagram_clone/features/profile/presentation/pages/profile_page.dart';
 import 'package:instagram_clone/features/reels/presentation/pages/reels_page.dart';
 import 'package:instagram_clone/features/search/presentation/pages/search_page.dart';
@@ -12,6 +14,14 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
+  int pageIndex = 1;
+  PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = new PageController(initialPage: pageIndex);
+  }
 
   var _list = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
@@ -48,27 +58,38 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: [
-          HomePostPage(),
-          SearchPage(),
-          ReelsPage(),
-          ActivityPage(),
-          ProfilePage(),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: _list,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        onTap: (int index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-      ),
+    return PageView(
+      scrollDirection: Axis.horizontal,
+      controller: _pageController,
+      pageSnapping: true,
+      children: [
+        NewPost(),
+        Scaffold(
+          body: IndexedStack(
+            index: _selectedIndex,
+            children: [
+              HomePostPage(),
+              SearchPage(),
+              ReelsPage(),
+              ActivityPage(),
+              ProfilePage(),
+            ],
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            selectedItemColor: Colors.black,
+            unselectedItemColor: Colors.black,
+            items: _list,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            onTap: (int index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+          ),
+        ),
+        Messaging(),
+      ],
     );
   }
 }
