@@ -12,7 +12,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Color(0xFFFFFFFF),
+        accentColor: Color(0xFF262626),
+        backgroundColor: Color(0xFFFFFFFF),
+        bottomAppBarColor: Color(0xFF000000),
+      ),
+      darkTheme: ThemeData(
+        accentColor: Color(0xFFF9F9F9),
+        fontFamily: 'SFProText',
       ),
       home: Home(),
     );
