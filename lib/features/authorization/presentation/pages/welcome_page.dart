@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/features/authorization/presentation/widgets/login_proceed_button.dart';
+import 'package:language_picker/language_picker.dart';
+import 'package:language_picker/languages.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -11,6 +15,46 @@ class _WelcomePageState extends State<WelcomePage> {
 
   String _userNameNullTracker = '';
   String _passwordNameNullTracker = '';
+  Language _selectedDropdownLanguage = Languages.korean;
+  Language _selectedDialogLanguage = Languages.korean;
+  final String defaultLocale = Platform.localeName;
+
+  void _openLanguagePickerDialog() => showDialog(
+        context: context,
+        builder: (context) => Theme(
+            data: Theme.of(context).copyWith(primaryColor: Colors.pink),
+            child: LanguagePickerDialog(
+                titlePadding: EdgeInsets.all(0.0),
+                searchCursorColor: Colors.pinkAccent,
+                searchInputDecoration: InputDecoration(hintText: 'Search...'),
+                isSearchable: true,
+                title: Text('Select your language'),
+                onValuePicked: (Language language) => setState(() {
+                      _selectedDialogLanguage = language;
+                      print(_selectedDialogLanguage.name);
+                      print(_selectedDialogLanguage.isoCode);
+                    }),
+                itemBuilder: _buildDialogItem)),
+      );
+  Widget _buildDialogItem(Language language) => Row(
+        children: <Widget>[
+          Text(language.name),
+          SizedBox(width: 8.0),
+          Flexible(child: Text("(${language.isoCode})"))
+        ],
+      );
+
+  Widget _buildDropdownItem(Language language) {
+    return Row(
+      children: <Widget>[
+        SizedBox(
+          width: 8.0,
+        ),
+        Text("${language.name} (${language.isoCode})"),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var _size = MediaQuery.of(context).size;
@@ -22,7 +66,25 @@ class _WelcomePageState extends State<WelcomePage> {
         padding: EdgeInsets.only(top: 50.0),
         child: Column(
           children: [
-            Text('English(United State)'),
+            InkWell(
+              onTap: _openLanguagePickerDialog,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(_selectedDialogLanguage.name),
+                  Icon(Icons.arrow_drop_down)
+                ],
+              ),
+            ),
+            // LanguagePickerDropdown(
+            //   initialValue: Languages.korean,
+            //   itemBuilder: _buildDialogItem,
+            //   onValuePicked: (Language language) {
+            //     _selectedDropdownLanguage = language;
+            //     print(_selectedDropdownLanguage.name);
+            //     print(_selectedDropdownLanguage.isoCode);
+            //   },
+            // ),
             SizedBox(
               height: _size.height * 0.2,
             ),
