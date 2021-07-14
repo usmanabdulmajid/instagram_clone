@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:instagram_clone/features/activity/presentation/pages/activity_page.dart';
 import 'package:instagram_clone/features/home/presentation/pages/home_post_page.dart';
 import 'package:instagram_clone/features/message/presentation/pages/message.dart';
@@ -16,10 +17,12 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
   int pageIndex = 1;
   PageController _pageController;
+  bool shouldScrollPage = true;
 
   @override
   void initState() {
     super.initState();
+    shouldScrollPage = true;
     _pageController = new PageController(initialPage: pageIndex);
   }
 
@@ -61,6 +64,9 @@ class _HomeState extends State<Home> {
     return PageView(
       scrollDirection: Axis.horizontal,
       controller: _pageController,
+      physics: shouldScrollPage
+          ? PageScrollPhysics()
+          : NeverScrollableScrollPhysics(),
       pageSnapping: true,
       children: [
         NewPost(),
@@ -84,6 +90,11 @@ class _HomeState extends State<Home> {
             onTap: (int index) {
               setState(() {
                 _selectedIndex = index;
+                if (index != 0) {
+                  shouldScrollPage = false;
+                } else {
+                  shouldScrollPage = true;
+                }
               });
             },
           ),
