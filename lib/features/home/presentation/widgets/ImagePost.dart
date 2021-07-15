@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
-class ImagePost extends StatelessWidget {
+class ImagePost extends StatefulWidget {
   const ImagePost({Key key}) : super(key: key);
 
+  @override
+  _ImagePostState createState() => _ImagePostState();
+}
+
+class _ImagePostState extends State<ImagePost> {
+  bool _imagePageCountVisible = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,25 +30,41 @@ class ImagePost extends StatelessWidget {
               ),
             ),
           ),
-          Stack(
-            children: [
-              Image.asset("assets/images/selfie_test.jpg"),
-              Positioned(
-                top: 16.0,
-                right: 16.0,
-                child: Container(
-                  padding: EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    color: Color(0xFF121212).withOpacity(0.7),
-                    borderRadius: BorderRadius.circular(16.0),
+          GestureDetector(
+            onTap: () => {
+              setState(() {
+                _imagePageCountVisible = !_imagePageCountVisible;
+                Future.delayed(Duration(seconds: 5), () {
+                  setState(() {
+                    _imagePageCountVisible = false;
+                  });
+                });
+              })
+            },
+            child: Stack(
+              children: [
+                Image.asset("assets/images/selfie_test.jpg"),
+                Positioned(
+                  top: 16.0,
+                  right: 16.0,
+                  child: AnimatedOpacity(
+                    duration: Duration(milliseconds: 300),
+                    opacity: _imagePageCountVisible ? 1 : 0,
+                    child: Container(
+                      padding: EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        color: Color(0xFF121212).withOpacity(0.7),
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                      child: Text(
+                        "1/2",
+                        style: TextStyle(color: Color(0xFFF9F9F9)),
+                      ),
+                    ),
                   ),
-                  child: Text(
-                    "1/2",
-                    style: TextStyle(color: Color(0xFFF9F9F9)),
-                  ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
           Container(
               child: Column(
@@ -54,7 +76,7 @@ class ImagePost extends StatelessWidget {
                     onPressed: () => {},
                   ),
                   IconButton(
-                    icon: Icon(Icons.chat_bubble_outline_rounded),
+                    icon: Icon(Icons.topic_rounded),
                     onPressed: () => {},
                   ),
                   IconButton(
