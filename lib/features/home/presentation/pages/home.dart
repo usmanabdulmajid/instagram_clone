@@ -90,27 +90,28 @@ class _HomeState extends State<Home> {
         ),
         Messaging(),
       ],
-    return Scaffold(
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: [
-          HomePostPage(),
-          SearchPage(),
-          ReelsPage(),
-          ActivityPage(),
-          ProfilePage(),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: _list,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        onTap: (int index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-      ),
+      // return Scaffold(
+      //   body: IndexedStack(
+      //     index: _selectedIndex,
+      //     children: [
+      //       HomePostPage(),
+      //       SearchPage(),
+      //       ReelsPage(),
+      //       ActivityPage(),
+      //       ProfilePage(),
+      //     ],
+      //   ),
+      //   bottomNavigationBar: BottomNavigationBar(
+      //     items: _list,
+      //     showSelectedLabels: false,
+      //     showUnselectedLabels: false,
+      //     onTap: (int index) {
+      //       setState(() {
+      //         _selectedIndex = index;
+      //       });
+      //     },
+      //   ),
+      // );
     );
   }
 }
