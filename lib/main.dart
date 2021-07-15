@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/features/home/presentation/pages/home.dart';
 
-
 void main() {
   runApp(MyApp());
 }
