@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/features/profile/presentation/pages/utils/colors.dart';
 import 'package:instagram_clone/features/profile/presentation/pages/utils/sizing.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  bool onTapStoryHighlight = false;
   @override
   Widget build(BuildContext context) {
     var brightness = MediaQuery.of(context).platformBrightness;
     bool darkModeOn = brightness == Brightness.dark;
-    print(darkModeOn);
     return Scaffold(
       backgroundColor: darkModeOn ? AppColors.black : AppColors.white,
       body: SafeArea(
@@ -15,7 +20,7 @@ class ProfilePage extends StatelessWidget {
           width: Sizing.xMargin(context, 100),
           height: Sizing.yMargin(context, 100),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -182,26 +187,190 @@ class ProfilePage extends StatelessWidget {
                 ),
                 YMargin(10),
                 GestureDetector(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  onTap: () {
+                    setState(() {
+                      onTapStoryHighlight = !onTapStoryHighlight;
+                    });
+                  },
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
-                        'Story Highlights',
-                        style: TextStyle(
-                          fontFamily: 'SFProText',
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: darkModeOn ? AppColors.white : AppColors.black,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Story Highlights',
+                            style: TextStyle(
+                              fontFamily: 'SFProText',
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: darkModeOn
+                                  ? AppColors.white
+                                  : AppColors.black,
+                            ),
+                          ),
+                          Transform.rotate(
+                            angle: onTapStoryHighlight ? 1.5708 : 4.71239,
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              size: 10,
+                              color: darkModeOn
+                                  ? AppColors.white
+                                  : AppColors.black,
+                            ),
+                          ),
+                        ],
                       ),
-                      Transform.rotate(
-                        angle: 1.5708,
-                        child: Icon(Icons.arrow_back_ios,
-                            color:
-                                darkModeOn ? AppColors.white : AppColors.black),
-                      ),
+                      YMargin(2),
                     ],
                   ),
+                ),
+                Visibility(
+                  visible: onTapStoryHighlight,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            onTapStoryHighlight = !onTapStoryHighlight;
+                          });
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              'Keep your favourite stories on your profile',
+                              style: TextStyle(
+                                fontFamily: 'SFProText',
+                                fontSize: 13,
+                                fontWeight: FontWeight.normal,
+                                color: darkModeOn
+                                    ? AppColors.white
+                                    : AppColors.black,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      YMargin(13),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  child: FloatingActionButton(
+                                    onPressed: () {},
+                                    elevation: 0,
+                                    child: Icon(
+                                      Icons.add,
+                                      size: 30,
+                                      color: darkModeOn
+                                          ? AppColors.white
+                                          : AppColors.black,
+                                    ),
+                                    backgroundColor: darkModeOn
+                                        ? AppColors.black
+                                        : AppColors.white,
+                                    shape: CircleBorder(
+                                        side: BorderSide(
+                                            width: 0.5,
+                                            color: darkModeOn
+                                                ? AppColors.white
+                                                : AppColors.black)),
+                                  ),
+                                ),
+                                YMargin(5),
+                                Text(
+                                  'New',
+                                  style: TextStyle(
+                                    fontFamily: 'SFProText',
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.normal,
+                                    color: darkModeOn
+                                        ? AppColors.white
+                                        : AppColors.black,
+                                  ),
+                                )
+                              ],
+                            ),
+                            XMargin(18),
+                            CircleAvatar(
+                              backgroundColor: AppColors.grey,
+                              radius: 30,
+                            ),
+                            XMargin(18),
+                            CircleAvatar(
+                              backgroundColor: AppColors.grey,
+                              radius: 30,
+                            ),
+                            XMargin(18),
+                            CircleAvatar(
+                              backgroundColor: AppColors.grey,
+                              radius: 30,
+                            ),
+                            XMargin(18),
+                            CircleAvatar(
+                              backgroundColor: AppColors.grey,
+                              radius: 30,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                YMargin(25),
+                Row(
+                  children: [
+                    Expanded(
+                      child: DefaultTabController(
+                        length: 2,
+                        child: Stack(
+                          fit: StackFit.passthrough,
+                          alignment: Alignment.bottomCenter,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: AppColors.grey,
+                                    width: 0.5,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            TabBar(
+                              indicatorWeight: 1.0,
+                              unselectedLabelColor: AppColors.darkStoryGrey,
+                              labelColor: darkModeOn
+                                  ? AppColors.white
+                                  : AppColors.black,
+                              tabs: [
+                                Tab(
+                                  icon: Icon(
+                                    Icons.grid_on_outlined,
+                                  ),
+                                ),
+                                Tab(
+                                  icon: Icon(
+                                    Icons.account_box_outlined,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 )
               ],
             ),
@@ -237,7 +406,7 @@ class ProfileButtonWidget extends StatelessWidget {
       ),
       style: ElevatedButton.styleFrom(
         elevation: 0,
-        padding: EdgeInsets.symmetric(vertical: 5, horizontal: 32),
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 32),
         textStyle: TextStyle(
           fontFamily: 'SFProText',
           fontSize: 14,
