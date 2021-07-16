@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
     ),
     BottomNavigationBarItem(
       icon: Icon(
-        Icons.favorite,
+        Icons.favorite_outline,
       ),
       label: 'Profile',
     ),

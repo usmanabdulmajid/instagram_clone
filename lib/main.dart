@@ -22,6 +22,10 @@ class MyApp extends StatelessWidget {
           headline5: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
           bodyText1: TextStyle(fontSize: 12.0, fontStyle: FontStyle.normal),
           bodyText2: TextStyle(fontSize: 14.0, fontStyle: FontStyle.normal),
+          caption: TextStyle(
+              fontSize: 10.0,
+              fontStyle: FontStyle.normal,
+              color: Color(0xFF262626)),
         ),
       ),
       themeMode: ThemeMode.system,
@@ -32,6 +36,12 @@ class MyApp extends StatelessWidget {
         backgroundColor: Color(0xFF000000),
         accentColor: Color(0xFFF9F9F9),
         fontFamily: 'SFProText',
+        textTheme: TextTheme(
+          caption: TextStyle(
+            fontSize: 11.0,
+            fontStyle: FontStyle.normal,
+          ),
+        ),
         appBarTheme: AppBarTheme(
           backgroundColor: Color(0xFF000000),
         ),
