@@ -447,7 +447,6 @@ class ProfileTextWidget extends StatelessWidget {
         Text(
           labelCount,
           style: TextStyle(
-            fontFamily: 'SFProText',
             fontSize: 16,
             fontWeight: FontWeight.bold,
             color: darkModeOn ? AppColors.white : AppColors.black,
@@ -457,7 +456,6 @@ class ProfileTextWidget extends StatelessWidget {
         Text(
           label,
           style: TextStyle(
-            fontFamily: 'SFProText',
             fontSize: 14,
             fontWeight: FontWeight.normal,
             color: darkModeOn ? AppColors.white : AppColors.black,

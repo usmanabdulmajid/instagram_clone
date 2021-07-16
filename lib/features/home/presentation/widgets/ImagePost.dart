@@ -12,10 +12,13 @@ class ImagePost extends StatefulWidget {
 
 class _ImagePostState extends State<ImagePost> {
   bool _imagePageCountVisible = false;
+  bool _cateloge = true;
+  String _imagePageCount = "";
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             child: Row(
@@ -41,7 +44,6 @@ class _ImagePostState extends State<ImagePost> {
                 ),
                 Spacer(),
                 IconButton(
-                  color: Color(0xFF000000),
                   icon: Icon(Icons.more_vert),
                   onPressed: () => {},
                 ),
@@ -51,12 +53,14 @@ class _ImagePostState extends State<ImagePost> {
           GestureDetector(
             onTap: () => {
               setState(() {
-                _imagePageCountVisible = !_imagePageCountVisible;
-                Future.delayed(Duration(seconds: 5), () {
-                  setState(() {
-                    _imagePageCountVisible = false;
+                if (_cateloge) {
+                  _imagePageCountVisible = !_imagePageCountVisible;
+                  Future.delayed(Duration(seconds: 5), () {
+                    setState(() {
+                      _imagePageCountVisible = false;
+                    });
                   });
-                });
+                }
               })
             },
             child: Stack(
@@ -65,18 +69,27 @@ class _ImagePostState extends State<ImagePost> {
                 Positioned(
                   top: kmediumSpace,
                   right: kmediumSpace,
-                  child: AnimatedOpacity(
-                    duration: Duration(milliseconds: 300),
-                    opacity: _imagePageCountVisible ? 1 : 0,
-                    child: Container(
-                      padding: EdgeInsets.all(ksmallSpace),
-                      decoration: BoxDecoration(
-                        color: Color(0xFF121212).withOpacity(0.7),
-                        borderRadius: BorderRadius.circular(kmediumSpace),
-                      ),
-                      child: Text(
-                        "1/2",
-                        style: TextStyle(color: Color(0xFFF9F9F9)),
+                  child: Visibility(
+                    visible: _cateloge,
+                    child: AnimatedOpacity(
+                      duration: Duration(milliseconds: 300),
+                      opacity: _imagePageCountVisible ? 1 : 0,
+                      child: Container(
+                        width: 40,
+                        padding: EdgeInsets.all(ksmallSpace),
+                        decoration: BoxDecoration(
+                          color: Color(0xFF121212).withOpacity(0.7),
+                          borderRadius: BorderRadius.horizontal(
+                              left: Radius.circular(kmediumSpace),
+                              right: Radius.circular(kmediumSpace)),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "1/2",
+                            style: TextStyle(
+                                color: Color(0xFFF9F9F9), fontSize: 12),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -92,14 +105,14 @@ class _ImagePostState extends State<ImagePost> {
                 Row(
                   children: [
                     Icon(
-                      Icons.favorite_outline,
+                      Icons.favorite_outline_sharp,
                       size: klargeIconSize,
                     ),
                     SizedBox(
                       width: ksmallSpace,
                     ),
                     Icon(
-                      Icons.topic_rounded,
+                      Icons.message_outlined,
                       size: klargeIconSize,
                     ),
                     SizedBox(
@@ -117,7 +130,7 @@ class _ImagePostState extends State<ImagePost> {
                       child: Container(),
                     ),
                     Icon(
-                      Icons.turned_in_not_rounded,
+                      Icons.bookmark_border_outlined,
                       size: klargeIconSize,
                     ),
                   ],
@@ -149,6 +162,7 @@ class _ImagePostState extends State<ImagePost> {
                       TextSpan(
                         text:
                             "The game in Japan was amazing and I want to share some photosThe game in Japan was amazing and I want to share some photosThe game in Japan was amazing and I want to share some photosThe game in Japan was amazing and I want to share some photosThe game in Japan was amazing and I want to share some photos",
+                        style: TextStyle(fontSize: 12),
                       ),
                     ],
                   ),
