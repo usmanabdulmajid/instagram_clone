@@ -42,6 +42,8 @@ flutter:
   assets:
     - assets/
     - assets/images/selfie_test.jpg
+    - assets/icons/dark-theme/
+    - assets/icons/light-theme/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
