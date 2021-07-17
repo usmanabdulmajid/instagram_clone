@@ -3,7 +3,8 @@ import 'package:instagram_clone/features/profile/presentation/pages/utils/colors
 import 'package:instagram_clone/features/profile/presentation/pages/utils/sizing.dart';
 import 'package:instagram_clone/features/profile/presentation/widgets/empty_profile_posts_page.dart';
 import 'package:instagram_clone/features/profile/presentation/widgets/empty_profile_tag_page.dart';
-import 'package:instagram_clone/features/profile/presentation/widgets/modal_list_tile.dart';
+import 'package:instagram_clone/features/profile/presentation/widgets/menu_modal_sheet.dart';
+import 'package:instagram_clone/features/profile/presentation/widgets/modal_bottom_sheet.dart';
 import 'package:instagram_clone/features/profile/presentation/widgets/profile_button_widget.dart';
 import 'package:instagram_clone/features/profile/presentation/widgets/profile_text_widget.dart';
 
@@ -28,115 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
         actions: [
           GestureDetector(
             onTap: () async {
-              await showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return Container(
-                        height: Sizing.yMargin(context, 50),
-                        color: darkModeOn ? AppColors.black : AppColors.white,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: darkModeOn
-                                ? AppColors.darkStoryGrey
-                                : AppColors.white,
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 10),
-                                child: Center(
-                                  child: Container(
-                                    width: 35,
-                                    height: 4,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        color: AppColors.textGrey),
-                                  ),
-                                ),
-                              ),
-                              Center(
-                                child: Text(
-                                  'Create new',
-                                  style: TextStyle(
-                                    fontFamily: 'SFProText',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w900,
-                                    color: AppColors.textGrey,
-                                  ),
-                                ),
-                              ),
-                              YMargin(5),
-                              Divider(
-                                color: darkModeOn
-                                    ? AppColors.textGrey
-                                    : AppColors.black,
-                              ),
-                              YMargin(10),
-                              ModalListTile(
-                                darkModeOn: darkModeOn,
-                                label: 'Feed Post',
-                                leadingWidget: Icon(Icons.grid_on_outlined,
-                                    size: 25,
-                                    color: darkModeOn
-                                        ? AppColors.white
-                                        : AppColors.black),
-                              ),
-                              ModalListTile(
-                                darkModeOn: darkModeOn,
-                                label: 'Reel',
-                                leadingWidget: Icon(
-                                    Icons.ondemand_video_outlined,
-                                    size: 25,
-                                    color: darkModeOn
-                                        ? AppColors.white
-                                        : AppColors.black),
-                              ),
-                              ModalListTile(
-                                darkModeOn: darkModeOn,
-                                label: 'Story',
-                                leadingWidget: Icon(Icons.add_circle_outline,
-                                    size: 25,
-                                    color: darkModeOn
-                                        ? AppColors.white
-                                        : AppColors.black),
-                              ),
-                              ModalListTile(
-                                darkModeOn: darkModeOn,
-                                label: 'Story Highlight',
-                                leadingWidget: Icon(
-                                    Icons.add_circle_outline_outlined,
-                                    size: 25,
-                                    color: darkModeOn
-                                        ? AppColors.white
-                                        : AppColors.black),
-                              ),
-                              ModalListTile(
-                                darkModeOn: darkModeOn,
-                                label: 'IGTV video',
-                                leadingWidget: Icon(Icons.live_tv_outlined,
-                                    size: 25,
-                                    color: darkModeOn
-                                        ? AppColors.white
-                                        : AppColors.black),
-                              ),
-                              ModalListTile(
-                                darkModeOn: darkModeOn,
-                                label: 'Guide',
-                                leadingWidget: Icon(Icons.menu_book,
-                                    size: 25,
-                                    color: darkModeOn
-                                        ? AppColors.white
-                                        : AppColors.black),
-                              ),
-                            ],
-                          ),
-                        ));
-                  });
+              await buildModalBottomSheet(context, darkModeOn);
             },
             child: Container(
                 child: darkModeOn
@@ -144,6 +37,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     : Image.asset("$lightIconTheme/add-light.png")),
           ),
           GestureDetector(
+            onTap: () async {
+              await buildMenuModalBottomSheet(context, darkModeOn);
+            },
             child: Container(
                 child: darkModeOn
                     ? Image.asset("$darkIconTheme/menu.png")
