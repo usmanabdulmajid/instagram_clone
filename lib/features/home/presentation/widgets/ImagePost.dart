@@ -27,12 +27,12 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 400),
+      duration: const Duration(milliseconds: 600),
       vsync: this,
     );
     _animation = CurvedAnimation(
       parent: _controller,
-      curve: Curves.bounceIn,
+      curve: Curves.bounceOut,
     );
     if (_commentCount > 0) {
       _hasComment = true;
@@ -103,7 +103,9 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                 {
                   setState(() {
                     _likedPost = true;
-                    _controller.forward();
+                    _controller
+                        .forward()
+                        .whenComplete(() => _controller.reset());
                   })
                 }
               else
@@ -111,7 +113,7 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                   setState(() {
                     _controller
                         .forward()
-                        .whenComplete(() => _controller.reverse());
+                        .whenComplete(() => _controller.reset());
                   })
                 }
             },
@@ -172,6 +174,11 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                       onTap: () => {
                         setState(() {
                           _likedPost = !_likedPost;
+                          if (_likedPost) {
+                            _controller
+                                .forward()
+                                .whenComplete(() => _controller.reset());
+                          }
                         })
                       },
                       onDoubleTap: () => {_controller},

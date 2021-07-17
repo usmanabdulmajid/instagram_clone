@@ -23,16 +23,16 @@ class HomePostPage extends StatelessWidget {
           ],
         ),
         SliverToBoxAdapter(
-            child: StoryRolls(
-          availableStatus: 10,
-        )),
+          child: StoryRolls(
+            availableStatus: 10,
+          ),
+        ),
         SliverList(
-            delegate: SliverChildListDelegate.fixed([
-          ImagePost(),
-          ImagePost(),
-          ImagePost(),
-          ImagePost(),
-        ]))
+          delegate: SliverChildBuilderDelegate(
+            (ctx, index) => ImagePost(),
+            childCount: 10,
+          ),
+        ),
       ],
     );
   }
