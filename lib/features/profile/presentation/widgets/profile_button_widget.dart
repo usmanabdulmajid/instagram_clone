@@ -39,7 +39,7 @@ class ProfileButtonWidget extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
           side: BorderSide(
-            width: 1.5,
+            width: 1.2,
             color: darkModeOn ? AppColors.darkStoryGrey : AppColors.borderGrey,
           ),
         ),

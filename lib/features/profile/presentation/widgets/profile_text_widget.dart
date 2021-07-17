@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/features/profile/presentation/pages/utils/colors.dart';
 import 'package:instagram_clone/features/profile/presentation/pages/utils/sizing.dart';
@@ -25,7 +24,7 @@ class ProfileTextWidget extends StatelessWidget {
           labelCount,
           style: TextStyle(
             fontFamily: 'SFProText',
-            fontSize: 16,
+            fontSize: 18,
             fontWeight: FontWeight.bold,
             color: darkModeOn ? AppColors.white : AppColors.black,
           ),
