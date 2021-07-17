@@ -3,17 +3,16 @@ import 'package:instagram_clone/features/profile/presentation/pages/utils/colors
 import 'package:instagram_clone/features/profile/presentation/pages/utils/sizing.dart';
 import 'package:instagram_clone/features/profile/presentation/widgets/modal_list_tile.dart';
 
-Future buildModalBottomSheet(BuildContext context, bool darkModeOn) {
+Future buildModalBottomSheet(BuildContext context) {
   return showModalBottomSheet(
       context: context,
       builder: (context) {
         return Container(
             height: Sizing.yMargin(context, 50),
-            color: darkModeOn ? AppColors.black : AppColors.white,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: darkModeOn ? AppColors.darkStoryGrey : AppColors.white,
+                color: Theme.of(context).accentColor,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -34,67 +33,65 @@ Future buildModalBottomSheet(BuildContext context, bool darkModeOn) {
                   Center(
                     child: Text(
                       'Create new',
-                      style: TextStyle(
-                        fontFamily: 'SFProText',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w900,
-                        color:
-                            darkModeOn ? AppColors.textGrey : AppColors.black,
-                      ),
+                      style: Theme.of(context).textTheme.overline,
                     ),
                   ),
                   YMargin(5),
-                  Divider(
-                    color: darkModeOn ? AppColors.textGrey : AppColors.black,
-                  ),
+                  Divider(),
                   YMargin(10),
                   ModalListTile(
                     onTap: () {},
-                    darkModeOn: darkModeOn,
                     label: 'Feed Post',
-                    leadingWidget: Icon(Icons.grid_on_outlined,
-                        size: 25,
-                        color: darkModeOn ? AppColors.white : AppColors.black),
+                    leadingWidget: Icon(
+                      Icons.grid_on_outlined,
+                      size: 25,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
                   ),
                   ModalListTile(
                     onTap: () {},
-                    darkModeOn: darkModeOn,
                     label: 'Reel',
-                    leadingWidget: Icon(Icons.ondemand_video_outlined,
-                        size: 25,
-                        color: darkModeOn ? AppColors.white : AppColors.black),
+                    leadingWidget: Icon(
+                      Icons.ondemand_video_outlined,
+                      size: 25,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
                   ),
                   ModalListTile(
                     onTap: () {},
-                    darkModeOn: darkModeOn,
                     label: 'Story',
-                    leadingWidget: Icon(Icons.add_circle_outline,
-                        size: 25,
-                        color: darkModeOn ? AppColors.white : AppColors.black),
+                    leadingWidget: Icon(
+                      Icons.add_circle_outline,
+                      size: 25,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
                   ),
                   ModalListTile(
                     onTap: () {},
-                    darkModeOn: darkModeOn,
                     label: 'Story Highlight',
-                    leadingWidget: Icon(Icons.add_circle_outline_outlined,
-                        size: 25,
-                        color: darkModeOn ? AppColors.white : AppColors.black),
+                    leadingWidget: Icon(
+                      Icons.add_circle_outline_outlined,
+                      size: 25,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
                   ),
                   ModalListTile(
                     onTap: () {},
-                    darkModeOn: darkModeOn,
                     label: 'IGTV video',
-                    leadingWidget: Icon(Icons.live_tv_outlined,
-                        size: 25,
-                        color: darkModeOn ? AppColors.white : AppColors.black),
+                    leadingWidget: Icon(
+                      Icons.live_tv_outlined,
+                      size: 25,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
                   ),
                   ModalListTile(
                     onTap: () {},
-                    darkModeOn: darkModeOn,
                     label: 'Guide',
-                    leadingWidget: Icon(Icons.menu_book,
-                        size: 25,
-                        color: darkModeOn ? AppColors.white : AppColors.black),
+                    leadingWidget: Icon(
+                      Icons.menu_book,
+                      size: 25,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
                   ),
                 ],
               ),
