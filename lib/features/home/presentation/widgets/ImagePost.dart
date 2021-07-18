@@ -16,6 +16,11 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
   bool _likedPost = false;
   bool _addedToCollection = false;
   bool _hasComment = false;
+  bool _hasSound = true;
+  bool _disabledSound = false;
+  bool _soundIndicatorVisible = false;
+  bool _isItv = true;
+  bool _isWatchTv = false;
   int _commentCount = 3;
   int _imageCount = 3;
   int _currentImagePageNumber = 1;
@@ -56,6 +61,26 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
     super.dispose();
     _likedController.dispose();
     _collectionController.dispose();
+  }
+
+  List<Widget> getCatelogIndicator(int length) {
+    List<Widget> indicator = [];
+    for (var i = 0; i < length; i++) {
+      indicator.add(
+        AnimatedContainer(
+          duration: Duration(milliseconds: 300),
+          margin: EdgeInsets.symmetric(horizontal: 2.5),
+          width: _currentImagePageNumber - 1 == i ? 10 : 5,
+          height: _currentImagePageNumber - 1 == i ? 10 : 5,
+          decoration: BoxDecoration(
+            color: Colors.blueAccent,
+            borderRadius: BorderRadius.circular(
+                _currentImagePageNumber - 1 == i ? 10 : 5),
+          ),
+        ),
+      );
+    }
+    return indicator;
   }
 
   @override
@@ -99,11 +124,38 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
               setState(() {
                 if (_cateloge) {
                   _imagePageCountVisible = !_imagePageCountVisible;
-                  Future.delayed(Duration(seconds: 5), () {
-                    setState(() {
-                      _imagePageCountVisible = false;
+                  if (_imagePageCountVisible) {
+                    Future.delayed(Duration(seconds: 5), () {
+                      setState(() {
+                        _imagePageCountVisible = false;
+                      });
                     });
-                  });
+                  }
+                }
+                if (_isItv) {
+                  _isWatchTv = !_isWatchTv;
+                  if (_isWatchTv) {
+                    Future.delayed(Duration(seconds: 5), () {
+                      setState(() {
+                        _isWatchTv = false;
+                      });
+                    });
+                  }
+                }
+
+                if (_hasSound && !_soundIndicatorVisible) {
+                  _disabledSound = !_disabledSound;
+                  _soundIndicatorVisible = !_soundIndicatorVisible;
+                  if (_soundIndicatorVisible) {
+                    Future.delayed(Duration(seconds: 5), () {
+                      setState(() {
+                        _soundIndicatorVisible = false;
+                      });
+                    });
+                  }
+                }
+                if (_hasSound) {
+                  _disabledSound = !_disabledSound;
                 }
               })
             },
@@ -190,11 +242,49 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                       ),
                     ),
                     Positioned(
+                      left: ksmallSpace,
+                      bottom: ksmallSpace,
+                      child: Visibility(
+                        visible: _isItv && _isWatchTv,
+                        child: Container(
+                          padding: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF121212).withOpacity(0.7),
+                            borderRadius: BorderRadius.horizontal(
+                                left: Radius.circular(kmediumSpace),
+                                right: Radius.circular(kmediumSpace)),
+                          ),
+                          child: Icon(
+                            Icons.live_tv_rounded,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
                       top: MediaQuery.of(context).size.width / 2 - 120,
                       left: MediaQuery.of(context).size.width / 2 - 40,
                       child: ScaleTransition(
                         scale: _likedAnimation,
                         child: Icon(Icons.favorite, size: 80),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: ksmallSpace,
+                      right: ksmallSpace,
+                      child: Visibility(
+                        visible: _hasSound && _soundIndicatorVisible,
+                        child: Container(
+                          padding: EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF121212).withOpacity(0.7),
+                            borderRadius: BorderRadius.horizontal(
+                                left: Radius.circular(kmediumSpace),
+                                right: Radius.circular(kmediumSpace)),
+                          ),
+                          child: Icon(
+                            _disabledSound ? Icons.volume_up : Icons.volume_off,
+                          ),
+                        ),
                       ),
                     ),
                     PositionedTransition(
@@ -280,36 +370,9 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                       child: Visibility(
                         visible: _cateloge,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 5,
-                              height: 5,
-                              decoration: BoxDecoration(
-                                color: Colors.blueAccent,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.symmetric(horizontal: 5),
-                              width: 5,
-                              height: 5,
-                              decoration: BoxDecoration(
-                                color: Colors.blueAccent,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
-                            Container(
-                              width: 5,
-                              height: 5,
-                              decoration: BoxDecoration(
-                                color: Colors.blueAccent,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
-                          ],
-                        ),
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: getCatelogIndicator(_imageCount)),
                       ),
                     ),
                     SizedBox(
