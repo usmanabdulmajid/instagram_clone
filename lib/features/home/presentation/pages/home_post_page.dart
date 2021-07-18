@@ -9,6 +9,7 @@ class HomePostPage extends StatelessWidget {
       slivers: [
         SliverAppBar(
           title: Text("Instagram"),
+          pinned: true,
           actions: [
             IconButton(
               icon: Icon(Icons.add_box_outlined),
@@ -23,9 +24,13 @@ class HomePostPage extends StatelessWidget {
         SliverToBoxAdapter(
           child: StoryRolls(),
         ),
-        SliverToBoxAdapter(
-          child: ImagePost(),
-        )
+        SliverList(
+            delegate: SliverChildListDelegate.fixed([
+          ImagePost(),
+          ImagePost(),
+          ImagePost(),
+          ImagePost(),
+        ]))
       ],
     );
   }
