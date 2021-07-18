@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
     ),
     BottomNavigationBarItem(
       icon: Icon(
-        Icons.favorite,
+        Icons.favorite_outline,
       ),
       label: 'Profile',
     ),
@@ -70,6 +70,7 @@ class _HomeState extends State<Home> {
       children: [
         NewPost(),
         Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
           body: IndexedStack(
             index: _selectedIndex,
             children: [
@@ -81,8 +82,8 @@ class _HomeState extends State<Home> {
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(
-            selectedItemColor: Colors.black,
-            unselectedItemColor: Colors.black,
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.white,
             items: _list,
             showSelectedLabels: false,
             showUnselectedLabels: false,
