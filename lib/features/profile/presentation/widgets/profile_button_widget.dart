@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/features/profile/presentation/pages/utils/colors.dart';
-import 'package:instagram_clone/features/profile/presentation/pages/utils/sizing.dart';
+import 'package:instagram_clone/core/utils/colors.dart';
+import 'package:instagram_clone/core/utils/sizing.dart';
 
 class ProfileButtonWidget extends StatelessWidget {
   const ProfileButtonWidget({

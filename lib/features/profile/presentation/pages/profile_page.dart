@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/features/profile/presentation/pages/utils/colors.dart';
-import 'package:instagram_clone/features/profile/presentation/pages/utils/sizing.dart';
+import 'package:instagram_clone/core/utils/colors.dart';
+import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/profile/presentation/widgets/empty_profile_posts_page.dart';
 import 'package:instagram_clone/features/profile/presentation/widgets/empty_profile_tag_page.dart';
 import 'package:instagram_clone/features/profile/presentation/widgets/menu_modal_sheet.dart';

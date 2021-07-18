@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/features/authorization/presentation/pages/welcome_page.dart';
 import 'package:instagram_clone/features/home/presentation/pages/home.dart';
+import 'package:instagram_clone/features/profile/presentation/pages/profile_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
         accentColor: Color(0xFFF9F9F9),
         fontFamily: 'SFProText',
       ),
-      home: Home(),
+      home: WelcomePage(),
     );
   }
 }
