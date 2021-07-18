@@ -19,7 +19,7 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
   bool _hasSound = true;
   bool _disabledSound = false;
   bool _soundIndicatorVisible = false;
-  bool _isItv = true;
+  bool _isItv = false;
   bool _isWatchTv = false;
   int _commentCount = 3;
   int _imageCount = 3;
@@ -68,14 +68,16 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
     for (var i = 0; i < length; i++) {
       indicator.add(
         AnimatedContainer(
-          duration: Duration(milliseconds: 300),
+          duration: Duration(milliseconds: 200),
           margin: EdgeInsets.symmetric(horizontal: 2.5),
-          width: _currentImagePageNumber - 1 == i ? 10 : 5,
-          height: _currentImagePageNumber - 1 == i ? 10 : 5,
+          width: _currentImagePageNumber - 1 == i ? 7 : 5,
+          height: _currentImagePageNumber - 1 == i ? 7 : 5,
           decoration: BoxDecoration(
-            color: Colors.blueAccent,
-            borderRadius: BorderRadius.circular(
-                _currentImagePageNumber - 1 == i ? 10 : 5),
+            color: _currentImagePageNumber - 1 == i
+                ? Colors.blueAccent
+                : Colors.grey,
+            borderRadius:
+                BorderRadius.circular(_currentImagePageNumber - 1 == i ? 7 : 5),
           ),
         ),
       );
@@ -265,7 +267,7 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                       left: MediaQuery.of(context).size.width / 2 - 40,
                       child: ScaleTransition(
                         scale: _likedAnimation,
-                        child: Icon(Icons.favorite, size: 80),
+                        child: Icon(Icons.favorite, size: 100),
                       ),
                     ),
                     Positioned(
