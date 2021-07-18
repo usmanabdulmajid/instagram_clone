@@ -9,6 +9,7 @@ class EmailSignUp extends StatefulWidget {
 class _EmailSignUpState extends State<EmailSignUp> {
   TextEditingController _textEditingController;
   FocusNode focusNode;
+  bool _disable = true;
   @override
   void initState() {
     _textEditingController = TextEditingController();
@@ -31,7 +32,6 @@ class _EmailSignUpState extends State<EmailSignUp> {
         Container(
           width: _size.width,
           height: 50.0,
-          margin: EdgeInsets.symmetric(horizontal: 20.0),
           padding: EdgeInsets.only(left: 20.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6.0),
@@ -42,7 +42,13 @@ class _EmailSignUpState extends State<EmailSignUp> {
           ),
           child: TextField(
             onChanged: (value) {
-              setState(() {});
+              setState(() {
+                if (value.isNotEmpty) {
+                  _disable = false;
+                } else {
+                  _disable = true;
+                }
+              });
             },
             // focusNode: focusNode,
             autofocus: false,
@@ -53,11 +59,11 @@ class _EmailSignUpState extends State<EmailSignUp> {
           ),
         ),
         SizedBox(
-          height: 10.0,
+          height: 15.0,
         ),
         LoginProceedButton(
           child: Text('Next'),
-          disableButton: true,
+          disableButton: _disable,
         )
       ],
     );
