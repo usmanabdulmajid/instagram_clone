@@ -22,13 +22,14 @@ class _ProfilePageState extends State<ProfilePage> {
     var brightness = MediaQuery.of(context).platformBrightness;
     bool darkModeOn = brightness == Brightness.dark;
     return Scaffold(
+      backgroundColor: darkModeOn ? AppColors.black : AppColors.white,
       appBar: AppBar(
         backgroundColor: darkModeOn ? AppColors.black : AppColors.white,
         elevation: 0,
         actions: [
           GestureDetector(
             onTap: () async {
-              await buildModalBottomSheet(context);
+              await buildModalBottomSheet(context, darkModeOn);
             },
             child: Container(
                 child: darkModeOn
@@ -48,8 +49,10 @@ class _ProfilePageState extends State<ProfilePage> {
         title: Text(
           'iloveteajay',
           style: TextStyle(
+            fontFamily: 'SFProText',
             fontSize: 22,
             fontWeight: FontWeight.bold,
+            color: darkModeOn ? AppColors.white : AppColors.black,
           ),
         ),
       ),
@@ -107,16 +110,19 @@ class _ProfilePageState extends State<ProfilePage> {
                                       ),
                                       XMargin(20),
                                       ProfileTextWidget(
+                                        darkModeOn: darkModeOn,
                                         label: 'Posts',
                                         labelCount: '0',
                                       ),
                                       XMargin(20),
                                       ProfileTextWidget(
+                                        darkModeOn: darkModeOn,
                                         label: 'Followers',
                                         labelCount: '1,118',
                                       ),
                                       XMargin(20),
                                       ProfileTextWidget(
+                                        darkModeOn: darkModeOn,
                                         label: 'Following',
                                         labelCount: '841',
                                       )
@@ -129,14 +135,19 @@ class _ProfilePageState extends State<ProfilePage> {
                             Text(
                               'TAY',
                               style: TextStyle(
+                                fontFamily: 'SFProText',
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
+                                color: darkModeOn
+                                    ? AppColors.white
+                                    : AppColors.black,
                               ),
                             ),
                             YMargin(2),
                             Text(
                               'Personal Blog',
                               style: TextStyle(
+                                fontFamily: 'SFProText',
                                 fontSize: 14,
                                 fontWeight: FontWeight.normal,
                                 color: AppColors.textGrey,
@@ -146,8 +157,12 @@ class _ProfilePageState extends State<ProfilePage> {
                             Text(
                               'flutter and vibes',
                               style: TextStyle(
+                                fontFamily: 'SFProText',
                                 fontSize: 14,
                                 fontWeight: FontWeight.normal,
+                                color: darkModeOn
+                                    ? AppColors.white
+                                    : AppColors.black,
                               ),
                             ),
                             YMargin(20),
@@ -250,6 +265,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                             fontFamily: 'SFProText',
                                             fontSize: 13,
                                             fontWeight: FontWeight.normal,
+                                            color: darkModeOn
+                                                ? AppColors.white
+                                                : AppColors.black,
                                           ),
                                         ),
                                       ],
@@ -276,20 +294,31 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 child: Icon(
                                                   Icons.add,
                                                   size: 30,
+                                                  color: darkModeOn
+                                                      ? AppColors.white
+                                                      : AppColors.black,
                                                 ),
+                                                backgroundColor: darkModeOn
+                                                    ? AppColors.black
+                                                    : AppColors.white,
                                                 shape: CircleBorder(
-                                                  side: BorderSide(
-                                                    width: 0.5,
-                                                  ),
-                                                ),
+                                                    side: BorderSide(
+                                                        width: 0.5,
+                                                        color: darkModeOn
+                                                            ? AppColors.white
+                                                            : AppColors.black)),
                                               ),
                                             ),
                                             YMargin(5),
                                             Text(
                                               'New',
                                               style: TextStyle(
+                                                fontFamily: 'SFProText',
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.normal,
+                                                color: darkModeOn
+                                                    ? AppColors.white
+                                                    : AppColors.black,
                                               ),
                                             )
                                           ],
