@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/features/authorization/presentation/pages/login_help_page.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/login_page.dart';
 import 'package:instagram_clone/features/home/presentation/pages/home.dart';
 import 'package:instagram_clone/features/profile/presentation/pages/profile_page.dart';
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
         ),
         bottomAppBarColor: Color(0xFF000000),
       ),
-      home: Home(),
+      home: LoginHelpPage(),
     );
   }
 }
