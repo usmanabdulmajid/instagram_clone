@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants.dart';
+import 'package:instagram_clone/features/home/presentation/widgets/video_post.dart';
 
 class ImagePost extends StatefulWidget {
   const ImagePost({Key key}) : super(key: key);
@@ -14,26 +15,39 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
   bool _imagePageCountVisible = false;
   bool _cateloge = false;
   bool _likedPost = false;
+  bool _addedToCollection = false;
   bool _hasComment = false;
+  bool _hasSound = true;
+  bool _disabledSound = false;
+  bool _soundIndicatorVisible = false;
+  bool _isItv = false;
+  bool _isWatchTv = false;
   int _commentCount = 3;
-  int _imageCount = 4;
+  int _imageCount = 3;
   int _currentImagePageNumber = 1;
-  String _imagePageCount;
+  String _imagePageCount = "";
   Size _imageSize;
 
-  AnimationController _controller;
-  Animation<double> _animation;
+  AnimationController _likedController;
+  Animation<double> _likedAnimation;
+
+  AnimationController _collectionController;
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 400),
+    _likedController = AnimationController(
+      duration: const Duration(milliseconds: 600),
       vsync: this,
     );
-    _animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.bounceIn,
+    _likedAnimation = CurvedAnimation(
+      parent: _likedController,
+      curve: Curves.bounceOut,
     );
+    _collectionController = AnimationController(
+      duration: const Duration(milliseconds: 950),
+      vsync: this,
+    );
+
     if (_commentCount > 0) {
       _hasComment = true;
     }
@@ -46,12 +60,41 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
   @override
   void dispose() {
     super.dispose();
-    _controller.dispose();
+    _likedController.dispose();
+    _collectionController.dispose();
+  }
+
+  List<Widget> getCatelogIndicator(int length) {
+    List<Widget> indicator = [];
+    for (var i = 0; i < length; i++) {
+      indicator.add(
+        AnimatedContainer(
+          duration: Duration(milliseconds: 200),
+          margin: EdgeInsets.symmetric(horizontal: 2.5),
+          width: _currentImagePageNumber - 1 == i ? 7 : 5,
+          height: _currentImagePageNumber - 1 == i ? 7 : 5,
+          decoration: BoxDecoration(
+            color: _currentImagePageNumber - 1 == i
+                ? Colors.blueAccent
+                : Colors.grey,
+            borderRadius:
+                BorderRadius.circular(_currentImagePageNumber - 1 == i ? 7 : 5),
+          ),
+        ),
+      );
+    }
+    return indicator;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Focus(
+      autofocus: true,
+      descendantsAreFocusable: true,
+      onFocusChange: (bool focusChanged) {
+        //TODO
+        //Reset all parameter
+      },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -90,11 +133,38 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
               setState(() {
                 if (_cateloge) {
                   _imagePageCountVisible = !_imagePageCountVisible;
-                  Future.delayed(Duration(seconds: 5), () {
-                    setState(() {
-                      _imagePageCountVisible = false;
+                  if (_imagePageCountVisible) {
+                    Future.delayed(Duration(seconds: 5), () {
+                      setState(() {
+                        _imagePageCountVisible = false;
+                      });
                     });
-                  });
+                  }
+                }
+                if (_isItv) {
+                  _isWatchTv = !_isWatchTv;
+                  if (_isWatchTv) {
+                    Future.delayed(Duration(seconds: 5), () {
+                      setState(() {
+                        _isWatchTv = false;
+                      });
+                    });
+                  }
+                }
+
+                if (_hasSound && !_soundIndicatorVisible) {
+                  _disabledSound = !_disabledSound;
+                  _soundIndicatorVisible = !_soundIndicatorVisible;
+                  if (_soundIndicatorVisible) {
+                    Future.delayed(Duration(seconds: 5), () {
+                      setState(() {
+                        _soundIndicatorVisible = false;
+                      });
+                    });
+                  }
+                }
+                if (_hasSound) {
+                  _disabledSound = !_disabledSound;
                 }
               })
             },
@@ -103,63 +173,173 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                 {
                   setState(() {
                     _likedPost = true;
-                    _controller.forward();
+                    _likedController
+                        .forward()
+                        .whenComplete(() => _likedController.reset());
                   })
                 }
               else
                 {
                   setState(() {
-                    _controller
+                    _likedController
                         .forward()
-                        .whenComplete(() => _controller.reverse());
+                        .whenComplete(() => _likedController.reset());
                   })
                 }
             },
-            child: Builder(builder: (BuildContext ctx) {
-              return Stack(
-                children: [
-                  Image.asset("assets/images/selfie_test.jpg"),
-                  Positioned(
-                    top: ksmallSpace,
-                    right: ksmallSpace,
-                    child: Visibility(
-                      visible: _cateloge,
-                      child: AnimatedOpacity(
-                        duration: Duration(milliseconds: 500),
-                        opacity: _imagePageCountVisible ? 1 : 0,
-                        child: Container(
-                          width: 35,
-                          padding: EdgeInsets.all(ksmallSpace),
-                          decoration: BoxDecoration(
-                            color: Color(0xFF121212).withOpacity(0.7),
-                            borderRadius: BorderRadius.horizontal(
-                                left: Radius.circular(kmediumSpace),
-                                right: Radius.circular(kmediumSpace)),
-                          ),
-                          child: Center(
-                            child: Text(
-                              _imagePageCount,
-                              style: TextStyle(
-                                color: Color(0xFFF9F9F9),
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
+            child: Builder(
+              builder: (BuildContext ctx) {
+                return Stack(
+                  fit: StackFit.passthrough,
+                  children: [
+                    _cateloge
+                        ? ConstrainedBox(
+                            constraints: BoxConstraints.tight(
+                                Size(MediaQuery.of(context).size.width, 250)),
+                            child: PageView(
+                              scrollDirection: Axis.horizontal,
+                              onPageChanged: (index) {
+                                setState(() {
+                                  _currentImagePageNumber = index + 1;
+                                  _imagePageCount =
+                                      "$_currentImagePageNumber/$_imageCount";
+                                });
+                              },
+                              children: [
+                                Container(
+                                  color: Colors.amber,
+                                  child: VideoPost(),
+                                ),
+                                Container(
+                                  color: Colors.blueAccent,
+                                ),
+                                Container(
+                                  color: Colors.blueGrey,
+                                ),
+                              ],
+                            ),
+                          )
+                        : Image.asset("assets/images/selfie_test.jpg"),
+                    Positioned(
+                      top: ksmallSpace,
+                      right: ksmallSpace,
+                      child: Visibility(
+                        visible: _cateloge,
+                        child: AnimatedOpacity(
+                          duration: Duration(milliseconds: 500),
+                          opacity: _imagePageCountVisible ? 1 : 0,
+                          child: Container(
+                            width: 40,
+                            padding: EdgeInsets.all(ksmallSpace),
+                            decoration: BoxDecoration(
+                              color: Color(0xFF121212),
+                              borderRadius: BorderRadius.horizontal(
+                                  left: Radius.circular(kmediumSpace),
+                                  right: Radius.circular(kmediumSpace)),
+                            ),
+                            child: Center(
+                              child: Text(
+                                _imagePageCount,
+                                style: TextStyle(
+                                  color: Color(0xFFF9F9F9),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Positioned(
+                    Positioned(
+                      left: ksmallSpace,
+                      bottom: ksmallSpace,
+                      child: Visibility(
+                        visible: _isItv && _isWatchTv,
+                        child: Container(
+                          padding: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF121212),
+                            borderRadius: BorderRadius.horizontal(
+                                left: Radius.circular(kmediumSpace),
+                                right: Radius.circular(kmediumSpace)),
+                          ),
+                          child: Icon(
+                            Icons.live_tv_rounded,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
                       top: MediaQuery.of(context).size.width / 2 - 120,
                       left: MediaQuery.of(context).size.width / 2 - 40,
                       child: ScaleTransition(
-                        scale: _animation,
-                        child: Icon(Icons.favorite, size: 80),
-                      )),
-                ],
-              );
-            }),
+                        scale: _likedAnimation,
+                        child: Icon(
+                          Icons.favorite,
+                          size: 100,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: ksmallSpace,
+                      right: ksmallSpace,
+                      child: Visibility(
+                        visible: _hasSound && _soundIndicatorVisible,
+                        child: Container(
+                          padding: EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF121212),
+                            borderRadius: BorderRadius.horizontal(
+                                left: Radius.circular(kmediumSpace),
+                                right: Radius.circular(kmediumSpace)),
+                          ),
+                          child: Icon(
+                            _disabledSound ? Icons.volume_up : Icons.volume_off,
+                          ),
+                        ),
+                      ),
+                    ),
+                    PositionedTransition(
+                      rect: RelativeRectTween(
+                        begin: RelativeRect.fromLTRB(0, 250.0 + 50, 0, -50),
+                        end: RelativeRect.fromLTRB(0, 250.0 - 49, 0, 0),
+                      ).animate(
+                        CurvedAnimation(
+                          parent: _collectionController,
+                          curve: Curves.easeInBack,
+                        ),
+                      ),
+                      child: Container(
+                        color: Theme.of(context).primaryColor,
+                        height: 50,
+                        child: ListTile(
+                          leading: Image.asset(
+                            "assets/images/selfie_test.jpg",
+                            height: 36,
+                            width: 36,
+                          ),
+                          title: Text(
+                            "Saved",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          trailing: Text(
+                            "Save to collections",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blueAccent,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                );
+              },
+            ),
           ),
           Container(
             padding: EdgeInsets.all(ksmallSpace),
@@ -167,14 +347,21 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GestureDetector(
                       onTap: () => {
                         setState(() {
                           _likedPost = !_likedPost;
+                          if (_likedPost) {
+                            _likedController
+                                .forward()
+                                .whenComplete(() => _likedController.reset());
+                          }
                         })
                       },
-                      onDoubleTap: () => {_controller},
+                      onDoubleTap: () => {_likedController},
                       child: _likedPost
                           ? Icon(
                               Icons.favorite,
@@ -205,11 +392,41 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                     ),
                     Expanded(
                       flex: 3,
-                      child: Container(),
+                      child: Visibility(
+                        visible: _cateloge,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: getCatelogIndicator(_imageCount)),
+                      ),
                     ),
-                    Icon(
-                      Icons.bookmark_border_outlined,
-                      size: klargeIconSize,
+                    SizedBox(
+                      width: klargeIconSize,
+                    ),
+                    SizedBox(
+                      width: klargeIconSize,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        if (!_addedToCollection) {
+                          _collectionController.forward()
+                            ..whenComplete(
+                              () => Future.delayed(
+                                Duration(seconds: 2),
+                                _collectionController.reverse,
+                              ),
+                            );
+                        }
+                        setState(() {
+                          _addedToCollection = !_addedToCollection;
+                        });
+                      },
+                      child: Icon(
+                        _addedToCollection
+                            ? Icons.bookmark
+                            : Icons.bookmark_border_outlined,
+                        size: klargeIconSize,
+                      ),
                     ),
                   ],
                 ),

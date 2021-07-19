@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/features/home/presentation/widgets/ImagePost.dart';
 import 'package:instagram_clone/features/home/presentation/widgets/story_rolls.dart';
 
-class HomePostPage extends StatelessWidget {
+class HomePostPage extends StatefulWidget {
+  @override
+  _HomePostPageState createState() => _HomePostPageState();
+}
+
+class _HomePostPageState extends State<HomePostPage> {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      physics: BouncingScrollPhysics(),
       slivers: [
         SliverAppBar(
           title: Text("Instagram"),
@@ -22,15 +28,16 @@ class HomePostPage extends StatelessWidget {
           ],
         ),
         SliverToBoxAdapter(
-          child: StoryRolls(),
+          child: StoryRolls(
+            availableStatus: 10,
+          ),
         ),
         SliverList(
-            delegate: SliverChildListDelegate.fixed([
-          ImagePost(),
-          ImagePost(),
-          ImagePost(),
-          ImagePost(),
-        ]))
+          delegate: SliverChildBuilderDelegate(
+            (ctx, index) => ImagePost(),
+            childCount: 10,
+          ),
+        ),
       ],
     );
   }

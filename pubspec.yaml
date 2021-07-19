@@ -27,6 +27,7 @@ dependencies:
   language_picker: ^0.4.1
   country_code_picker: ^2.0.2
   font_awesome_flutter: ^9.1.0
+  video_player: ^2.1.10
 
 dev_dependencies:
   flutter_test:
