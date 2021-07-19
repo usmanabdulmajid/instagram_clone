@@ -6,6 +6,7 @@ class HomePostPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      physics: BouncingScrollPhysics(),
       slivers: [
         SliverAppBar(
           title: Text("Instagram"),
@@ -22,15 +23,16 @@ class HomePostPage extends StatelessWidget {
           ],
         ),
         SliverToBoxAdapter(
-          child: StoryRolls(),
+          child: StoryRolls(
+            availableStatus: 10,
+          ),
         ),
         SliverList(
-            delegate: SliverChildListDelegate.fixed([
-          ImagePost(),
-          ImagePost(),
-          ImagePost(),
-          ImagePost(),
-        ]))
+          delegate: SliverChildBuilderDelegate(
+            (ctx, index) => ImagePost(),
+            childCount: 10,
+          ),
+        ),
       ],
     );
   }
