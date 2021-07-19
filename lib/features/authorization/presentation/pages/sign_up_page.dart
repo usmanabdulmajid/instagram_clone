@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utils/colors.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/email_sign_up.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/number_sign_up.dart';
 
@@ -28,6 +29,8 @@ class _SignUpPageState extends State<SignUpPage>
   @override
   Widget build(BuildContext context) {
     var _size = MediaQuery.of(context).size;
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool darkModeOn = brightness == Brightness.dark;
     return Scaffold(
       body: Container(
         width: _size.width,
@@ -66,7 +69,9 @@ class _SignUpPageState extends State<SignUpPage>
               ),
             ),
             //Spacer(),
-            Divider(),
+            Divider(
+              color: darkModeOn ? Colors.grey.shade700 : Colors.grey,
+            ),
             SizedBox(
               height: 10.0,
             ),
@@ -80,7 +85,8 @@ class _SignUpPageState extends State<SignUpPage>
                 Text(
                   'Log in.',
                   style: TextStyle(
-                    color: Colors.blue.shade900,
+                    color:
+                        darkModeOn ? AppColors.storyGrey : Colors.blue.shade900,
                     fontWeight: FontWeight.bold,
                     fontSize: 12.0,
                   ),

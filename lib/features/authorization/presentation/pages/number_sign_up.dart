@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utils/colors.dart';
 import 'package:instagram_clone/features/authorization/presentation/widgets/login_proceed_button.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 
@@ -43,7 +44,10 @@ class _NumberSignUpState extends State<NumberSignUp> {
 
   @override
   Widget build(BuildContext context) {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool darkModeOn = brightness == Brightness.dark;
     var _size = MediaQuery.of(context).size;
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,11 +57,14 @@ class _NumberSignUpState extends State<NumberSignUp> {
               height: 50.0,
               padding: EdgeInsets.only(left: 20.0),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6.0),
+                borderRadius: BorderRadius.circular(4.0),
                 border: Border.all(
-                  color: Colors.grey,
+                  color: darkModeOn
+                      ? AppColors.darkStoryGrey
+                      : Colors.grey.shade400,
                 ),
-                color: Colors.grey.shade300,
+                color:
+                    darkModeOn ? AppColors.darkStoryGrey : Colors.grey.shade100,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -68,21 +75,26 @@ class _NumberSignUpState extends State<NumberSignUp> {
                   // ),
                   CountryCodePicker(
                     padding: EdgeInsets.all(0.0),
-
                     onChanged: (CountryCode countryCode) {
                       setState(() {
                         _countryCode = countryCode.code;
                       });
                     },
-
+                    backgroundColor:
+                        darkModeOn ? AppColors.black : AppColors.white,
+                    barrierColor:
+                        darkModeOn ? AppColors.black : AppColors.white,
+                    dialogBackgroundColor:
+                        darkModeOn ? AppColors.black : AppColors.white,
+                    dialogTextStyle: TextStyle(
+                      color: darkModeOn ? AppColors.white : AppColors.black,
+                    ),
                     // showOnlyCountryWhenClosed: false,
                     // showFlagDialog: false,
                     // showFlagMain: false,
                     // showCountryOnly: true,
-
-                    //showDropDownButton: true,
-                    showFlag: true,
-                    //dd
+                    // showDropDownButton: true,
+                    // showFlag: true,
                     builder: (CountryCode countrycode) {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -147,7 +159,11 @@ class _NumberSignUpState extends State<NumberSignUp> {
             height: 15.0,
           ),
           LoginProceedButton(
-            child: Text('Next'),
+            child: Text(
+              'Next',
+              style: TextStyle(
+                  color: AppColors.white, fontWeight: FontWeight.bold),
+            ),
             disableButton: _textEditingController.text.isEmpty,
           )
         ],

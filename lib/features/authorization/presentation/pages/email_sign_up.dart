@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utils/colors.dart';
 import 'package:instagram_clone/features/authorization/presentation/widgets/login_proceed_button.dart';
 
 class EmailSignUp extends StatefulWidget {
@@ -26,6 +27,8 @@ class _EmailSignUpState extends State<EmailSignUp> {
 
   @override
   Widget build(BuildContext context) {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool darkModeOn = brightness == Brightness.dark;
     var _size = MediaQuery.of(context).size;
     return Column(
       children: [
@@ -34,11 +37,12 @@ class _EmailSignUpState extends State<EmailSignUp> {
           height: 50.0,
           padding: EdgeInsets.only(left: 20.0),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6.0),
+            borderRadius: BorderRadius.circular(4.0),
             border: Border.all(
-              color: Colors.grey,
+              color:
+                  darkModeOn ? AppColors.darkStoryGrey : Colors.grey.shade400,
             ),
-            color: Colors.grey.shade300,
+            color: darkModeOn ? AppColors.darkStoryGrey : Colors.grey.shade100,
           ),
           child: TextField(
             onChanged: (value) {
@@ -62,7 +66,11 @@ class _EmailSignUpState extends State<EmailSignUp> {
           height: 15.0,
         ),
         LoginProceedButton(
-          child: Text('Next'),
+          child: Text(
+            'Next',
+            style:
+                TextStyle(color: AppColors.white, fontWeight: FontWeight.bold),
+          ),
           disableButton: _disable,
         )
       ],

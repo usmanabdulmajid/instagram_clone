@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utils/colors.dart';
 import 'package:instagram_clone/features/authorization/presentation/widgets/login_proceed_button.dart';
 import 'package:language_picker/language_picker.dart';
 import 'package:language_picker/languages.dart';
@@ -58,6 +59,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool darkModeOn = brightness == Brightness.dark;
     var _size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
@@ -102,11 +105,15 @@ class _LoginPageState extends State<LoginPage> {
                 margin: EdgeInsets.symmetric(horizontal: 20.0),
                 padding: EdgeInsets.only(left: 20.0),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6.0),
+                  borderRadius: BorderRadius.circular(4.0),
                   border: Border.all(
-                    color: Colors.grey,
+                    color: darkModeOn
+                        ? AppColors.darkStoryGrey
+                        : Colors.grey.shade400,
                   ),
-                  color: Colors.grey.shade300,
+                  color: darkModeOn
+                      ? AppColors.darkStoryGrey
+                      : Colors.grey.shade100,
                 ),
                 child: TextField(
                   onChanged: (value) {
@@ -129,9 +136,15 @@ class _LoginPageState extends State<LoginPage> {
                 margin: EdgeInsets.symmetric(horizontal: 20.0),
                 padding: EdgeInsets.only(left: 20.0),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6.0),
-                  border: Border.all(color: Colors.grey),
-                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(4.0),
+                  border: Border.all(
+                    color: darkModeOn
+                        ? AppColors.darkStoryGrey
+                        : Colors.grey.shade400,
+                  ),
+                  color: darkModeOn
+                      ? AppColors.darkStoryGrey
+                      : Colors.grey.shade100,
                 ),
                 child: Row(
                   children: [
@@ -160,10 +173,12 @@ class _LoginPageState extends State<LoginPage> {
                           ? FaIcon(
                               FontAwesomeIcons.eyeSlash,
                               size: 16,
+                              color: Colors.grey,
                             )
                           : FaIcon(
                               FontAwesomeIcons.eye,
                               size: 16,
+                              color: Colors.blue,
                             ),
                     ),
                     SizedBox(
@@ -200,9 +215,11 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextStyle(color: Colors.grey, fontSize: 12.0),
                   ),
                   Text(
-                    'Get help logggin in.',
+                    'Get help loggin in.',
                     style: TextStyle(
-                      color: Colors.blue.shade900,
+                      color: darkModeOn
+                          ? AppColors.storyGrey
+                          : Colors.blue.shade900,
                       fontWeight: FontWeight.bold,
                       fontSize: 12.0,
                     ),
@@ -217,14 +234,28 @@ class _LoginPageState extends State<LoginPage> {
                   Expanded(
                     child: Container(
                       margin: EdgeInsets.only(right: 15, left: 20.0),
-                      child: Divider(),
+                      child: Divider(
+                        color: darkModeOn
+                            ? Colors.grey.shade700
+                            : Colors.grey.shade100,
+                      ),
                     ),
                   ),
-                  Text('OR'),
+                  Text(
+                    'OR',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: darkModeOn ? Colors.grey : Colors.white,
+                    ),
+                  ),
                   Expanded(
                     child: Container(
                       margin: EdgeInsets.only(left: 15, right: 20.0),
-                      child: Divider(),
+                      child: Divider(
+                        color: darkModeOn
+                            ? Colors.grey.shade700
+                            : Colors.grey.shade100,
+                      ),
                     ),
                   )
                 ],
@@ -239,7 +270,10 @@ class _LoginPageState extends State<LoginPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      FaIcon(FontAwesomeIcons.facebook),
+                      FaIcon(
+                        FontAwesomeIcons.facebook,
+                        color: Colors.white,
+                      ),
                       SizedBox(
                         width: 5.0,
                       ),
@@ -255,7 +289,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Spacer(),
-              Divider(),
+              Divider(
+                color: darkModeOn ? Colors.grey.shade700 : Colors.grey.shade100,
+              ),
               SizedBox(
                 height: 10.0,
               ),
@@ -269,7 +305,9 @@ class _LoginPageState extends State<LoginPage> {
                   Text(
                     'Sign up.',
                     style: TextStyle(
-                      color: Colors.blue.shade900,
+                      color: darkModeOn
+                          ? AppColors.storyGrey
+                          : Colors.blue.shade900,
                       fontWeight: FontWeight.bold,
                       fontSize: 12.0,
                     ),

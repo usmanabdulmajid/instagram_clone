@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
         ),
         bottomAppBarColor: Color(0xFF000000),
       ),
-      home: LoginPage(),
+      home: Home(),
     );
   }
 }
