@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants.dart';
+import 'package:instagram_clone/features/home/presentation/widgets/video_post.dart';
 
 class ImagePost extends StatefulWidget {
   const ImagePost({Key key}) : super(key: key);
@@ -207,6 +208,7 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                               children: [
                                 Container(
                                   color: Colors.amber,
+                                  child: VideoPost(),
                                 ),
                                 Container(
                                   color: Colors.blueAccent,
