@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/colors.dart';
+import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/authorization/presentation/widgets/login_proceed_button.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 
@@ -103,13 +104,13 @@ class _NumberSignUpState extends State<NumberSignUp> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                               )),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          Text(countrycode.dialCode,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ))
+                          XMargin(5),
+                          Text(
+                            countrycode.dialCode,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
                         ],
                       );
                     },
@@ -148,16 +149,12 @@ class _NumberSignUpState extends State<NumberSignUp> {
                       : Container(),
                 ],
               )),
-          SizedBox(
-            height: 15.0,
-          ),
+          YMargin(15),
           Text(
             'You may receive SMS updates from instagram and can opt out any time',
             textAlign: TextAlign.center,
           ),
-          SizedBox(
-            height: 15.0,
-          ),
+          YMargin(15),
           LoginProceedButton(
             child: Text(
               'Next',

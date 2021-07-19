@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:instagram_clone/core/utils/colors.dart';
+import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/authorization/presentation/widgets/login_proceed_button.dart';
 
 class LoginHelpPage extends StatefulWidget {
@@ -23,9 +24,7 @@ class _LoginHelpPageState extends State<LoginHelpPage> {
           height: _size.height,
           child: Column(
             children: [
-              SizedBox(
-                height: 45,
-              ),
+              YMargin(45),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 child: Row(
@@ -42,24 +41,18 @@ class _LoginHelpPageState extends State<LoginHelpPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 50.0,
-                    ),
+                    YMargin(50.0),
                     Text(
                       'Find your account',
                       style: TextStyle(fontSize: 25),
                     ),
-                    SizedBox(
-                      height: 25.0,
-                    ),
+                    YMargin(25),
                     Text(
                       'Enter your username or the email address or phone number linked to your account.',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.grey, fontSize: 14.0),
                     ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
+                    YMargin(20),
                     Container(
                       width: _size.width,
                       height: 50.0,
@@ -92,9 +85,7 @@ class _LoginHelpPageState extends State<LoginHelpPage> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
+                    YMargin(20),
                     LoginProceedButton(
                       disableButton: _disable,
                       child: Text(
@@ -104,9 +95,7 @@ class _LoginHelpPageState extends State<LoginHelpPage> {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
+                    YMargin(20.0),
                     Row(
                       children: [
                         Expanded(
@@ -138,9 +127,7 @@ class _LoginHelpPageState extends State<LoginHelpPage> {
                         )
                       ],
                     ),
-                    SizedBox(
-                      height: 15.0,
-                    ),
+                    YMargin(15),
                     TextButton(
                       onPressed: () {},
                       child: Row(
@@ -150,9 +137,7 @@ class _LoginHelpPageState extends State<LoginHelpPage> {
                             FontAwesomeIcons.facebook,
                             //color: Colors.white,
                           ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
+                          XMargin(5),
                           Text(
                             'Log In With Facebook',
                             style: TextStyle(fontWeight: FontWeight.bold),

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/colors.dart';
+import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/authorization/presentation/widgets/login_proceed_button.dart';
 import 'package:language_picker/language_picker.dart';
 import 'package:language_picker/languages.dart';
@@ -41,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildDialogItem(Language language) => Row(
         children: <Widget>[
           Text(language.name),
-          SizedBox(width: 8.0),
+          XMargin(8),
           Flexible(child: Text("(${language.isoCode})"))
         ],
       );
@@ -49,9 +50,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildDropdownItem(Language language) {
     return Row(
       children: <Widget>[
-        SizedBox(
-          width: 8.0,
-        ),
+        XMargin(8),
         Text("${language.name} (${language.isoCode})"),
       ],
     );
@@ -96,9 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                 'Instagram',
                 style: TextStyle(fontSize: 30.0),
               ),
-              SizedBox(
-                height: 40.0,
-              ),
+              YMargin(40),
               Container(
                 width: _size.width,
                 height: 50.0,
@@ -127,9 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 15.0,
-              ),
+              YMargin(15),
               Container(
                 width: _size.width,
                 height: 50.0,
@@ -181,15 +176,11 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.blue,
                             ),
                     ),
-                    SizedBox(
-                      width: 10.0,
-                    )
+                    XMargin(10),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 15.0,
-              ),
+              YMargin(15),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 20.0),
                 child: LoginProceedButton(
@@ -204,9 +195,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 15.0,
-              ),
+              YMargin(15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -226,9 +215,7 @@ class _LoginPageState extends State<LoginPage> {
                   )
                 ],
               ),
-              SizedBox(
-                height: 20.0,
-              ),
+              YMargin(20),
               Row(
                 children: [
                   Expanded(
@@ -260,9 +247,7 @@ class _LoginPageState extends State<LoginPage> {
                   )
                 ],
               ),
-              SizedBox(
-                height: 20.0,
-              ),
+              YMargin(20),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 20.0),
                 child: LoginProceedButton(
@@ -274,9 +259,7 @@ class _LoginPageState extends State<LoginPage> {
                         FontAwesomeIcons.facebook,
                         color: Colors.white,
                       ),
-                      SizedBox(
-                        width: 5.0,
-                      ),
+                      XMargin(5),
                       Text(
                         'Continue as as @username',
                         style: TextStyle(
@@ -292,9 +275,7 @@ class _LoginPageState extends State<LoginPage> {
               Divider(
                 color: darkModeOn ? Colors.grey.shade700 : Colors.grey.shade100,
               ),
-              SizedBox(
-                height: 10.0,
-              ),
+              YMargin(10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -314,9 +295,7 @@ class _LoginPageState extends State<LoginPage> {
                   )
                 ],
               ),
-              SizedBox(
-                height: 10.0,
-              )
+              YMargin(10)
             ],
           ),
         ),

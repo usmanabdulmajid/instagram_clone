@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/colors.dart';
+import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/authorization/presentation/widgets/login_proceed_button.dart';
 
 class EmailSignUp extends StatefulWidget {
@@ -62,9 +63,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
             ),
           ),
         ),
-        SizedBox(
-          height: 15.0,
-        ),
+        YMargin(15),
         LoginProceedButton(
           child: Text(
             'Next',
