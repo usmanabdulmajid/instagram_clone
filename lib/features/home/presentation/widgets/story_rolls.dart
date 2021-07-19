@@ -12,7 +12,16 @@ class _StoryRollsState extends State<StoryRolls> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 110.0,
+      padding: EdgeInsets.all(3.0),
+      height: 116.0,
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            width: 0.15,
+            color: Color(0xFF9F9F9F),
+          ),
+        ),
+      ),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 10,
@@ -50,7 +59,7 @@ class _StoryRollsState extends State<StoryRolls> {
                               width: 24,
                               height: 24,
                               decoration: BoxDecoration(
-                                color: Colors.black,
+                                color: Theme.of(context).backgroundColor,
                                 borderRadius: BorderRadius.circular(24.0),
                               ),
                               child: Center(
@@ -62,7 +71,10 @@ class _StoryRollsState extends State<StoryRolls> {
                                     borderRadius: BorderRadius.circular(22.0),
                                   ),
                                   child: Center(
-                                    child: Icon(Icons.add),
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -96,11 +108,10 @@ class _StoryRollsState extends State<StoryRolls> {
                           borderRadius: BorderRadius.circular(94.0),
                           border: Border.all(
                             style: BorderStyle.solid,
-                            color: Colors.black,
+                            color: Theme.of(context).primaryColor,
                             width: 4.0,
                           ),
                         ),
-                        child: Icon(Icons.add),
                       ),
                     ),
                   ),

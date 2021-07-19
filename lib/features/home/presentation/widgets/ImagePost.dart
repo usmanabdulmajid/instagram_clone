@@ -87,7 +87,13 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Focus(
+      autofocus: true,
+      descendantsAreFocusable: true,
+      onFocusChange: (bool focusChanged) {
+        //TODO
+        //Reset all parameter
+      },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -224,7 +230,7 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                             width: 40,
                             padding: EdgeInsets.all(ksmallSpace),
                             decoration: BoxDecoration(
-                              color: Color(0xFF121212).withOpacity(0.7),
+                              color: Color(0xFF121212),
                               borderRadius: BorderRadius.horizontal(
                                   left: Radius.circular(kmediumSpace),
                                   right: Radius.circular(kmediumSpace)),
@@ -251,7 +257,7 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                         child: Container(
                           padding: EdgeInsets.all(4),
                           decoration: BoxDecoration(
-                            color: Color(0xFF121212).withOpacity(0.7),
+                            color: Color(0xFF121212),
                             borderRadius: BorderRadius.horizontal(
                                 left: Radius.circular(kmediumSpace),
                                 right: Radius.circular(kmediumSpace)),
@@ -267,7 +273,11 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                       left: MediaQuery.of(context).size.width / 2 - 40,
                       child: ScaleTransition(
                         scale: _likedAnimation,
-                        child: Icon(Icons.favorite, size: 100),
+                        child: Icon(
+                          Icons.favorite,
+                          size: 100,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     Positioned(
@@ -278,7 +288,7 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                         child: Container(
                           padding: EdgeInsets.all(2),
                           decoration: BoxDecoration(
-                            color: Color(0xFF121212).withOpacity(0.7),
+                            color: Color(0xFF121212),
                             borderRadius: BorderRadius.horizontal(
                                 left: Radius.circular(kmediumSpace),
                                 right: Radius.circular(kmediumSpace)),
@@ -300,7 +310,7 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                         ),
                       ),
                       child: Container(
-                        color: Colors.black,
+                        color: Theme.of(context).primaryColor,
                         height: 50,
                         child: ListTile(
                           leading: Image.asset(
@@ -308,8 +318,19 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                             height: 36,
                             width: 36,
                           ),
-                          title: Text("Saved"),
-                          trailing: Text("Save to collections"),
+                          title: Text(
+                            "Saved",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          trailing: Text(
+                            "Save to collections",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blueAccent,
+                            ),
+                          ),
                         ),
                       ),
                     )
