@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/colors.dart';
-import 'package:instagram_clone/features/authorization/presentation/pages/email_sign_up.dart';
-import 'package:instagram_clone/features/authorization/presentation/pages/number_sign_up.dart';
+import 'package:instagram_clone/core/utils/sizing.dart';
+import 'package:instagram_clone/features/authorization/presentation/widgets/email_sign_up.dart';
+import 'package:instagram_clone/features/authorization/presentation/widgets/number_sign_up.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -11,7 +12,7 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
-  var _list = <Tab>[
+  var _tablist = <Tab>[
     Tab(
       child: Text('PHONE NUMBER'),
     ),
@@ -42,20 +43,16 @@ class _SignUpPageState extends State<SignUpPage>
               Icons.person,
               size: 100.0,
             ),
-            SizedBox(
-              height: 10.0,
-            ),
+            YMargin(10),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: TabBar(
                 controller: _tabController,
                 unselectedLabelColor: Colors.grey,
-                tabs: _list,
+                tabs: _tablist,
               ),
             ),
-            SizedBox(
-              height: 20.0,
-            ),
+            YMargin(20),
             Expanded(
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 20.0),
@@ -68,13 +65,10 @@ class _SignUpPageState extends State<SignUpPage>
                 ),
               ),
             ),
-            //Spacer(),
             Divider(
               color: darkModeOn ? Colors.grey.shade700 : Colors.grey,
             ),
-            SizedBox(
-              height: 10.0,
-            ),
+            YMargin(10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -93,9 +87,7 @@ class _SignUpPageState extends State<SignUpPage>
                 )
               ],
             ),
-            SizedBox(
-              height: 10.0,
-            )
+            YMargin(10),
           ],
         ),
       ),
