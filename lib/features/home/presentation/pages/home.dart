@@ -82,8 +82,8 @@ class _HomeState extends State<Home> {
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(
-            selectedIconTheme: Theme.of(context).iconTheme,
-            unselectedIconTheme: Theme.of(context).iconTheme,
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.white,
             items: _list,
             showSelectedLabels: false,
             showUnselectedLabels: false,

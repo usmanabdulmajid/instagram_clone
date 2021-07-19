@@ -4,11 +4,13 @@ import 'package:instagram_clone/core/utils/colors.dart';
 class ModalListTile extends StatelessWidget {
   const ModalListTile({
     Key key,
+    @required this.darkModeOn,
     @required this.leadingWidget,
     @required this.label,
     @required this.onTap,
   }) : super(key: key);
 
+  final bool darkModeOn;
   final String label;
   final Widget leadingWidget;
   final VoidCallback onTap;
@@ -24,7 +26,12 @@ class ModalListTile extends StatelessWidget {
         dense: true,
         title: Text(
           label,
-          style: Theme.of(context).textTheme.headline5,
+          style: TextStyle(
+            fontFamily: 'SFProText',
+            fontSize: 17,
+            fontWeight: FontWeight.normal,
+            color: darkModeOn ? AppColors.white : AppColors.black,
+          ),
         ),
       ),
     );

@@ -19,6 +19,7 @@ class ProfileButtonWidget extends StatelessWidget {
       child: Text(
         label,
         style: TextStyle(
+          fontFamily: 'SFProText',
           fontSize: 14,
           fontWeight: FontWeight.bold,
           color: darkModeOn ? AppColors.white : AppColors.black,
