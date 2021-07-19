@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/features/authorization/presentation/pages/login_help_page.dart';
+import 'package:instagram_clone/features/authorization/presentation/pages/login_page.dart';
 import 'package:instagram_clone/features/home/presentation/pages/home.dart';
 import 'package:instagram_clone/features/profile/presentation/pages/profile_page.dart';
+import 'package:instagram_clone/features/authorization/presentation/pages/sign_up_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -125,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
-        ),
+        ), //;;
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,

@@ -1,0 +1,322 @@
+[33mcommit cf9bc76b524d219e43c6cbcb2a6cf208368f8a50[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: usmanabdulmajid <abstractmajid@gmail.com>
+Date:   Sat Jul 17 16:06:42 2021 -0700
+
+    rls
+
+[33mcommit 3e03b451f444866bdeb78e39219b78e180e96e7f[m
+Author: usmanabdulmajid <abstractmajid@gmail.com>
+Date:   Sat Jul 17 15:56:27 2021 -0700
+
+    rale
+
+[33mcommit fcfd601bccd723eaf7c2c76156f6d34719cbb442[m
+Author: usmanabdulmajid <abstractmajid@gmail.com>
+Date:   Sat Jul 17 15:52:26 2021 -0700
+
+    Commit message
+
+[33mcommit 76d37f50b8c004f5482f0faf0a0dbb7e4c14ed3f[m
+Author: usmanabdulmajid <abstractmajid@gmail.com>
+Date:   Sat Jul 17 15:38:17 2021 -0700
+
+    up
+
+[33mcommit 31f2cedac801e068262e560e65ec70982cb103fb[m[33m ([m[1;31morigin/use_local_cache[m[33m, [m[1;31mmain/main[m[33m)[m
+Author: usmanabdulmajid <abstractmajid@gmail.com>
+Date:   Sat Jul 17 15:04:45 2021 -0700
+
+    update
+
+[33mcommit 62e00d521872913bc6ad617b86e91c824585d84f[m
+Merge: c63720e acd3387
+Author: usmanabdulmajid <63570223+usmanabdulmajid@users.noreply.github.com>
+Date:   Sat Jul 17 04:16:15 2021 -0700
+
+    Merge pull request #20 from usmanabdulmajid/usmanabdulmajid-patch-1
+    
+    Merge pull request #19 from usmanabdulmajid/main
+
+[33mcommit acd33878f81d22348e2d11af9abc54fe7d378467[m[33m ([m[1;31morigin/usmanabdulmajid-patch-1[m[33m)[m
+Merge: 6dd938d c63720e
+Author: usmanabdulmajid <63570223+usmanabdulmajid@users.noreply.github.com>
+Date:   Sat Jul 17 04:13:45 2021 -0700
+
+    Merge pull request #19 from usmanabdulmajid/main
+    
+    Merge branch
+
+[33mcommit c63720e7e0821250ad16bf7867d860329c2efef9[m
+Author: usmanabdulmajid <abstractmajid@gmail.com>
+Date:   Sat Jul 17 04:12:20 2021 -0700
+
+    update
+
+[33mcommit de2fae38179c3328009c21b704870f7a24f209b7[m
+Author: usmanabdulmajid <abstractmajid@gmail.com>
+Date:   Sat Jul 17 04:07:09 2021 -0700
+
+    updated project
+
+[33mcommit 0c81051d9c025f4678903b43c3c160c0e3774b9f[m
+Merge: 02c3a7d de56bd2
+Author: Ahmed Yusuf <48961332+iloveteajay@users.noreply.github.com>
+Date:   Sat Jul 17 03:06:17 2021 +0100
+
+    Merge pull request #18 from iloveteajay/main
+    
+    Profile Page UI fixes and refactoring
+
+[33mcommit de56bd2b1db93a7b4dc1051570d6149acf547deb[m
+Author: iloveteajay <atytjani@gmail.com>
+Date:   Sat Jul 17 03:03:58 2021 +0100
+
+    profile page UI fixes
+
+[33mcommit 9d41a815a247bfa522199439fb4708ce5260f6da[m
+Author: iloveteajay <atytjani@gmail.com>
+Date:   Sat Jul 17 02:29:17 2021 +0100
+
+    add icon asset, profile page modal bottom sheet done
+
+[33mcommit 731e396d095fce9da263001332f76ee534870167[m
+Author: iloveteajay <atytjani@gmail.com>
+Date:   Fri Jul 16 22:01:18 2021 +0100
+
+    UI fixes and refactoring
+
+[33mcommit 02c3a7d24dccae3e336287ceca5490ce6a7da2f6[m
+Merge: 332bd10 8fa844f
+Author: Ahmed Yusuf <48961332+iloveteajay@users.noreply.github.com>
+Date:   Fri Jul 16 04:19:53 2021 +0100
+
+    Merge pull request #17 from josh4500/main
+    
+    Update from @josh4500
+
+[33mcommit 8fa844ffe43399597a7e377431f230ab1314934a[m
+Merge: 86aa20d 616a3ae
+Author: Ajibola Akinmosin <jibo.ajosh45@gmail.com>
+Date:   Thu Jul 15 22:49:16 2021 +0100
+
+    Merge pull request #3 from iloveteajay/main
+    
+    Update from @iloveteajay
+
+[33mcommit 86aa20d7495d0e6b5ece41297a244c5cc668d35d[m
+Author: josh4500 <jibo.ajosh45@gmail.com>
+Date:   Thu Jul 15 22:30:38 2021 +0100
+
+    Fix home_post_page
+
+[33mcommit 38ca8ff836ef7d68a9913cdd49ec4a95832841d8[m
+Merge: 2b506e9 23a0767
+Author: josh4500 <jibo.ajosh45@gmail.com>
+Date:   Thu Jul 15 22:28:29 2021 +0100
+
+    Merge branch 'main' of https://github.com/josh4500/instagram_clone into main
+
+[33mcommit 2b506e9e7b00276b93e8e94df89820d969d89936[m
+Author: josh4500 <jibo.ajosh45@gmail.com>
+Date:   Thu Jul 15 22:28:13 2021 +0100
+
+    Redesign ImagePost Card
+
+[33mcommit 4ab02825b23944d8e19abff9b0b7b41c46c009e8[m
+Author: josh4500 <jibo.ajosh45@gmail.com>
+Date:   Thu Jul 15 20:44:28 2021 +0100
+
+    Dynamic Opacity Change on ImagePageCount
+
+[33mcommit 332bd108e60ad7a1f2a08d349443980e66bb6317[m
+Merge: 5adf680 616a3ae
+Author: usmanabdulmajid <63570223+usmanabdulmajid@users.noreply.github.com>
+Date:   Thu Jul 15 10:48:40 2021 -0700
+
+    Merge pull request #16 from iloveteajay/main
+    
+    Profile Page UI Updatedd
+
+[33mcommit 616a3ae06053a4c3aad99c1d3b88f05d6f1e140f[m
+Merge: dd0a88d 5adf680
+Author: Ahmed Yusuf <48961332+iloveteajay@users.noreply.github.com>
+Date:   Thu Jul 15 18:22:47 2021 +0100
+
+    Merge pull request #3 from usmanabdulmajid/main
+    
+    Updated Profile Page UI
+
+[33mcommit dd0a88d070ee2fb0542fdd97fb1fb5f224165e11[m
+Merge: d60cc16 23a0767
+Author: Ahmed Yusuf <48961332+iloveteajay@users.noreply.github.com>
+Date:   Thu Jul 15 18:22:15 2021 +0100
+
+    Merge pull request #2 from josh4500/main
+    
+    Update from @josh4500
+
+[33mcommit 23a0767a660e403d964e1c3d17d33aa7d0712d09[m
+Merge: a8b0a30 d60cc16
+Author: Ahmed Yusuf <48961332+iloveteajay@users.noreply.github.com>
+Date:   Thu Jul 15 18:20:34 2021 +0100
+
+    Merge branch 'main' into main
+
+[33mcommit d60cc16f462d51ffa67e66d34f06e0f4cf9109e6[m
+Author: iloveteajay <atytjani@gmail.com>
+Date:   Thu Jul 15 18:07:19 2021 +0100
+
+    Profile Page UI fix
+
+[33mcommit 5adf68074a6dc421607ffae486ddae504bef407a[m
+Merge: 912531e a8b0a30
+Author: usmanabdulmajid <63570223+usmanabdulmajid@users.noreply.github.com>
+Date:   Thu Jul 15 08:22:02 2021 -0700
+
+    Merge pull request #15 from josh4500/main
+    
+    Update from @josh4500
+
+[33mcommit ea2e07a5f19117a7178aec048178889c4aca7e2b[m
+Author: iloveteajay <atytjani@gmail.com>
+Date:   Thu Jul 15 02:42:20 2021 +0100
+
+    update profile page UI
+
+[33mcommit a8b0a30c7becb8ffa29dd95fb6a0197cf96cce6a[m
+Merge: e1e5a2b dbb80ad
+Author: josh4500 <jibo.ajosh45@gmail.com>
+Date:   Wed Jul 14 16:24:24 2021 +0100
+
+    Complete Merge
+
+[33mcommit e1e5a2be379d4ed0d1a9eecf4e490fa3dfc7f562[m
+Author: josh4500 <jibo.ajosh45@gmail.com>
+Date:   Wed Jul 14 16:18:52 2021 +0100
+
+    Add ImagePost
+
+[33mcommit e53cb759f0b34958baec45483d1aaf726c69ecc7[m
+Author: josh4500 <jibo.ajosh45@gmail.com>
+Date:   Wed Jul 14 15:02:37 2021 +0100
+
+    Make pageview scroll only on Homepage
+
+[33mcommit 912531e666ef4cc66ff36533a97fa843aeaa3715[m
+Merge: d556ba5 dbb80ad
+Author: Ajibola Akinmosin <jibo.ajosh45@gmail.com>
+Date:   Tue Jul 13 19:38:27 2021 +0100
+
+    Merge pull request #14 from josh4500/main
+    
+    Fix version issues
+
+[33mcommit dbb80adcdb9a5cb2148363a4084b325c7af57716[m
+Merge: cb1f1b5 d556ba5
+Author: usmanabdulmajid <63570223+usmanabdulmajid@users.noreply.github.com>
+Date:   Tue Jul 13 11:37:34 2021 -0700
+
+    Merge branch 'main' into main
+
+[33mcommit d556ba557cd1b6d97708dcb3b3b3b275bd115f33[m
+Merge: ba7d822 42a8b40
+Author: usmanabdulmajid <63570223+usmanabdulmajid@users.noreply.github.com>
+Date:   Tue Jul 13 11:28:48 2021 -0700
+
+    Merge pull request #12 from iloveteajay/main
+    
+    project setup
+
+[33mcommit 25d99ac50011b520c18e768cfdfa056fe982fa61[m
+Author: josh4500 <jibo.ajosh45@gmail.com>
+Date:   Tue Jul 13 19:21:53 2021 +0100
+
+    Fix issues
+
+[33mcommit cb1f1b5bac5d8260da8b787a98f1577fca1402b1[m
+Author: josh4500 <jibo.ajosh45@gmail.com>
+Date:   Tue Jul 13 19:16:07 2021 +0100
+
+    Fix version issues
+
+[33mcommit e085c0280036844cbcbd749e774b0a184208c516[m
+Author: Ajibola Akinmosin <jibo.ajosh45@gmail.com>
+Date:   Tue Jul 13 18:19:09 2021 +0100
+
+    Update pubspec.yaml
+
+[33mcommit 0efdc5d0a8cf9f2f7a73a314a7a25f68a37fe435[m
+Author: Ajibola Akinmosin <jibo.ajosh45@gmail.com>
+Date:   Tue Jul 13 18:17:45 2021 +0100
+
+    Update home.dart
+
+[33mcommit 1971267a43165a101f45cbb6962b33a40c0d64d9[m
+Author: Ajibola Akinmosin <jibo.ajosh45@gmail.com>
+Date:   Tue Jul 13 18:16:51 2021 +0100
+
+    Update home_post_page.dart
+
+[33mcommit ba7d822faa6481b4994728c7520fb2c9ec39473f[m
+Author: usmanabdulmajid <abstractmajid@gmail.com>
+Date:   Tue Jul 13 07:20:48 2021 -0700
+
+    added language dropdown
+
+[33mcommit 758bf9d3a1a6d62956d29dbd9be8e0338f328480[m
+Merge: c4dcfd8 b881ec6
+Author: Ajibola Akinmosin <jibo.ajosh45@gmail.com>
+Date:   Mon Jul 12 08:09:52 2021 +0100
+
+    Merge pull request #2 from usmanabdulmajid/main
+    
+    project setup
+
+[33mcommit c858074e82a4d4be5fd72dac5161fa80c34e609d[m
+Author: usmanabdulmajid <abstractmajid@gmail.com>
+Date:   Sun Jul 11 17:14:06 2021 -0700
+
+    create welcomePage
+
+[33mcommit c4dcfd855b8068d6d1723baec645ebe1ca42df02[m
+Merge: 0dcd74f 6dd938d
+Author: Ajibola Akinmosin <jibo.ajosh45@gmail.com>
+Date:   Sun Jul 11 19:38:17 2021 +0100
+
+    Merge pull request #1 from usmanabdulmajid/usmanabdulmajid-patch-1
+    
+    Create contributing.md
+
+[33mcommit 42a8b409a104f222f27e5b82ad3be58c30f873b0[m
+Merge: 96f69f1 b881ec6
+Author: Ahmed Yusuf <48961332+iloveteajay@users.noreply.github.com>
+Date:   Sun Jul 11 15:11:52 2021 +0100
+
+    Merge branch 'usmanabdulmajid:main' into main
+
+[33mcommit b881ec627c9b4f00093567b9324a4ba1bcb3859c[m
+Author: usmanabdulmajid <abstractmajid@gmail.com>
+Date:   Sun Jul 11 05:26:38 2021 -0700
+
+    project setup
+
+[33mcommit 96f69f163938368799436d8bf93649953005dd19[m
+Merge: 0dcd74f 6dd938d
+Author: usmanabdulmajid <63570223+usmanabdulmajid@users.noreply.github.com>
+Date:   Fri Jul 9 06:04:10 2021 -0700
+
+    Merge pull request #1 from usmanabdulmajid/usmanabdulmajid-patch-1
+    
+    Create contributing.md
+
+[33mcommit 6dd938d5523de5a6c46527a58d64b99d2ae87c41[m
+Author: usmanabdulmajid <63570223+usmanabdulmajid@users.noreply.github.com>
+Date:   Fri Jul 9 06:03:49 2021 -0700
+
+    Create contributing.md
+
+[33mcommit 0dcd74fc49ee72668269ad04e77c124fe256ef61[m
+Author: usmanabdulmajid <abstractmajid@gmail.com>
+Date:   Wed Jul 7 05:10:59 2021 -0700
+
+    added README.md
