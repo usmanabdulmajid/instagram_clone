@@ -89,23 +89,22 @@ class _VideoPostState extends State<VideoPost> {
                       });
                     }
                   }
-                  if (_hasSound && !_soundIndicatorVisible) {
+                  if (_hasSound) {
                     _disabledSound = !_disabledSound;
-                    _soundIndicatorVisible = !_soundIndicatorVisible;
+                    if (!_soundIndicatorVisible) {
+                      _soundIndicatorVisible = !_soundIndicatorVisible;
+                    }
+                    if (_disabledSound) {
+                      _controller.setVolume(1);
+                    } else {
+                      _controller.setVolume(0);
+                    }
                     if (_soundIndicatorVisible) {
                       Future.delayed(Duration(seconds: 5), () {
                         setState(() {
                           _soundIndicatorVisible = false;
                         });
                       });
-                    }
-                  }
-                  if (_hasSound) {
-                    _disabledSound = !_disabledSound;
-                    if (_disabledSound) {
-                      _controller.setVolume(1);
-                    } else {
-                      _controller.setVolume(0);
                     }
                   }
                   _controller.value.isPlaying
@@ -168,15 +167,18 @@ class _VideoPostState extends State<VideoPost> {
                               width: 8.0,
                             ),
                             AnimatedContainer(
-                                duration: Duration(milliseconds: 200),
-                                width: _showWatchTvText ? 80 : 0,
-                                child: _showWatchTvText
-                                    ? Text(
-                                        "Watch TV",
-                                        maxLines: 1,
-                                        overflow: TextOverflow.clip,
-                                      )
-                                    : SizedBox())
+                              duration: Duration(milliseconds: 200),
+                              width: _showWatchTvText ? 80 : 0,
+                              child: _showWatchTvText
+                                  ? Text(
+                                      "Watch TV",
+                                      maxLines: 1,
+                                      overflow: TextOverflow.clip,
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
+                                    )
+                                  : SizedBox(),
+                            ),
                           ],
                         ),
                       ),
