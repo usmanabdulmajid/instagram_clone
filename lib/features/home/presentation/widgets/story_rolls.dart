@@ -12,7 +12,7 @@ class _StoryRollsState extends State<StoryRolls> {
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
-    double size = (_size.width / 3.2) - (5 * 8);
+    double size = (_size.width / 3.1) - (5 * 8);
     return Container(
       padding: EdgeInsets.all(3.0),
       height: size + (5 * 2) + 6,

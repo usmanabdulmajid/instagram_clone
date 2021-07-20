@@ -20,8 +20,6 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
   bool _hasSound = true;
   bool _disabledSound = false;
   bool _soundIndicatorVisible = false;
-  bool _isItv = false;
-  bool _isWatchTv = false;
   int _commentCount = 3;
   int _imageCount = 3;
   int _currentImagePageNumber = 1;
@@ -155,16 +153,6 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                   });
                 }
               }
-              if (_isItv) {
-                _isWatchTv = !_isWatchTv;
-                if (_isWatchTv) {
-                  Future.delayed(Duration(seconds: 5), () {
-                    setState(() {
-                      _isWatchTv = false;
-                    });
-                  });
-                }
-              }
 
               if (_hasSound && !_soundIndicatorVisible) {
                 _disabledSound = !_disabledSound;
@@ -249,26 +237,6 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    left: ksmallSpace,
-                    bottom: ksmallSpace,
-                    child: Visibility(
-                      visible: _isItv && _isWatchTv,
-                      child: Container(
-                        padding: EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          color: Colors.black54,
-                          borderRadius: BorderRadius.horizontal(
-                              left: Radius.circular(kmediumSpace),
-                              right: Radius.circular(kmediumSpace)),
-                        ),
-                        child: Icon(
-                          Icons.live_tv_rounded,
-                          size: klmediumIconSize,
                         ),
                       ),
                     ),
@@ -473,12 +441,10 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                       style:
                           TextStyle(fontSize: 11, fontWeight: FontWeight.w100),
                     ),
-                    TextSpan(
-                        text: 'more',
-                        style: Theme.of(context).textTheme.caption),
                   ],
                 ),
               ),
+              Text('more', style: Theme.of(context).textTheme.caption),
               SizedBox(
                 height: ksmallSpace,
               ),
