@@ -58,6 +58,22 @@ class _HomeState extends State<Home> {
     ),
   ];
 
+  void addPost() {
+    _pageController.animateToPage(
+      0,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.linearToEaseOut,
+    );
+  }
+
+  void gotoMessage() {
+    _pageController.animateToPage(
+      2,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.linearToEaseOut,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return PageView(
@@ -74,7 +90,8 @@ class _HomeState extends State<Home> {
           body: IndexedStack(
             index: _selectedIndex,
             children: [
-              HomePostPage(),
+              HomePostPage(
+                  addPostCallback: addPost, gotoMessageCallback: gotoMessage),
               SearchPage(),
               ReelsPage(),
               ActivityPage(),

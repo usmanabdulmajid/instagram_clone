@@ -47,8 +47,6 @@ class _VideoPostState extends State<VideoPost> {
           setState(() {
             _isItv = true;
           });
-          //TODO
-          //Show Watch
         }
       }
     });
@@ -171,11 +169,7 @@ class _VideoPostState extends State<VideoPost> {
                             ),
                             AnimatedContainer(
                                 duration: Duration(milliseconds: 200),
-                                width: _showWatchTvText
-                                    ? 80
-                                    : !_controller.value.isPlaying
-                                        ? 80
-                                        : 0,
+                                width: _showWatchTvText ? 80 : 0,
                                 child: _showWatchTvText
                                     ? Text(
                                         "Watch TV",
