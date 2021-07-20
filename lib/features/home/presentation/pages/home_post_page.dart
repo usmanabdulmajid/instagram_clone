@@ -36,7 +36,7 @@ class _HomePostPageState extends State<HomePostPage> {
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (ctx, index) => ImagePost(),
-            childCount: 1,
+            childCount: 10,
           ),
         ),
       ],

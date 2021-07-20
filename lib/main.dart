@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
           bodyText1: TextStyle(fontSize: 12.0, fontStyle: FontStyle.normal),
           bodyText2: TextStyle(fontSize: 14.0, fontStyle: FontStyle.normal),
           caption: TextStyle(
-            fontSize: 10.0,
+            fontSize: 8.0,
             fontStyle: FontStyle.normal,
             color: Color(0xFF262626),
           ),
@@ -89,7 +89,7 @@ class MyApp extends StatelessWidget {
           bodyText1: TextStyle(fontSize: 12.0, fontStyle: FontStyle.normal),
           bodyText2: TextStyle(fontSize: 14.0, fontStyle: FontStyle.normal),
           caption: TextStyle(
-            fontSize: 11.0,
+            fontSize: 8.0,
             fontStyle: FontStyle.normal,
           ),
         ),

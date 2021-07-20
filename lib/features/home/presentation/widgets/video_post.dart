@@ -12,9 +12,11 @@ class VideoPost extends StatefulWidget {
 class _VideoPostState extends State<VideoPost> {
   VideoPlayerController _controller;
   Future<void> _initializeVideoPlayerFuture;
+  FocusNode _focusNode;
 
   @override
   void initState() {
+    _focusNode = FocusNode();
     _controller = VideoPlayerController.asset("assets/video/vidTest.mp4",
         videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true));
     _initializeVideoPlayerFuture = _controller.initialize()
@@ -39,8 +41,9 @@ class _VideoPostState extends State<VideoPost> {
       child: _controller.value.isInitialized
           ? GestureDetector(
               onTap: () {
-                _controller.play();
-                _controller.setVolume(1);
+                _controller.value.isPlaying
+                    ? _controller.pause()
+                    : _controller.play();
               },
               child: AspectRatio(
                 aspectRatio: _controller.value.aspectRatio,
