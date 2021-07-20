@@ -44,6 +44,8 @@ class _HomePostPageState extends State<HomePostPage> {
           delegate: SliverChildBuilderDelegate(
             (ctx, index) => ImagePost(),
             childCount: 10,
+            addAutomaticKeepAlives: true,
+            addRepaintBoundaries: true,
           ),
         ),
       ],
