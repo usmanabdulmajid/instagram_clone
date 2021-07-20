@@ -17,9 +17,6 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
   bool _likedPost = false;
   bool _addedToCollection = false;
   bool _hasComment = false;
-  bool _hasSound = true;
-  bool _disabledSound = false;
-  bool _soundIndicatorVisible = false;
   int _commentCount = 3;
   int _imageCount = 3;
   int _currentImagePageNumber = 1;
@@ -153,21 +150,6 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                   });
                 }
               }
-
-              if (_hasSound && !_soundIndicatorVisible) {
-                _disabledSound = !_disabledSound;
-                _soundIndicatorVisible = !_soundIndicatorVisible;
-                if (_soundIndicatorVisible) {
-                  Future.delayed(Duration(seconds: 5), () {
-                    setState(() {
-                      _soundIndicatorVisible = false;
-                    });
-                  });
-                }
-              }
-              if (_hasSound) {
-                _disabledSound = !_disabledSound;
-              }
             })
           },
           onDoubleTap: () => {
@@ -250,29 +232,6 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                         Icons.favorite,
                         size: 100,
                         color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: ksmallSpace,
-                    right: ksmallSpace,
-                    child: Visibility(
-                      visible: _hasSound && _soundIndicatorVisible,
-                      child: Container(
-                        padding: EdgeInsets.all(2),
-                        decoration: BoxDecoration(
-                          color: Colors.black54,
-                          borderRadius: BorderRadius.horizontal(
-                              left: Radius.circular(kmediumSpace),
-                              right: Radius.circular(kmediumSpace)),
-                        ),
-                        child: Center(
-                          child: Icon(
-                            _disabledSound ? Icons.volume_up : Icons.volume_off,
-                            color: Colors.white,
-                            size: klmediumIconSize,
-                          ),
-                        ),
                       ),
                     ),
                   ),

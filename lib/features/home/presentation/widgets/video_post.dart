@@ -16,6 +16,9 @@ class _VideoPostState extends State<VideoPost> {
   bool _isWatchTv = false;
   bool _showWatchTvText = true;
   bool _isDurationVisible = true;
+  bool _hasSound = true;
+  bool _disabledSound = false;
+  bool _soundIndicatorVisible = false;
   String _duration = "";
 
   @override
@@ -67,29 +70,50 @@ class _VideoPostState extends State<VideoPost> {
       child: _controller.value.isInitialized
           ? GestureDetector(
               onTap: () {
-                if (_isItv) {
-                  _isWatchTv = !_isWatchTv;
-                  Future.delayed(Duration(seconds: 2), () {
-                    setState(() {
-                      _showWatchTvText = !_showWatchTvText;
-                    });
-                  });
-                  if (_isWatchTv) {
-                    Future.delayed(Duration(seconds: 5), () {
+                setState(() {
+                  if (_isItv) {
+                    _isWatchTv = !_isWatchTv;
+                    Future.delayed(Duration(seconds: 2), () {
                       setState(() {
-                        _isWatchTv = false;
+                        _showWatchTvText = !_showWatchTvText;
                       });
                     });
-                    Future.delayed(Duration(seconds: 3), () {
-                      setState(() {
-                        _showWatchTvText = false;
+                    if (_isWatchTv) {
+                      Future.delayed(Duration(seconds: 5), () {
+                        setState(() {
+                          _isWatchTv = false;
+                        });
                       });
-                    });
+                      Future.delayed(Duration(seconds: 3), () {
+                        setState(() {
+                          _showWatchTvText = false;
+                        });
+                      });
+                    }
                   }
-                }
-                _controller.value.isPlaying
-                    ? _controller.pause()
-                    : _controller.play();
+                  if (_hasSound && !_soundIndicatorVisible) {
+                    _disabledSound = !_disabledSound;
+                    _soundIndicatorVisible = !_soundIndicatorVisible;
+                    if (_soundIndicatorVisible) {
+                      Future.delayed(Duration(seconds: 5), () {
+                        setState(() {
+                          _soundIndicatorVisible = false;
+                        });
+                      });
+                    }
+                  }
+                  if (_hasSound) {
+                    _disabledSound = !_disabledSound;
+                    if (_disabledSound) {
+                      _controller.setVolume(1);
+                    } else {
+                      _controller.setVolume(0);
+                    }
+                  }
+                  _controller.value.isPlaying
+                      ? _controller.play()
+                      : _controller.play();
+                });
               },
               child: Stack(
                 fit: StackFit.expand,
@@ -147,7 +171,11 @@ class _VideoPostState extends State<VideoPost> {
                             ),
                             AnimatedContainer(
                                 duration: Duration(milliseconds: 200),
-                                width: _showWatchTvText ? 80 : 0,
+                                width: _showWatchTvText
+                                    ? 80
+                                    : !_controller.value.isPlaying
+                                        ? 80
+                                        : 0,
                                 child: _showWatchTvText
                                     ? Text(
                                         "Watch TV",
@@ -156,6 +184,29 @@ class _VideoPostState extends State<VideoPost> {
                                       )
                                     : SizedBox())
                           ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: ksmallSpace,
+                    right: ksmallSpace,
+                    child: Visibility(
+                      visible: _hasSound && _soundIndicatorVisible,
+                      child: Container(
+                        padding: EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                          color: Colors.black54,
+                          borderRadius: BorderRadius.horizontal(
+                              left: Radius.circular(kmediumSpace),
+                              right: Radius.circular(kmediumSpace)),
+                        ),
+                        child: Center(
+                          child: Icon(
+                            _disabledSound ? Icons.volume_up : Icons.volume_off,
+                            color: Colors.white,
+                            size: klmediumIconSize,
+                          ),
                         ),
                       ),
                     ),
