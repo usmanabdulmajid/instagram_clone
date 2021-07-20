@@ -23,6 +23,7 @@ class _HomePostPageState extends State<HomePostPage> {
         SliverAppBar(
           elevation: 0,
           title: Text("Instagram"),
+          pinned: true,
           actions: [
             IconButton(
               icon: Icon(Icons.add_box_outlined),

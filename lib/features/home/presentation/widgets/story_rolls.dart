@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utils/sizing.dart';
 
 class StoryRolls extends StatefulWidget {
   const StoryRolls({Key key, @required this.availableStatus}) : super(key: key);
@@ -11,8 +12,7 @@ class StoryRolls extends StatefulWidget {
 class _StoryRollsState extends State<StoryRolls> {
   @override
   Widget build(BuildContext context) {
-    Size _size = MediaQuery.of(context).size;
-    double size = (_size.width / 3.1) - (5 * 8);
+    double size = Sizing.xMargin(context, 33.1) - (5 * 8);
     return Container(
       padding: EdgeInsets.all(3.0),
       height: size + (5 * 2) + 6,

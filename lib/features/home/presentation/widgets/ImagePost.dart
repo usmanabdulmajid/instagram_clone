@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants.dart';
+import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/home/presentation/widgets/video_post.dart';
 
 class ImagePost extends StatefulWidget {
@@ -132,7 +133,10 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
               Spacer(),
               IconButton(
                 icon: Icon(Icons.more_vert),
-                onPressed: () => {},
+                onPressed: () => {
+                  //TODO
+                  //ShowModalOptions
+                },
               ),
             ],
           ),
@@ -178,7 +182,7 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                   _cateloge
                       ? ConstrainedBox(
                           constraints: BoxConstraints.tight(
-                              Size(MediaQuery.of(context).size.width, 250)),
+                              Size(Sizing.xMargin(context, 100), 250)),
                           child: PageView(
                             scrollDirection: Axis.horizontal,
                             onPageChanged: (index) {
@@ -224,8 +228,8 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                     ),
                   ),
                   Positioned(
-                    top: MediaQuery.of(context).size.width / 2 - 120,
-                    left: MediaQuery.of(context).size.width / 2 - 40,
+                    top: Sizing.xMargin(context, 50) - 120,
+                    left: Sizing.xMargin(context, 50) - 40,
                     child: ScaleTransition(
                       scale: _likedAnimation,
                       child: Icon(
@@ -404,9 +408,7 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                 ),
               ),
               Text('more', style: Theme.of(context).textTheme.caption),
-              SizedBox(
-                height: ksmallSpace,
-              ),
+              YMargin(ksmallSpace),
               _hasComment
                   ? RichText(
                       text: TextSpan(children: [
@@ -417,6 +419,35 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                       ], style: Theme.of(context).textTheme.caption),
                     )
                   : SizedBox(),
+              YMargin(ksmallSpace),
+              Container(
+                height: 30,
+                // color: Colors.blueGrey,
+                child: Row(
+                  children: [
+                    Icon(Icons.account_circle),
+                    XMargin(ksmallSpace),
+                    Expanded(
+                      child: Container(
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: Text(
+                            "Add Comment...",
+                            style: TextStyle(
+                              color: Theme.of(context).accentColor,
+                              fontSize: 16.0,
+                              fontStyle: FontStyle.normal,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Text("🙌"),
+                    XMargin(ksmallSpace),
+                    Text("♥"),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
