@@ -121,20 +121,19 @@ class _VideoPostState extends State<VideoPost> {
                   ),
                   Positioned(
                     top: ksmallSpace,
-                    right: ksmallSpace,
+                    right: ksmallSpace / 2,
                     child: Visibility(
                       visible: _isDurationVisible,
                       child: Container(
                         width: 60,
-                        padding: EdgeInsets.all(ksmallSpace),
                         color: Colors.transparent,
                         child: Center(
                           child: Text(
                             _duration,
                             style: TextStyle(
                               color: Color(0xFFF9F9F9),
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
                         ),

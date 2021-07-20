@@ -424,6 +424,8 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                 height: 30,
                 // color: Colors.blueGrey,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Icon(Icons.account_circle),
                     XMargin(ksmallSpace),
@@ -435,8 +437,9 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                             "Add Comment...",
                             style: TextStyle(
                               color: Theme.of(context).accentColor,
-                              fontSize: 16.0,
+                              fontSize: 18.0,
                               fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                         ),
