@@ -14,6 +14,7 @@ class _HomePostPageState extends State<HomePostPage> {
       physics: BouncingScrollPhysics(),
       slivers: [
         SliverAppBar(
+          elevation: 0,
           title: Text("Instagram"),
           pinned: true,
           actions: [
@@ -35,7 +36,7 @@ class _HomePostPageState extends State<HomePostPage> {
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (ctx, index) => ImagePost(),
-            childCount: 10,
+            childCount: 1,
           ),
         ),
       ],

@@ -335,7 +335,7 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 );
               },

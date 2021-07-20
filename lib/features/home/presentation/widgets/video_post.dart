@@ -1,5 +1,6 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+import '../../../../constants.dart';
 
 class VideoPost extends StatefulWidget {
   const VideoPost({Key key}) : super(key: key);
@@ -14,9 +15,14 @@ class _VideoPostState extends State<VideoPost> {
 
   @override
   void initState() {
-    _controller = VideoPlayerController.asset("assets/video/vidTest.mp4");
-    _initializeVideoPlayerFuture = _controller.initialize();
-
+    _controller = VideoPlayerController.asset("assets/video/vidTest.mp4",
+        videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true));
+    _initializeVideoPlayerFuture = _controller.initialize()
+      ..then(
+        (_) => setState(() {}),
+      );
+    _controller.play();
+    _controller.setLooping(true);
     super.initState();
   }
 
@@ -30,14 +36,20 @@ class _VideoPostState extends State<VideoPost> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: FutureBuilder(
-        builder: (context, snapshot) {
-          return AspectRatio(
-            aspectRatio: _controller.value.aspectRatio,
-            child: VideoPlayer(_controller),
-          );
-        },
-      ),
+      child: _controller.value.isInitialized
+          ? GestureDetector(
+              onTap: () {
+                _controller.play();
+                _controller.setVolume(1);
+              },
+              child: AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: VideoPlayer(_controller),
+              ),
+            )
+          : Container(
+              color: Colors.white,
+            ),
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/login_help_page.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/login_page.dart';
 import 'package:instagram_clone/features/home/presentation/pages/home.dart';
@@ -6,6 +8,14 @@ import 'package:instagram_clone/features/profile/presentation/pages/profile_page
 import 'package:instagram_clone/features/authorization/presentation/pages/sign_up_page.dart';
 
 void main() {
+  // bool isDark =
+  //     SchedulerBinding.instance.window.platformBrightness == Brightness.dark;
+  // SystemChrome.setSystemUIOverlayStyle(
+  //   SystemUiOverlayStyle(
+  //     systemNavigationBarColor: isDark ? Colors.black : Colors.white,
+  //     statusBarColor: isDark ? Colors.black : Colors.white,
+  //   ),
+  // );
   runApp(MyApp());
 }
 
