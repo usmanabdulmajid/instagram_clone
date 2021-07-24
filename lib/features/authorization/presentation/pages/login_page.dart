@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/colors.dart';
+import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/authorization/presentation/widgets/login_proceed_button.dart';
 import 'package:language_picker/language_picker.dart';
@@ -88,14 +89,11 @@ class _LoginPageState extends State<LoginPage> {
               //     print(_selectedDropdownLanguage.isoCode);
               //   },
               // ),
-              SizedBox(
-                height: _size.height * 0.2,
+              YMargin(Sizing.yMargin(context, 15)),
+              CustomIcon(
+                icon: "Instagram_logo",
+                size: 200,
               ),
-              Text(
-                'Instagram',
-                style: TextStyle(fontSize: 30.0),
-              ),
-              YMargin(40),
               Container(
                 width: _size.width,
                 height: 50.0,
@@ -200,7 +198,7 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Forgot your loginpage details?',
+                    'Forgot your loginpage details? ',
                     style: TextStyle(color: Colors.grey, fontSize: 12.0),
                   ),
                   Text(
@@ -280,7 +278,7 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Don\' have an account?',
+                    'Don\'t have an account? ',
                     style: TextStyle(color: Colors.grey, fontSize: 12.0),
                   ),
                   Text(

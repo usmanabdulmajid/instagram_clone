@@ -1,36 +1,93 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/constants.dart';
+import 'package:instagram_clone/core/utils/icons.dart';
+import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/home/presentation/widgets/ImagePost.dart';
 import 'package:instagram_clone/features/home/presentation/widgets/story_rolls.dart';
 
-class HomePostPage extends StatelessWidget {
+class HomePostPage extends StatefulWidget {
+  HomePostPage(
+      {Key key,
+      @required this.addPostCallback,
+      @required this.gotoMessageCallback})
+      : super(key: key);
+  final VoidCallback addPostCallback;
+  final VoidCallback gotoMessageCallback;
+
+  @override
+  _HomePostPageState createState() => _HomePostPageState();
+}
+
+class _HomePostPageState extends State<HomePostPage> {
+  ScrollController _controller;
+
+  @override
+  void initState() {
+    _controller = ScrollController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      physics: BouncingScrollPhysics(),
+      controller: _controller,
       slivers: [
         SliverAppBar(
-          title: Text("Instagram"),
+          elevation: 4.0,
+          title: GestureDetector(
+            onTap: () {
+              _controller.animateTo(0,
+                  duration: Duration(milliseconds: 300),
+                  curve: Curves.easeInToLinear);
+            },
+            child: CustomIcon(
+              icon: "Instagram_logo",
+              size: 120,
+            ),
+          ),
           pinned: true,
           actions: [
-            IconButton(
-              icon: Icon(Icons.add_box_outlined),
-              onPressed: () => {},
+            GestureDetector(
+              onTap: widget.addPostCallback,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: ksmallSpace),
+                child: CustomIcon(icon: "add", size: 24),
+              ),
             ),
-            IconButton(
-              icon: Icon(Icons.send_outlined),
-              onPressed: () => {},
-            )
+            GestureDetector(
+              onTap: widget.gotoMessageCallback,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: ksmallSpace),
+                child: CustomIcon(icon: "messenger", size: 24),
+              ),
+            ),
+            XMargin(ksmallSpace),
           ],
         ),
         SliverToBoxAdapter(
-          child: StoryRolls(),
+          child: StoryRolls(
+            availableStatus: 10,
+          ),
         ),
         SliverList(
-            delegate: SliverChildListDelegate.fixed([
-          ImagePost(),
-          ImagePost(),
-          ImagePost(),
-          ImagePost(),
-        ]))
+          delegate: SliverChildBuilderDelegate(
+            (ctx, index) => ImagePost(
+              key: PageStorageKey(index),
+            ),
+            childCount: 10,
+            addAutomaticKeepAlives: true,
+            addRepaintBoundaries: true,
+          ),
+        ),
       ],
     );
   }

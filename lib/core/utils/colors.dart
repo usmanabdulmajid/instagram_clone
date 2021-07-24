@@ -13,11 +13,10 @@ class AppColors {
 
   static const Color lightBlue = Color(0xFF1999ED);
   static const Color lightRed = Color(0xFFEE4957);
-  
+
   //Dark Theme
   static const Color white = Color(0xFFFFFFFF);
   static const Color whiteShade1 = Color(0xFFFFFFDE);
 
   static const Color darkStoryGrey = Color(0xFF262626);
-  
 }
