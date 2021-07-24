@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/features/activity/presentation/pages/activity_page.dart';
+import 'package:instagram_clone/features/authorization/presentation/pages/login_page.dart';
+import 'package:instagram_clone/features/authorization/presentation/pages/sign_up_page.dart';
 import 'package:instagram_clone/features/home/presentation/pages/home_post_page.dart';
 import 'package:instagram_clone/features/message/presentation/pages/message.dart';
 import 'package:instagram_clone/features/new_post/presentation/pages/new_post.dart';
@@ -22,41 +25,53 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     shouldScrollPage = true;
-    _pageController = new PageController(initialPage: pageIndex);
+    _pageController = new PageController(
+      initialPage: pageIndex,
+    );
   }
 
-  var _list = <BottomNavigationBarItem>[
-    BottomNavigationBarItem(
-      icon: Icon(
-        Icons.home,
+  List<BottomNavigationBarItem> _getBAppBArIcon(int index) {
+    var list = [
+      BottomNavigationBarItem(
+        icon: CustomIcon(
+          icon: "home",
+          iconAccent: "home_outlined",
+          showFirst: index == 0,
+          isNotFaded: false,
+        ),
+        label: 'Home',
       ),
-      label: 'Home',
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(
-        Icons.search,
+      BottomNavigationBarItem(
+        icon: CustomIcon(
+          icon: "search",
+        ),
+        label: 'Search',
       ),
-      label: 'Search',
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(
-        Icons.video_collection_rounded,
+      BottomNavigationBarItem(
+        icon: CustomIcon(
+          icon: "add",
+        ),
+        label: 'Discover',
       ),
-      label: 'Discover',
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(
-        Icons.favorite_outline,
+      BottomNavigationBarItem(
+        icon: CustomIcon(
+          icon: "liked_filled",
+          iconAccent: "like",
+          showFirst: index == 3,
+          isNotFaded: false,
+        ),
+        label: 'Like',
       ),
-      label: 'Profile',
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(
-        Icons.account_circle,
+      BottomNavigationBarItem(
+        icon: CircleAvatar(
+          backgroundColor: Colors.cyan,
+          radius: 15,
+        ),
+        label: 'Profile',
       ),
-      label: 'Profile',
-    ),
-  ];
+    ];
+    return list;
+  }
 
   void addPost() {
     _pageController.animateToPage(
@@ -91,8 +106,10 @@ class _HomeState extends State<Home> {
             index: _selectedIndex,
             children: [
               HomePostPage(
-                  addPostCallback: addPost, gotoMessageCallback: gotoMessage),
-              SearchPage(),
+                addPostCallback: addPost,
+                gotoMessageCallback: gotoMessage,
+              ),
+              LoginPage(),
               ReelsPage(),
               ActivityPage(),
               ProfilePage(),
@@ -101,12 +118,13 @@ class _HomeState extends State<Home> {
           bottomNavigationBar: BottomNavigationBar(
             selectedIconTheme: Theme.of(context).iconTheme,
             unselectedIconTheme: Theme.of(context).iconTheme,
-            items: _list,
+            items: _getBAppBArIcon(_selectedIndex),
             showSelectedLabels: false,
             showUnselectedLabels: false,
             onTap: (int index) {
               setState(() {
                 _selectedIndex = index;
+
                 if (index != 0) {
                   shouldScrollPage = false;
                 } else {

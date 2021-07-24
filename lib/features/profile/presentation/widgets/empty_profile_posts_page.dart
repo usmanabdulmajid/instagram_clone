@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/colors.dart';
+import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 
 class EmptyProfilePostsPage extends StatelessWidget {
@@ -31,9 +32,7 @@ class EmptyProfilePostsPage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Container(
-              child: darkModeOn
-                  ? Image.asset("$darkIconTheme/add.png")
-                  : Image.asset("$lightIconTheme/add-light.png"),
+              child: CustomIcon(icon: "add", size: 22),
             ),
           ),
         ),

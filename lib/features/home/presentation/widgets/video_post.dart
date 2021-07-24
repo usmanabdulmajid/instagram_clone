@@ -71,7 +71,7 @@ class _VideoPostState extends State<VideoPost> {
                 setState(() {
                   if (_isItv) {
                     _isWatchTv = !_isWatchTv;
-                    Future.delayed(Duration(seconds: 2), () {
+                    Future.delayed(Duration(seconds: 1), () {
                       setState(() {
                         _showWatchTvText = !_showWatchTvText;
                       });
@@ -82,7 +82,7 @@ class _VideoPostState extends State<VideoPost> {
                           _isWatchTv = false;
                         });
                       });
-                      Future.delayed(Duration(seconds: 3), () {
+                      Future.delayed(Duration(seconds: 4), () {
                         setState(() {
                           _showWatchTvText = false;
                         });
@@ -166,8 +166,8 @@ class _VideoPostState extends State<VideoPost> {
                               width: 8.0,
                             ),
                             AnimatedContainer(
-                              duration: Duration(milliseconds: 200),
-                              width: _showWatchTvText ? 80 : 0,
+                              duration: Duration(milliseconds: 100),
+                              width: _showWatchTvText ? 70 : 0,
                               child: _showWatchTvText
                                   ? Text(
                                       "Watch TV",

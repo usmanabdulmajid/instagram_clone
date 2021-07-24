@@ -8,15 +8,18 @@ import 'package:instagram_clone/features/profile/presentation/pages/profile_page
 import 'package:instagram_clone/features/authorization/presentation/pages/sign_up_page.dart';
 
 void main() {
-  // bool isDark =
-  //     SchedulerBinding.instance.window.platformBrightness == Brightness.dark;
-  // SystemChrome.setSystemUIOverlayStyle(
-  //   SystemUiOverlayStyle(
-  //     systemNavigationBarColor: isDark ? Colors.black : Colors.white,
-  //     statusBarColor: isDark ? Colors.black : Colors.white,
-  //   ),
-  // );
   runApp(MyApp());
+  bool isDark =
+      SchedulerBinding.instance.window.platformBrightness == Brightness.dark;
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      systemNavigationBarColor: isDark ? Colors.black : Colors.white,
+      statusBarColor: isDark ? Colors.black : Colors.white,
+      systemNavigationBarDividerColor: isDark ? Colors.black : Colors.white,
+      systemNavigationBarIconBrightness:
+          isDark ? Brightness.light : Brightness.dark,
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

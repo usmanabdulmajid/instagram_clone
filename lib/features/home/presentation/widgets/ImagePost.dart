@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants.dart';
+import 'package:instagram_clone/core/utils/colors.dart';
+import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/home/presentation/widgets/video_post.dart';
 
@@ -22,6 +24,7 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
   int _imageCount = 3;
   int _currentImagePageNumber = 1;
   String _imagePageCount = "";
+  PageController _catalogPageViewController;
 
   AnimationController _likedController;
   Animation<double> _likedAnimation;
@@ -29,7 +32,10 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
   AnimationController _collectionController;
   @override
   void initState() {
-    super.initState();
+    _catalogPageViewController = PageController(
+      keepPage: true,
+      viewportFraction: 1,
+    );
     _likedController = AnimationController(
       duration: const Duration(milliseconds: 600),
       vsync: this,
@@ -39,17 +45,18 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
       curve: Curves.bounceOut,
     );
     _collectionController = AnimationController(
-      duration: const Duration(milliseconds: 950),
+      duration: const Duration(milliseconds: 750),
       vsync: this,
     );
 
     if (_commentCount > 0) {
       _hasComment = true;
     }
-    if (_imageCount > 0) {
+    if (_imageCount > 1) {
       _cateloge = true;
       _imagePageCount = "$_currentImagePageNumber/$_imageCount";
     }
+    super.initState();
   }
 
   @override
@@ -57,6 +64,7 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
     super.dispose();
     _likedController.dispose();
     _collectionController.dispose();
+    _catalogPageViewController.dispose();
   }
 
   List<Widget> getCatelogIndicator(int length) {
@@ -64,16 +72,16 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
     for (var i = 0; i < length; i++) {
       indicator.add(
         AnimatedContainer(
-          duration: Duration(milliseconds: 200),
+          duration: Duration(milliseconds: 300),
           margin: EdgeInsets.symmetric(horizontal: 2.5),
-          width: _currentImagePageNumber - 1 == i ? 7 : 5,
-          height: _currentImagePageNumber - 1 == i ? 7 : 5,
+          width: (_currentImagePageNumber - 1) == i ? 6 : 4.5,
+          height: (_currentImagePageNumber - 1) == i ? 6 : 4.5,
           decoration: BoxDecoration(
             color: _currentImagePageNumber - 1 == i
                 ? Colors.blueAccent
                 : Colors.grey,
-            borderRadius:
-                BorderRadius.circular(_currentImagePageNumber - 1 == i ? 7 : 5),
+            borderRadius: BorderRadius.circular(
+                (_currentImagePageNumber - 1) == i ? 6 : 4.5),
           ),
         ),
       );
@@ -289,42 +297,31 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
-                    onTap: () => {
-                      setState(() {
-                        _likedPost = !_likedPost;
-                        if (_likedPost) {
-                          _likedController
-                              .forward()
-                              .whenComplete(() => _likedController.reset());
-                        }
-                      })
-                    },
-                    onDoubleTap: () => {_likedController},
-                    child: _likedPost
-                        ? Icon(
-                            Icons.favorite,
-                            size: klargeIconSize,
-                            color: Colors.red,
-                          )
-                        : Icon(
-                            Icons.favorite_outline_sharp,
-                            size: klargeIconSize,
-                          ),
-                  ),
+                      onTap: () => {
+                            setState(() {
+                              _likedPost = !_likedPost;
+                              if (_likedPost) {
+                                _likedController.forward().whenComplete(
+                                    () => _likedController.reset());
+                              }
+                            })
+                          },
+                      onDoubleTap: () => {_likedController},
+                      child: _likedPost
+                          ? CustomIcon(
+                              icon: "like_filled",
+                              size: klargeIconSize,
+                              color: Colors.red,
+                            )
+                          : CustomIcon(icon: "like", size: klargeIconSize)),
                   SizedBox(
                     width: ksmallSpace,
                   ),
-                  Icon(
-                    Icons.message_outlined,
-                    size: klargeIconSize,
-                  ),
+                  CustomIcon(icon: "comment", size: klargeIconSize),
                   SizedBox(
                     width: ksmallSpace,
                   ),
-                  Icon(
-                    Icons.send_outlined,
-                    size: klargeIconSize,
-                  ),
+                  CustomIcon(icon: "messenger", size: klargeIconSize),
                   SizedBox(
                     width: ksmallSpace,
                   ),
@@ -333,9 +330,10 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                     child: Visibility(
                       visible: _cateloge,
                       child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: getCatelogIndicator(_imageCount)),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: getCatelogIndicator(_imageCount),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -409,16 +407,14 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
               ),
               Text('more', style: Theme.of(context).textTheme.caption),
               YMargin(ksmallSpace),
-              _hasComment
-                  ? RichText(
-                      text: TextSpan(children: [
-                        TextSpan(text: 'View'),
-                        TextSpan(text: " $_commentCount "),
-                        TextSpan(
-                            text: _commentCount > 1 ? "comment" : "comments")
-                      ], style: Theme.of(context).textTheme.caption),
-                    )
-                  : SizedBox(),
+              if (_hasComment)
+                RichText(
+                  text: TextSpan(children: [
+                    TextSpan(text: 'View'),
+                    TextSpan(text: " $_commentCount "),
+                    TextSpan(text: _commentCount > 1 ? "comment" : "comments")
+                  ], style: Theme.of(context).textTheme.caption),
+                ),
               YMargin(ksmallSpace),
               Container(
                 height: 30,
@@ -436,7 +432,7 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                           child: Text(
                             "Add Comment...",
                             style: TextStyle(
-                              color: Theme.of(context).accentColor,
+                              color: Colors.black.withOpacity(0.4),
                               fontSize: 18.0,
                               fontStyle: FontStyle.normal,
                               fontWeight: FontWeight.w700,
