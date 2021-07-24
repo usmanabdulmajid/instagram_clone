@@ -28,7 +28,7 @@ Future buildActionModalBottomSheet(BuildContext context) {
                     height: 4,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
-                        color: AppColors.textGrey),
+                        color: Theme.of(context).unselectedWidgetColor),
                   ),
                 ),
               ),

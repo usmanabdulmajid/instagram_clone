@@ -10,7 +10,7 @@ Future buildModalBottomSheet(BuildContext context) {
       builder: (context) {
         return Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
             color: Theme.of(context).accentColor,
           ),
           child: Column(
@@ -25,7 +25,7 @@ Future buildModalBottomSheet(BuildContext context) {
                     height: 4,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
-                        color: AppColors.textGrey),
+                        color: Theme.of(context).unselectedWidgetColor),
                   ),
                 ),
               ),

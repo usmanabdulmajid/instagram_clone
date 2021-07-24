@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
       ),
       BottomNavigationBarItem(
         icon: CircleAvatar(
-          backgroundColor: Colors.cyan,
+          backgroundColor: Colors.cyan[900],
           radius: 15,
         ),
         label: 'Profile',

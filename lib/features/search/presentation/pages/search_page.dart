@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:instagram_clone/constants.dart';
 import 'package:instagram_clone/core/utils/colors.dart';
 import 'package:instagram_clone/core/utils/icons.dart';
@@ -174,19 +175,6 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                   children: [
                     Container(
                       alignment: Alignment.centerLeft,
-                      //   child:  TextField(
-                      //   controller: _searchBoxController,
-                      //   decoration: InputDecoration(
-                      //     hintText: "Search $_searchSuffix",
-                      //     labelStyle: Theme.of(context).textTheme.bodyText1,
-                      //     border: InputBorder.none,
-                      //     suffixIcon: Icon(
-                      //       Icons.close,
-                      //       color: Theme.of(context).iconTheme.color,
-                      //     ),
-                      //   ),
-                      //   cursorHeight: 18,
-                      // ),
                       child: Text(
                         "Search $_searchSuffix",
                         style: TextStyle(
@@ -197,6 +185,39 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                     ),
                   ],
                 ),
+                // TODO(#1608): Add a search texteditor.
+                // child: Container(
+                //   decoration: BoxDecoration(
+                //     borderRadius:
+                //         BorderRadius.all(Radius.circular(ksmallSpace)),
+                //     color: Theme.of(context)
+                //         .unselectedWidgetColor
+                //         .withOpacity(0.2),
+                //   ),
+                //   child: TextField(
+                //     controller: _searchBoxController,
+                //     cursorWidth: 1,
+                //     cursorColor: Colors.white,
+                //     toolbarOptions: ToolbarOptions(
+                //       copy: true,
+                //       paste: true,
+                //       selectAll: true,
+                //       cut: true,
+                //     ),
+                //     maxLines: 1,
+                //     decoration: InputDecoration(
+                //       hintText: "Search $_searchSuffix",
+                //       labelStyle: Theme.of(context).textTheme.bodyText1,
+                //       border: InputBorder.none,
+                //       alignLabelWithHint: true,
+                //       suffixIcon: Icon(
+                //         Icons.close,
+                //         color: Theme.of(context).iconTheme.color,
+                //       ),
+                //     ),
+                //     cursorHeight: 18,
+                //   ),
+                // ),
               ),
               bottom: PreferredSize(
                 child: TabBar(
