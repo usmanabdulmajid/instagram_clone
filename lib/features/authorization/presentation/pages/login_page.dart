@@ -200,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Forgot your loginpage details?',
+                    'Forgot your loginpage details? ',
                     style: TextStyle(color: Colors.grey, fontSize: 12.0),
                   ),
                   Text(
@@ -280,7 +280,7 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Don\' have an account?',
+                    'Don\'t have an account? ',
                     style: TextStyle(color: Colors.grey, fontSize: 12.0),
                   ),
                   Text(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/colors.dart';
+import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/profile/presentation/widgets/empty_profile_posts_page.dart';
 import 'package:instagram_clone/features/profile/presentation/widgets/empty_profile_tag_page.dart';
@@ -31,9 +32,8 @@ class _ProfilePageState extends State<ProfilePage> {
               await buildModalBottomSheet(context);
             },
             child: Container(
-                child: darkModeOn
-                    ? Image.asset("$darkIconTheme/add.png")
-                    : Image.asset("$lightIconTheme/add-light.png")),
+              child: CustomIcon(icon: "add", size: 22),
+            ),
           ),
           GestureDetector(
             onTap: () async {

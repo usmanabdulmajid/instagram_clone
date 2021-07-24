@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/login_help_page.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/login_page.dart';
 import 'package:instagram_clone/features/home/presentation/pages/home.dart';
@@ -7,6 +9,17 @@ import 'package:instagram_clone/features/authorization/presentation/pages/sign_u
 
 void main() {
   runApp(MyApp());
+  bool isDark =
+      SchedulerBinding.instance.window.platformBrightness == Brightness.dark;
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      systemNavigationBarColor: isDark ? Colors.black : Colors.white,
+      statusBarColor: isDark ? Colors.black : Colors.white,
+      systemNavigationBarDividerColor: isDark ? Colors.black : Colors.white,
+      systemNavigationBarIconBrightness:
+          isDark ? Brightness.light : Brightness.dark,
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -30,7 +43,7 @@ class MyApp extends StatelessWidget {
           bodyText1: TextStyle(fontSize: 12.0, fontStyle: FontStyle.normal),
           bodyText2: TextStyle(fontSize: 14.0, fontStyle: FontStyle.normal),
           caption: TextStyle(
-            fontSize: 10.0,
+            fontSize: 8.0,
             fontStyle: FontStyle.normal,
             color: Color(0xFF262626),
           ),
@@ -79,7 +92,7 @@ class MyApp extends StatelessWidget {
           bodyText1: TextStyle(fontSize: 12.0, fontStyle: FontStyle.normal),
           bodyText2: TextStyle(fontSize: 14.0, fontStyle: FontStyle.normal),
           caption: TextStyle(
-            fontSize: 11.0,
+            fontSize: 8.0,
             fontStyle: FontStyle.normal,
           ),
         ),
