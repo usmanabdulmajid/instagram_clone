@@ -11,7 +11,9 @@ Future buildActionModalBottomSheet(BuildContext context) {
         return Container(
           height: Sizing.yMargin(context, 40),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(20),
+            ),
             color: Theme.of(context).accentColor,
           ),
           child: Column(
