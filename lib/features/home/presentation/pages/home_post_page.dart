@@ -1,7 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/constants.dart';
 import 'package:instagram_clone/core/utils/icons.dart';
+import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/home/presentation/widgets/ImagePost.dart';
 import 'package:instagram_clone/features/home/presentation/widgets/story_rolls.dart';
 
@@ -37,24 +39,25 @@ class _HomePostPageState extends State<HomePostPage> {
           elevation: 4.0,
           title: CustomIcon(
             icon: "Instagram_logo",
-            size: 100,
+            size: 120,
           ),
           pinned: true,
           actions: [
             GestureDetector(
               onTap: widget.addPostCallback,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(horizontal: ksmallSpace),
                 child: CustomIcon(icon: "add", size: 24),
               ),
             ),
             GestureDetector(
               onTap: widget.gotoMessageCallback,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(horizontal: ksmallSpace),
                 child: CustomIcon(icon: "messenger", size: 24),
               ),
             ),
+            XMargin(ksmallSpace),
           ],
         ),
         SliverToBoxAdapter(
