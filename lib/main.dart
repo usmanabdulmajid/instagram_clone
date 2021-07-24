@@ -32,8 +32,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         primaryColor: Color(0xFFFFFFFF),
         accentColor: Color(0xFFFFFFFF),
-        indicatorColor: Color(0xFF262626),
-        unselectedWidgetColor: Color(0xFF262626),
+        unselectedWidgetColor: Color(0xFF000000),
         backgroundColor: Color(0xFFFFFFFF),
         bottomAppBarColor: Color(0xFF000000),
         dividerColor: Color(0xFF9F9F9F),
@@ -73,7 +72,6 @@ class MyApp extends StatelessWidget {
         backgroundColor: Color(0xFF000000),
         accentColor: Color(0xFF262626),
         scaffoldBackgroundColor: Colors.black,
-        indicatorColor: Color(0xFF262626),
         primaryIconTheme: IconThemeData(
           color: Colors.white,
         ),
