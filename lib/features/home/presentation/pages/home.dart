@@ -44,8 +44,11 @@ class _HomeState extends State<Home> {
       BottomNavigationBarItem(
         icon: CustomIcon(
           icon: "search",
+          iconAccent: "search_thick",
+          showFirst: index == 1,
+          isNotFaded: false,
         ),
-        label: 'Search',
+        label: 'Like',
       ),
       BottomNavigationBarItem(
         icon: CustomIcon(
@@ -64,7 +67,7 @@ class _HomeState extends State<Home> {
       ),
       BottomNavigationBarItem(
         icon: CircleAvatar(
-          backgroundColor: Colors.cyan,
+          backgroundColor: Colors.cyan[900],
           radius: 15,
         ),
         label: 'Profile',
@@ -109,7 +112,7 @@ class _HomeState extends State<Home> {
                 addPostCallback: addPost,
                 gotoMessageCallback: gotoMessage,
               ),
-              LoginPage(),
+              SearchPage(),
               ReelsPage(),
               ActivityPage(),
               ProfilePage(),
