@@ -5,6 +5,7 @@ import 'package:instagram_clone/constants.dart';
 import 'package:instagram_clone/core/utils/colors.dart';
 import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
+import 'package:instagram_clone/features/home/presentation/widgets/action_modal_bottomsheet.dart';
 import 'package:instagram_clone/features/home/presentation/widgets/video_post.dart';
 
 class ImagePost extends StatefulWidget {
@@ -141,10 +142,7 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
               Spacer(),
               IconButton(
                 icon: Icon(Icons.more_vert),
-                onPressed: () => {
-                  //TODO
-                  //ShowModalOptions
-                },
+                onPressed: () => {buildActionModalBottomSheet(context, true)},
               ),
             ],
           ),
