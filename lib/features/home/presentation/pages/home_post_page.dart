@@ -37,9 +37,16 @@ class _HomePostPageState extends State<HomePostPage> {
       slivers: [
         SliverAppBar(
           elevation: 4.0,
-          title: CustomIcon(
-            icon: "Instagram_logo",
-            size: 120,
+          title: GestureDetector(
+            onTap: () {
+              _controller.animateTo(0,
+                  duration: Duration(milliseconds: 300),
+                  curve: Curves.easeInToLinear);
+            },
+            child: CustomIcon(
+              icon: "Instagram_logo",
+              size: 120,
+            ),
           ),
           pinned: true,
           actions: [
