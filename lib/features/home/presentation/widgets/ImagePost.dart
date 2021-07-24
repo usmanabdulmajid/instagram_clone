@@ -62,10 +62,10 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    super.dispose();
     _likedController.dispose();
     _collectionController.dispose();
     _catalogPageViewController.dispose();
+    super.dispose();
   }
 
   List<Widget> getCatelogIndicator(int length) {
@@ -142,7 +142,7 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
               Spacer(),
               IconButton(
                 icon: Icon(Icons.more_vert),
-                onPressed: () => {buildActionModalBottomSheet(context, true)},
+                onPressed: () => {buildActionModalBottomSheet(context)},
               ),
             ],
           ),

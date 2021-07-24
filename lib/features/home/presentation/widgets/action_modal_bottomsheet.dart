@@ -3,7 +3,7 @@ import 'package:instagram_clone/core/utils/colors.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/profile/presentation/widgets/modal_list_tile.dart';
 
-Future buildActionModalBottomSheet(BuildContext context, bool darkModeOn) {
+Future buildActionModalBottomSheet(BuildContext context) {
   return showModalBottomSheet(
       backgroundColor: Colors.transparent,
       context: context,
@@ -12,7 +12,7 @@ Future buildActionModalBottomSheet(BuildContext context, bool darkModeOn) {
           height: Sizing.yMargin(context, 40),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: darkModeOn ? AppColors.darkStoryGrey : AppColors.white,
+            color: Theme.of(context).accentColor,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,

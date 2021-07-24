@@ -30,6 +30,12 @@ class _HomePostPageState extends State<HomePostPage> {
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       physics: BouncingScrollPhysics(),
