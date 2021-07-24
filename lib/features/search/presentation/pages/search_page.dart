@@ -20,6 +20,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   int _selectedIndex;
   TabController _tabController;
   String _searchSuffix = "";
+  TextEditingController _searchBoxController;
   List<String> _listOfSuffix = [
     "",
     "accounts",
@@ -65,6 +66,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
       initialIndex: 0,
       vsync: this,
     );
+    _searchBoxController = TextEditingController();
     _selectedIndex = 0;
     super.initState();
   }
@@ -73,6 +75,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   void dispose() {
     _controller.dispose();
     _tabController.dispose();
+    _searchBoxController.dispose();
     super.dispose();
   }
 
@@ -171,6 +174,19 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                   children: [
                     Container(
                       alignment: Alignment.centerLeft,
+                      //   child:  TextField(
+                      //   controller: _searchBoxController,
+                      //   decoration: InputDecoration(
+                      //     hintText: "Search $_searchSuffix",
+                      //     labelStyle: Theme.of(context).textTheme.bodyText1,
+                      //     border: InputBorder.none,
+                      //     suffixIcon: Icon(
+                      //       Icons.close,
+                      //       color: Theme.of(context).iconTheme.color,
+                      //     ),
+                      //   ),
+                      //   cursorHeight: 18,
+                      // ),
                       child: Text(
                         "Search $_searchSuffix",
                         style: TextStyle(
