@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/colors.dart';
+import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/authorization/presentation/widgets/login_proceed_button.dart';
 import 'package:language_picker/language_picker.dart';
@@ -91,11 +92,10 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: _size.height * 0.2,
               ),
-              Text(
-                'Instagram',
-                style: TextStyle(fontSize: 30.0),
+              CustomIcon(
+                icon: "Instagram_logo",
+                size: 150,
               ),
-              YMargin(40),
               Container(
                 width: _size.width,
                 height: 50.0,

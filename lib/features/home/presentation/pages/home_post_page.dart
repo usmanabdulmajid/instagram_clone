@@ -34,7 +34,7 @@ class _HomePostPageState extends State<HomePostPage> {
       controller: _controller,
       slivers: [
         SliverAppBar(
-          elevation: 0,
+          elevation: 4.0,
           title: CustomIcon(
             icon: "Instagram_logo",
             size: 100,
@@ -45,14 +45,14 @@ class _HomePostPageState extends State<HomePostPage> {
               onTap: widget.addPostCallback,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CustomIcon(icon: "add", size: 22),
+                child: CustomIcon(icon: "add", size: 24),
               ),
             ),
             GestureDetector(
               onTap: widget.gotoMessageCallback,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CustomIcon(icon: "messenger", size: 22),
+                child: CustomIcon(icon: "messenger", size: 24),
               ),
             ),
           ],
