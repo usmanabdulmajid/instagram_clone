@@ -54,3 +54,25 @@ class CustomIcon extends StatelessWidget {
           );
   }
 }
+
+class IconPainter extends CustomPainter {
+  const IconPainter({Key key, @required this.color, @required this.icon});
+
+  final Color color;
+  final Path icon;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint();
+    paint.color = color;
+    paint.strokeWidth = 3;
+    paint.style = PaintingStyle.fill;
+
+    canvas.drawPath(icon, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
+  }
+}
