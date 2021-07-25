@@ -116,8 +116,6 @@ class _HomeState extends State<Home> {
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(
-            elevation: 0.0,
-            iconSize: 16,
             selectedIconTheme: Theme.of(context).iconTheme,
             unselectedIconTheme: Theme.of(context).iconTheme,
             items: _getBAppBArIcon(_selectedIndex),
