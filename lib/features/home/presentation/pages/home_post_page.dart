@@ -1,9 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/constants.dart';
 import 'package:instagram_clone/core/utils/icons.dart';
-import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/home/presentation/widgets/ImagePost.dart';
 import 'package:instagram_clone/features/home/presentation/widgets/story_rolls.dart';
 
@@ -30,47 +28,33 @@ class _HomePostPageState extends State<HomePostPage> {
   }
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       physics: BouncingScrollPhysics(),
       controller: _controller,
       slivers: [
         SliverAppBar(
-          elevation: 4.0,
-          title: GestureDetector(
-            onTap: () {
-              _controller.animateTo(0,
-                  duration: Duration(milliseconds: 300),
-                  curve: Curves.easeInToLinear);
-            },
-            child: CustomIcon(
-              icon: "Instagram_logo",
-              size: 120,
-            ),
+          elevation: 0,
+          title: CustomIcon(
+            icon: "Instagram_logo",
+            size: 100,
           ),
           pinned: true,
           actions: [
             GestureDetector(
               onTap: widget.addPostCallback,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: ksmallSpace),
-                child: CustomIcon(icon: "add", size: 24),
+                padding: const EdgeInsets.all(8.0),
+                child: CustomIcon(icon: "add", size: 22),
               ),
             ),
             GestureDetector(
               onTap: widget.gotoMessageCallback,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: ksmallSpace),
-                child: CustomIcon(icon: "messenger", size: 24),
+                padding: const EdgeInsets.all(8.0),
+                child: CustomIcon(icon: "messenger", size: 22),
               ),
             ),
-            XMargin(ksmallSpace),
           ],
         ),
         SliverToBoxAdapter(

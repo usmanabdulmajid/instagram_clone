@@ -5,17 +5,17 @@ import 'package:instagram_clone/features/profile/presentation/widgets/modal_list
 
 Future buildMenuModalBottomSheet(BuildContext context, bool darkModeOn) {
   return showModalBottomSheet(
-      backgroundColor: Colors.transparent,
       context: context,
       builder: (context) {
         String darkIconTheme = 'assets/icons/dark-theme';
         String lightIconTheme = 'assets/icons/light-theme';
         return Container(
           height: Sizing.yMargin(context, 60),
+          color: darkModeOn ? AppColors.black : AppColors.white,
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-              color: Theme.of(context).accentColor,
+              borderRadius: BorderRadius.circular(10),
+              color: darkModeOn ? AppColors.darkStoryGrey : AppColors.white,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -29,7 +29,7 @@ Future buildMenuModalBottomSheet(BuildContext context, bool darkModeOn) {
                       height: 4,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
-                          color: Theme.of(context).unselectedWidgetColor),
+                          color: AppColors.textGrey),
                     ),
                   ),
                 ),
