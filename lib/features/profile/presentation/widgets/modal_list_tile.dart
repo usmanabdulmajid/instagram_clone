@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/colors.dart';
 
 class ModalListTile extends StatelessWidget {
-  const ModalListTile({
-    Key key,
-    this.leadingWidget,
-    @required this.label,
-    @required this.onTap,
-  }) : super(key: key);
+  const ModalListTile(
+      {Key key,
+      this.leadingWidget,
+      @required this.label,
+      @required this.onTap,
+      this.color})
+      : super(key: key);
 
   final String label;
   final Widget leadingWidget;
   final VoidCallback onTap;
+  final MaterialColor color;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,9 @@ class ModalListTile extends StatelessWidget {
         dense: true,
         title: Text(
           label,
-          style: Theme.of(context).textTheme.headline5,
+          style: color == null
+              ? Theme.of(context).textTheme.headline5
+              : Theme.of(context).textTheme.headline5.copyWith(color: color),
         ),
       ),
     );

@@ -44,7 +44,7 @@ class _HomeState extends State<Home> {
       BottomNavigationBarItem(
         icon: CustomIcon(
           icon: "search",
-          iconAccent: "search_thick",
+          iconAccent: "search",
           showFirst: index == 1,
           isNotFaded: false,
         ),
