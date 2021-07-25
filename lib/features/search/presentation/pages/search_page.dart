@@ -85,6 +85,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
     super.dispose();
   }
 
+class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IndexedStack(
@@ -356,6 +357,10 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
           ],
         )
       ],
+    return Container(
+      child: Center(
+        child: Text('SearchPage'),
+      ),
     );
   }
 }
