@@ -4,7 +4,7 @@ import 'package:instagram_clone/core/utils/colors.dart';
 class ModalListTile extends StatelessWidget {
   const ModalListTile({
     Key key,
-    @required this.leadingWidget,
+    this.leadingWidget,
     @required this.label,
     @required this.onTap,
   }) : super(key: key);

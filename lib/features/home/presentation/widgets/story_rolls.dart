@@ -45,7 +45,6 @@ class _StoryRollsState extends State<StoryRolls> {
                             width: size,
                             height: size,
                             decoration: BoxDecoration(
-                              color: Colors.grey,
                               borderRadius: BorderRadius.circular(size),
                             ),
                           ),

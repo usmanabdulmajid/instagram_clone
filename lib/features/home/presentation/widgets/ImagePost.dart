@@ -5,6 +5,7 @@ import 'package:instagram_clone/constants.dart';
 import 'package:instagram_clone/core/utils/colors.dart';
 import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
+import 'package:instagram_clone/features/home/presentation/widgets/action_modal_bottomsheet.dart';
 import 'package:instagram_clone/features/home/presentation/widgets/video_post.dart';
 
 class ImagePost extends StatefulWidget {
@@ -61,10 +62,10 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    super.dispose();
     _likedController.dispose();
     _collectionController.dispose();
     _catalogPageViewController.dispose();
+    super.dispose();
   }
 
   List<Widget> getCatelogIndicator(int length) {
@@ -141,10 +142,7 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
               Spacer(),
               IconButton(
                 icon: Icon(Icons.more_vert),
-                onPressed: () => {
-                  //TODO
-                  //ShowModalOptions
-                },
+                onPressed: () => {buildActionModalBottomSheet(context)},
               ),
             ],
           ),
@@ -216,7 +214,7 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                           width: 40,
                           padding: EdgeInsets.all(ksmallSpace),
                           decoration: BoxDecoration(
-                            color: Colors.black54,
+                            color: Colors.black54.withOpacity(0.7),
                             borderRadius: BorderRadius.horizontal(
                                 left: Radius.circular(kmediumSpace),
                                 right: Radius.circular(kmediumSpace)),
@@ -292,6 +290,9 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(
+                height: ksmallSpace / 2,
+              ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -315,16 +316,13 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                             )
                           : CustomIcon(icon: "like", size: klargeIconSize)),
                   SizedBox(
-                    width: ksmallSpace,
+                    width: kmediumSpace,
                   ),
                   CustomIcon(icon: "comment", size: klargeIconSize),
                   SizedBox(
-                    width: ksmallSpace,
+                    width: kmediumSpace,
                   ),
                   CustomIcon(icon: "messenger", size: klargeIconSize),
-                  SizedBox(
-                    width: ksmallSpace,
-                  ),
                   Expanded(
                     flex: 3,
                     child: Visibility(
