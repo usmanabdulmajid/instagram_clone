@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:instagram_clone/constants.dart';
@@ -22,6 +25,8 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   TabController _tabController;
   String _searchSuffix = "";
   TextEditingController _searchBoxController;
+  bool _dissmissBarrier = false;
+  var result;
   List<String> _listOfSuffix = [
     "",
     "accounts",
@@ -126,7 +131,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
             SliverGrid(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: Sizing.xMargin(context, 33.333),
-                mainAxisExtent: 200.0,
+                mainAxisExtent: Sizing.xMargin(context, 33.333),
                 mainAxisSpacing: 1,
                 crossAxisSpacing: 1,
                 childAspectRatio: 4.0,
@@ -134,12 +139,111 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
                   return ClipRRect(
-                    child: Container(
-                      alignment: Alignment.center,
-                      color: Colors.blue[100 * (index % 9)],
-                      child: Stack(children: [
-                        Text('Post item $index'),
-                      ]),
+                    child: GestureDetector(
+                      onLongPressStart: (details) {
+                        showDialog(
+                          useSafeArea: false,
+                          context: context,
+                          builder: (ctx) {
+                            return Focus(
+                              autofocus: true,
+                              canRequestFocus: true,
+                              child: Listener(
+                                behavior: HitTestBehavior.translucent,
+                                child: BackdropFilter(
+                                  filter: ImageFilter.blur(
+                                      sigmaX: 7.0, sigmaY: 7.0),
+                                  child: Center(
+                                    child: Container(
+                                      height: Sizing.yMargin(context, 50),
+                                      width: Sizing.xMargin(context, 95),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20)),
+                                        color: Theme.of(context).accentColor,
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.vertical(
+                                                      top: Radius.circular(20)),
+                                              color:
+                                                  Theme.of(context).accentColor,
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  EdgeInsets.all(kmediumSpace),
+                                              child: Row(
+                                                children: [
+                                                  CircleAvatar(
+                                                    radius: 16,
+                                                    backgroundColor:
+                                                        Colors.cyan[900],
+                                                  ),
+                                                  Spacer(),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                              child: Container(
+                                            color: Theme.of(context)
+                                                .unselectedWidgetColor,
+                                          )),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.vertical(
+                                                      bottom:
+                                                          Radius.circular(20)),
+                                              color:
+                                                  Theme.of(context).accentColor,
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: kmediumSpace,
+                                                      horizontal:
+                                                          kmediumSpace * 2),
+                                              child: Row(
+                                                children: [
+                                                  CustomIcon(
+                                                      icon: "like", size: 24),
+                                                  Spacer(),
+                                                  Icon(
+                                                    Icons
+                                                        .account_circle_outlined,
+                                                    size: 24,
+                                                  ),
+                                                  Spacer(),
+                                                  CustomIcon(
+                                                      icon: "messenger",
+                                                      size: 24),
+                                                  Spacer(),
+                                                  Icon(Icons.more_vert_rounded),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        color: Colors.blue[100 * (index % 9)],
+                        child: Stack(children: [
+                          Text('Post item $index'),
+                        ]),
+                      ),
                     ),
                   );
                 },
@@ -241,7 +345,12 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
               hasScrollBody: true,
               child: TabBarView(
                 controller: _tabController,
-                children: [],
+                children: [
+                  SearchTop(),
+                  SearchAccount(),
+                  SearchTags(),
+                  SearchPlaces(),
+                ],
               ),
             )
           ],
