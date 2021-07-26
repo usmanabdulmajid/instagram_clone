@@ -9,6 +9,7 @@ Future buildModalBottomSheet(BuildContext context) {
       context: context,
       builder: (context) {
         return Container(
+          height: Sizing.yMargin(context, 50),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
             color: Theme.of(context).accentColor,
@@ -38,60 +39,68 @@ Future buildModalBottomSheet(BuildContext context) {
               YMargin(5),
               Divider(),
               YMargin(10),
-              ModalListTile(
-                onTap: () {},
-                label: 'Feed Post',
-                leadingWidget: Icon(
-                  Icons.grid_on_outlined,
-                  size: 25,
-                  color: Theme.of(context).iconTheme.color,
+              Expanded(
+                child: ListView(
+                  shrinkWrap: true,
+                  physics: AlwaysScrollableScrollPhysics(),
+                  children: [
+                    ModalListTile(
+                      onTap: () {},
+                      label: 'Feed Post',
+                      leadingWidget: Icon(
+                        Icons.grid_on_outlined,
+                        size: 25,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
+                    ),
+                    ModalListTile(
+                      onTap: () {},
+                      label: 'Reel',
+                      leadingWidget: Icon(
+                        Icons.ondemand_video_outlined,
+                        size: 25,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
+                    ),
+                    ModalListTile(
+                      onTap: () {},
+                      label: 'Story',
+                      leadingWidget: Icon(
+                        Icons.add_circle_outline,
+                        size: 25,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
+                    ),
+                    ModalListTile(
+                      onTap: () {},
+                      label: 'Story Highlight',
+                      leadingWidget: Icon(
+                        Icons.add_circle_outline_outlined,
+                        size: 25,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
+                    ),
+                    ModalListTile(
+                      onTap: () {},
+                      label: 'IGTV video',
+                      leadingWidget: Icon(
+                        Icons.live_tv_outlined,
+                        size: 25,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
+                    ),
+                    ModalListTile(
+                      onTap: () {},
+                      label: 'Guide',
+                      leadingWidget: Icon(
+                        Icons.menu_book,
+                        size: 25,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              ModalListTile(
-                onTap: () {},
-                label: 'Reel',
-                leadingWidget: Icon(
-                  Icons.ondemand_video_outlined,
-                  size: 25,
-                  color: Theme.of(context).iconTheme.color,
-                ),
-              ),
-              ModalListTile(
-                onTap: () {},
-                label: 'Story',
-                leadingWidget: Icon(
-                  Icons.add_circle_outline,
-                  size: 25,
-                  color: Theme.of(context).iconTheme.color,
-                ),
-              ),
-              ModalListTile(
-                onTap: () {},
-                label: 'Story Highlight',
-                leadingWidget: Icon(
-                  Icons.add_circle_outline_outlined,
-                  size: 25,
-                  color: Theme.of(context).iconTheme.color,
-                ),
-              ),
-              ModalListTile(
-                onTap: () {},
-                label: 'IGTV video',
-                leadingWidget: Icon(
-                  Icons.live_tv_outlined,
-                  size: 25,
-                  color: Theme.of(context).iconTheme.color,
-                ),
-              ),
-              ModalListTile(
-                onTap: () {},
-                label: 'Guide',
-                leadingWidget: Icon(
-                  Icons.menu_book,
-                  size: 25,
-                  color: Theme.of(context).iconTheme.color,
-                ),
-              ),
+              )
             ],
           ),
         );

@@ -356,13 +356,14 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
           ],
         )
       ],
-<<<<<<< HEAD
-=======
-    return Container(
-      child: Center(
-        child: Text('SearchPage'),
-      ),
->>>>>>> 9fca54f5bbeaa52993357fe4148fa166b29fe1dd
     );
+// <<<<<<< HEAD
+// =======
+//     return Container(
+//       child: Center(
+//         child: Text('SearchPage'),
+//       ),
+// >>>>>>> 9fca54f5bbeaa52993357fe4148fa166b29fe1dd
+//     );
   }
 }
