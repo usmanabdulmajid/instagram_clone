@@ -27,7 +27,7 @@ class ProfileButtonWidget extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         elevation: 0,
         padding: EdgeInsets.symmetric(
-            vertical: 5, horizontal: Sizing.xMargin(context, 8)),
+            vertical: 5, horizontal: Sizing.xMargin(context, 6)),
         textStyle: TextStyle(
           fontFamily: 'SFProText',
           fontSize: 14,

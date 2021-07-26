@@ -49,9 +49,9 @@ class MyApp extends StatelessWidget {
             color: Color(0xFF262626),
           ),
           overline: TextStyle(
-            fontSize: 16,
+            fontSize: 14.0,
             fontWeight: FontWeight.w900,
-            color: Color(0xFF9F9F9F),
+            color: Color(0xFF000000),
           ),
         ),
         accentIconTheme: IconThemeData(
@@ -96,6 +96,11 @@ class MyApp extends StatelessWidget {
           caption: TextStyle(
             fontSize: 8.0,
             fontStyle: FontStyle.normal,
+          ),
+          overline: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w900,
+            color: Color(0xFFFFFFFF),
           ),
         ),
         appBarTheme: AppBarTheme(
