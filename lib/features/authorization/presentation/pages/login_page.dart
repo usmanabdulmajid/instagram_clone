@@ -89,11 +89,12 @@ class _LoginPageState extends State<LoginPage> {
               //     print(_selectedDropdownLanguage.isoCode);
               //   },
               // ),
-              YMargin(Sizing.yMargin(context, 15)),
+              YMargin(30),
               CustomIcon(
                 icon: "Instagram_logo",
-                size: 200,
+                size: 180,
               ),
+
               Container(
                 width: _size.width,
                 height: 50.0,
@@ -293,7 +294,7 @@ class _LoginPageState extends State<LoginPage> {
                   )
                 ],
               ),
-              YMargin(10)
+              YMargin(20)
             ],
           ),
         ),
