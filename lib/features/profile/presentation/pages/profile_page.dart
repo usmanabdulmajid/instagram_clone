@@ -172,10 +172,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                         darkModeOn: darkModeOn,
                                         label: 'Promotions',
                                       ),
+                                      XMargin(6),
                                       ProfileButtonWidget(
                                         darkModeOn: darkModeOn,
                                         label: 'Insights',
                                       ),
+                                      XMargin(6),
                                       ProfileButtonWidget(
                                         darkModeOn: darkModeOn,
                                         label: 'Contact',
