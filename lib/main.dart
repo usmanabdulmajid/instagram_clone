@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/login_help_page.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/login_page.dart';
+import 'package:instagram_clone/features/authorization/presentation/pages/recover_account_page.dart';
 import 'package:instagram_clone/features/home/presentation/pages/home.dart';
 import 'package:instagram_clone/features/profile/presentation/pages/profile_page.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/sign_up_page.dart';
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         primaryColor: Color(0xFFFFFFFF),
         accentColor: Color(0xFFFFFFFF),
-        unselectedWidgetColor: Color(0xFF000000),
+        indicatorColor: Color(0xFF262626),
+        unselectedWidgetColor: Color(0xFF262626),
         backgroundColor: Color(0xFFFFFFFF),
         bottomAppBarColor: Color(0xFF000000),
         dividerColor: Color(0xFF9F9F9F),
@@ -72,6 +74,7 @@ class MyApp extends StatelessWidget {
         backgroundColor: Color(0xFF000000),
         accentColor: Color(0xFF262626),
         scaffoldBackgroundColor: Colors.black,
+        indicatorColor: Color(0xFF262626),
         primaryIconTheme: IconThemeData(
           color: Colors.white,
         ),
@@ -101,7 +104,7 @@ class MyApp extends StatelessWidget {
         ),
         bottomAppBarColor: Color(0xFF000000),
       ),
-      home: Home(),
+      home: RecoverAccountPage(),
     );
   }
 }
