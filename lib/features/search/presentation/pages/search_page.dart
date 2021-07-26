@@ -155,10 +155,12 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                 (BuildContext context, int index) {
                   return ClipRRect(
                     child: GestureDetector(
+                      onLongPressEnd: (e) => print(e.globalPosition),
+                      onLongPressMoveUpdate: (e) => print(e.globalPosition),
+                      onLongPressUp: () => print("up"),
                       onLongPressStart: (details) {
-                        //TODO Strat OnHoldEvent
+                        //TODO Start OnHoldEvent
                         showDialog(
-                          // barrierDismissible: false,
                           barrierLabel: "Label",
                           context: context,
                           builder: (ctx) {
@@ -350,22 +352,20 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                                                 ),
                                                 Spacer(),
                                                 Listener(
-                                                    onPointerHover: (e) =>
-                                                        setState(() {
-                                                          _showOptionTitle =
-                                                              true;
-                                                        }),
-                                                    onPointerUp: (e) =>
-                                                        setState(() {
-                                                          _showOptionTitle =
-                                                              false;
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                          buildoptionModalBottomSheet(
-                                                              context);
-                                                        }),
-                                                    child: Icon(Icons
-                                                        .more_vert_rounded)),
+                                                  onPointerHover: (e) =>
+                                                      setState(() {
+                                                    _showOptionTitle = true;
+                                                  }),
+                                                  onPointerUp: (e) =>
+                                                      setState(() {
+                                                    _showOptionTitle = false;
+                                                    Navigator.of(context).pop();
+                                                    buildoptionModalBottomSheet(
+                                                        context);
+                                                  }),
+                                                  child: Icon(
+                                                      Icons.more_vert_rounded),
+                                                ),
                                               ],
                                             ),
                                           ),
