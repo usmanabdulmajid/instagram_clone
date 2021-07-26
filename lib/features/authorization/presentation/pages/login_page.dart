@@ -94,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                 icon: "Instagram_logo",
                 size: 180,
               ),
-              YMargin(30),
+
               Container(
                 width: _size.width,
                 height: 50.0,
@@ -294,7 +294,7 @@ class _LoginPageState extends State<LoginPage> {
                   )
                 ],
               ),
-              YMargin(10)
+              YMargin(20)
             ],
           ),
         ),
