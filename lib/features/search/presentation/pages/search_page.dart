@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:instagram_clone/constants.dart';
@@ -11,6 +13,7 @@ import 'package:instagram_clone/features/search/presentation/pages/search_accoun
 import 'package:instagram_clone/features/search/presentation/pages/search_places_page.dart';
 import 'package:instagram_clone/features/search/presentation/pages/search_tags_page.dart';
 import 'package:instagram_clone/features/search/presentation/pages/search_top_page.dart';
+import 'package:instagram_clone/features/search/presentation/widgets/optionModalSheet.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -26,6 +29,12 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   String _searchSuffix = "";
   TextEditingController _searchBoxController;
   bool _dissmissBarrier = false;
+
+  bool _showLikeTitle = false;
+  bool _showViewProfileTitle = false;
+  bool _showShareTitle = false;
+  bool _showOptionTitle = false;
+
   var result;
   List<String> _listOfSuffix = [
     "",
@@ -85,6 +94,12 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  void __showT() {
+    setState(() {
+      _showLikeTitle = _showLikeTitle;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return IndexedStack(
@@ -141,94 +156,221 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                   return ClipRRect(
                     child: GestureDetector(
                       onLongPressStart: (details) {
+                        //TODO Strat OnHoldEvent
                         showDialog(
-                          useSafeArea: false,
+                          // barrierDismissible: false,
+                          barrierLabel: "Label",
                           context: context,
                           builder: (ctx) {
-                            return Focus(
-                              autofocus: true,
-                              canRequestFocus: true,
-                              child: Listener(
-                                behavior: HitTestBehavior.translucent,
-                                child: BackdropFilter(
-                                  filter: ImageFilter.blur(
-                                      sigmaX: 7.0, sigmaY: 7.0),
-                                  child: Center(
-                                    child: Container(
-                                      height: Sizing.yMargin(context, 50),
-                                      width: Sizing.xMargin(context, 95),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20)),
-                                        color: Theme.of(context).accentColor,
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.vertical(
-                                                      top: Radius.circular(20)),
-                                              color:
-                                                  Theme.of(context).accentColor,
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  EdgeInsets.all(kmediumSpace),
-                                              child: Row(
-                                                children: [
-                                                  CircleAvatar(
-                                                    radius: 16,
-                                                    backgroundColor:
-                                                        Colors.cyan[900],
-                                                  ),
-                                                  Spacer(),
-                                                ],
-                                              ),
+                            return StatefulBuilder(
+                              builder: (ctx, setState) => BackdropFilter(
+                                filter: ImageFilter.blur(
+                                    sigmaX: 10.0, sigmaY: 10.0),
+                                child: Center(
+                                  child: Container(
+                                    height: Sizing.yMargin(context, 50),
+                                    width: Sizing.xMargin(context, 95),
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(20)),
+                                      color: Theme.of(ctx).accentColor,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.vertical(
+                                                top: Radius.circular(20)),
+                                            color: Theme.of(ctx).accentColor,
+                                          ),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsets.all(kmediumSpace),
+                                            child: Row(
+                                              children: [
+                                                CircleAvatar(
+                                                  radius: 16,
+                                                  backgroundColor:
+                                                      Colors.cyan[900],
+                                                ),
+                                                XMargin(ksmallSpace),
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "joshua_l",
+                                                      style: Theme.of(ctx)
+                                                          .textTheme
+                                                          .subtitle1,
+                                                    ),
+                                                    Text(
+                                                      "Los Angeles, CA",
+                                                      style: Theme.of(ctx)
+                                                          .textTheme
+                                                          .bodyText1,
+                                                    )
+                                                  ],
+                                                ),
+                                                Spacer(),
+                                              ],
                                             ),
                                           ),
-                                          Expanded(
-                                              child: Container(
-                                            color: Theme.of(context)
-                                                .unselectedWidgetColor,
-                                          )),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.vertical(
-                                                      bottom:
-                                                          Radius.circular(20)),
-                                              color:
-                                                  Theme.of(context).accentColor,
+                                        ),
+                                        Expanded(
+                                          child: ClipRect(
+                                            child: Stack(
+                                              fit: StackFit.expand,
+                                              children: [
+                                                Container(
+                                                  color: Theme.of(context)
+                                                      .unselectedWidgetColor,
+                                                  child: FittedBox(
+                                                    child: Image.asset(
+                                                        "assets/images/selfie_test.jpg"),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                                AnimatedPositioned(
+                                                  duration: Duration(
+                                                      milliseconds: 150),
+                                                  curve: Curves.bounceOut,
+                                                  width: Sizing.xMargin(
+                                                      context, 95),
+                                                  left: 0,
+                                                  bottom: _showLikeTitle ||
+                                                          _showOptionTitle ||
+                                                          _showViewProfileTitle ||
+                                                          _showShareTitle
+                                                      ? 0
+                                                      : -50,
+                                                  child: Container(
+                                                    color: Colors.transparent,
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical:
+                                                              kmediumSpace,
+                                                          horizontal:
+                                                              kmediumSpace *
+                                                                  1.55),
+                                                      child: Row(
+                                                        children: [
+                                                          TitlePopUp(
+                                                            title: "Like",
+                                                            isVisible:
+                                                                _showLikeTitle,
+                                                          ),
+                                                          Spacer(),
+                                                          TitlePopUp(
+                                                            title:
+                                                                "View Profile",
+                                                            isVisible:
+                                                                _showViewProfileTitle,
+                                                          ),
+                                                          Spacer(),
+                                                          TitlePopUp(
+                                                            title: "Share",
+                                                            isVisible:
+                                                                _showShareTitle,
+                                                          ),
+                                                          Spacer(),
+                                                          TitlePopUp(
+                                                            title: "Option",
+                                                            isVisible:
+                                                                _showOptionTitle,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
                                             ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: kmediumSpace,
-                                                      horizontal:
-                                                          kmediumSpace * 2),
-                                              child: Row(
-                                                children: [
-                                                  CustomIcon(
+                                          ),
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.vertical(
+                                                bottom: Radius.circular(20)),
+                                            color:
+                                                Theme.of(context).accentColor,
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: kmediumSpace,
+                                                horizontal: kmediumSpace * 2),
+                                            child: Row(
+                                              children: [
+                                                Listener(
+                                                  onPointerHover: (e) =>
+                                                      setState(() {
+                                                    _showLikeTitle = true;
+                                                  }),
+                                                  onPointerUp: (e) =>
+                                                      setState(() {
+                                                    _showLikeTitle = false;
+                                                  }),
+                                                  child: CustomIcon(
                                                       icon: "like", size: 24),
-                                                  Spacer(),
-                                                  Icon(
+                                                ),
+                                                Spacer(),
+                                                Listener(
+                                                  onPointerHover: (e) =>
+                                                      setState(() {
+                                                    _showViewProfileTitle =
+                                                        true;
+                                                  }),
+                                                  onPointerUp: (e) =>
+                                                      setState(() {
+                                                    _showViewProfileTitle =
+                                                        false;
+                                                  }),
+                                                  child: Icon(
                                                     Icons
                                                         .account_circle_outlined,
                                                     size: 24,
                                                   ),
-                                                  Spacer(),
-                                                  CustomIcon(
+                                                ),
+                                                Spacer(),
+                                                Listener(
+                                                  onPointerHover: (e) =>
+                                                      setState(() {
+                                                    _showShareTitle = true;
+                                                  }),
+                                                  onPointerUp: (e) =>
+                                                      setState(() {
+                                                    _showShareTitle = false;
+                                                  }),
+                                                  child: CustomIcon(
                                                       icon: "messenger",
                                                       size: 24),
-                                                  Spacer(),
-                                                  Icon(Icons.more_vert_rounded),
-                                                ],
-                                              ),
+                                                ),
+                                                Spacer(),
+                                                Listener(
+                                                    onPointerHover: (e) =>
+                                                        setState(() {
+                                                          _showOptionTitle =
+                                                              true;
+                                                        }),
+                                                    onPointerUp: (e) =>
+                                                        setState(() {
+                                                          _showOptionTitle =
+                                                              false;
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                          buildoptionModalBottomSheet(
+                                                              context);
+                                                        }),
+                                                    child: Icon(Icons
+                                                        .more_vert_rounded)),
+                                              ],
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
@@ -240,9 +382,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                       child: Container(
                         alignment: Alignment.center,
                         color: Colors.blue[100 * (index % 9)],
-                        child: Stack(children: [
-                          Text('Post item $index'),
-                        ]),
+                        child: Stack(children: []),
                       ),
                     ),
                   );
@@ -356,14 +496,29 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
           ],
         )
       ],
+
     );
-// <<<<<<< HEAD
-// =======
-//     return Container(
-//       child: Center(
-//         child: Text('SearchPage'),
-//       ),
-// >>>>>>> 9fca54f5bbeaa52993357fe4148fa166b29fe1dd
-//     );
   }
 }
+
+class TitlePopUp extends StatelessWidget {
+  const TitlePopUp({Key key, @required this.title, @required this.isVisible})
+      : super(key: key);
+
+  final String title;
+  final bool isVisible;
+
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+      visible: isVisible,
+      child: Container(
+        padding: EdgeInsets.all(ksmallSpace),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(ksmallSpace / 2),
+          color: Theme.of(context).accentColor.withOpacity(0.9),
+        ),
+        child: Text(title),
+      ),
+    );
+  }

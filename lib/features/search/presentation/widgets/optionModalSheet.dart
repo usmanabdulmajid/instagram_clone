@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/profile/presentation/widgets/modal_list_tile.dart';
 
-Future buildActionModalBottomSheet(BuildContext context) {
+Future buildoptionModalBottomSheet(BuildContext context) {
   return showModalBottomSheet(
       backgroundColor: Colors.transparent,
       context: context,
       builder: (context) {
         return Container(
-          height: Sizing.yMargin(context, 40),
+          height: Sizing.yMargin(context, 18),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.vertical(
               top: Radius.circular(20),
@@ -40,26 +40,11 @@ Future buildActionModalBottomSheet(BuildContext context) {
                     ModalListTile(
                       onTap: () {},
                       label: 'Report...',
+                      color: Colors.red,
                     ),
                     ModalListTile(
                       onTap: () {},
-                      label: 'Hide',
-                    ),
-                    ModalListTile(
-                      onTap: () {},
-                      label: 'Turn on Post Notifications',
-                    ),
-                    ModalListTile(
-                      onTap: () {},
-                      label: 'Copy Link',
-                    ),
-                    ModalListTile(
-                      onTap: () {},
-                      label: 'Share to',
-                    ),
-                    ModalListTile(
-                      onTap: () {},
-                      label: 'Unfollow',
+                      label: 'Not Interested',
                     ),
                   ],
                 ),
