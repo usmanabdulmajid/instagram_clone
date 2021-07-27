@@ -155,9 +155,6 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                 (BuildContext context, int index) {
                   return ClipRRect(
                     child: GestureDetector(
-                      onLongPressEnd: (e) => print(e.globalPosition),
-                      onLongPressMoveUpdate: (e) => print(e.globalPosition),
-                      onLongPressUp: () => print("up"),
                       onLongPressStart: (details) {
                         //TODO Start OnHoldEvent
                         showDialog(
