@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:instagram_clone/constants.dart';
 import 'package:instagram_clone/core/utils/colors.dart';
 import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
@@ -42,7 +43,7 @@ class _LoginWithFaceBookPageState extends State<LoginWithFaceBookPage> {
   Widget _buildDialogItem(Language language) => Row(
         children: <Widget>[
           Text(language.name),
-          XMargin(8),
+          XMargin(ksmallSpace),
           Flexible(child: Text("(${language.isoCode})"))
         ],
       );
@@ -51,113 +52,102 @@ class _LoginWithFaceBookPageState extends State<LoginWithFaceBookPage> {
   Widget build(BuildContext context) {
     var brightness = MediaQuery.of(context).platformBrightness;
     bool darkModeOn = brightness == Brightness.dark;
-    var _size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
-        width: _size.width,
-        height: _size.height,
-        padding: EdgeInsets.only(top: 50.0),
+      body: SafeArea(
         child: Column(
           children: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
+            InkWell(
+              onTap: _openLanguagePickerDialog,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  InkWell(
-                    onTap: _openLanguagePickerDialog,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(_selectedDialogLanguage.name),
-                        Icon(Icons.arrow_drop_down)
-                      ],
-                    ),
-                  ),
-                  YMargin(160),
-                  CustomIcon(
-                    icon: "Instagram_logo",
-                    size: 180,
-                  ),
-                  YMargin(50),
-                  LoginProceedButton(
-                    disableButton: false,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        FaIcon(
-                          FontAwesomeIcons.facebook,
-                          color: Colors.white,
-                        ),
-                        XMargin(5),
-                        Text(
-                          'Continue as as @username',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  YMargin(5),
-                  Text(
-                    'Madara Uchiha, Minato Namikaze, Zabuza and 611 other friends are using instagram',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                  YMargin(10),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.only(right: 15),
-                          child: Divider(
-                            color:
-                                darkModeOn ? Colors.grey.shade700 : Colors.grey,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'OR',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: darkModeOn ? Colors.grey : Colors.grey,
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.only(
-                            left: 15,
-                          ),
-                          child: Divider(
-                            color:
-                                darkModeOn ? Colors.grey.shade700 : Colors.grey,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  YMargin(10),
-                  TextButton(
-                    style: ButtonStyle(
-                      overlayColor: MaterialStateColor.resolveWith(
-                          (states) => Colors.transparent),
-                    ),
-                    onPressed: () {},
-                    child: Text(
-                      'I can\'t access this email or phone number',
-                      style: TextStyle(
-                          color: Colors.blue, fontWeight: FontWeight.bold),
-                    ),
-                  ),
+                  Text(_selectedDialogLanguage.name),
+                  Icon(Icons.arrow_drop_down)
                 ],
+              ),
+            ),
+            Spacer(),
+            CustomIcon(
+              icon: "Instagram_logo",
+              size: 200,
+            ),
+            Spacer(),
+            Padding(
+              padding: const EdgeInsets.all(kmediumSpace),
+              child: LoginProceedButton(
+                disableButton: false,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.facebook,
+                      color: Colors.white,
+                    ),
+                    XMargin(5),
+                    Text(
+                      'Continue as as @username',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(kmediumSpace),
+              child: Text(
+                'Madara Uchiha, Minato Namikaze, Zabuza and 611 other friends are using instagram',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.grey),
+              ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(right: 15),
+                    child: Divider(
+                        color: darkModeOn ? Colors.grey.shade700 : Colors.grey),
+                  ),
+                ),
+                Text(
+                  'OR',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: darkModeOn ? Colors.grey : Colors.grey,
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(
+                      left: 15,
+                    ),
+                    child: Divider(
+                      color: darkModeOn ? Colors.grey.shade700 : Colors.grey,
+                    ),
+                  ),
+                )
+              ],
+            ),
+            TextButton(
+              style: ButtonStyle(
+                overlayColor: MaterialStateColor.resolveWith(
+                    (states) => Colors.transparent),
+              ),
+              onPressed: () {},
+              child: Text(
+                'I can\'t access this email or phone number',
+                style:
+                    TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
               ),
             ),
             Spacer(),
             Divider(
               color: Colors.grey.shade700,
             ),
-            YMargin(10),
+            YMargin(ksmallSpace),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -176,7 +166,7 @@ class _LoginWithFaceBookPageState extends State<LoginWithFaceBookPage> {
                 )
               ],
             ),
-            YMargin(10)
+            YMargin(ksmallSpace)
           ],
         ),
       ),

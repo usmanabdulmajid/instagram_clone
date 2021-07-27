@@ -89,12 +89,12 @@ class _LoginPageState extends State<LoginPage> {
               //     print(_selectedDropdownLanguage.isoCode);
               //   },
               // ),
-              YMargin(30),
+              Spacer(),
               CustomIcon(
                 icon: "Instagram_logo",
-                size: 180,
+                size: 200,
               ),
-
+              Spacer(),
               Container(
                 width: _size.width,
                 height: 50.0,

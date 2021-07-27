@@ -112,7 +112,7 @@ class _HomeState extends State<Home> {
                 addPostCallback: addPost,
                 gotoMessageCallback: gotoMessage,
               ),
-            SearchPage(),
+              SearchPage(),
               ReelsPage(),
               ActivityPage(),
               ProfilePage(),
