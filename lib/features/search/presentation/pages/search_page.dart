@@ -496,7 +496,6 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
           ],
         )
       ],
-
     );
   }
 }
@@ -522,3 +521,4 @@ class TitlePopUp extends StatelessWidget {
       ),
     );
   }
+}
