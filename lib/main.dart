@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/login_help_page.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/login_page.dart';
+import 'package:instagram_clone/features/authorization/presentation/pages/recover_account_page.dart';
 import 'package:instagram_clone/features/home/presentation/pages/home.dart';
 import 'package:instagram_clone/features/profile/presentation/pages/profile_page.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/sign_up_page.dart';
@@ -49,9 +50,9 @@ class MyApp extends StatelessWidget {
             color: Color(0xFF262626),
           ),
           overline: TextStyle(
-            fontSize: 16,
+            fontSize: 14.0,
             fontWeight: FontWeight.w900,
-            color: Color(0xFF9F9F9F),
+            color: Color(0xFF000000),
           ),
         ),
         accentIconTheme: IconThemeData(
@@ -96,6 +97,11 @@ class MyApp extends StatelessWidget {
           caption: TextStyle(
             fontSize: 8.0,
             fontStyle: FontStyle.normal,
+          ),
+          overline: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w900,
+            color: Color(0xFFFFFFFF),
           ),
         ),
         appBarTheme: AppBarTheme(
