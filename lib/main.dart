@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/login_help_page.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/login_page.dart';
+import 'package:instagram_clone/features/authorization/presentation/pages/login_with_facebook_page.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/recover_account_page.dart';
 import 'package:instagram_clone/features/home/presentation/pages/home.dart';
 import 'package:instagram_clone/features/profile/presentation/pages/profile_page.dart';
