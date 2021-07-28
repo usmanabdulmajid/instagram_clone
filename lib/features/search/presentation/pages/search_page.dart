@@ -9,11 +9,13 @@ import 'package:instagram_clone/constants.dart';
 import 'package:instagram_clone/core/utils/colors.dart';
 import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
+import 'package:instagram_clone/features/profile/presentation/widgets/modal_list_tile.dart';
 import 'package:instagram_clone/features/search/presentation/pages/search_accounts_page.dart';
 import 'package:instagram_clone/features/search/presentation/pages/search_places_page.dart';
 import 'package:instagram_clone/features/search/presentation/pages/search_tags_page.dart';
 import 'package:instagram_clone/features/search/presentation/pages/search_top_page.dart';
 import 'package:instagram_clone/features/search/presentation/widgets/optionModalSheet.dart';
+import 'package:instagram_clone/features/search/presentation/widgets/shareModalSheet.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -29,6 +31,8 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   String _searchSuffix = "";
   TextEditingController _searchBoxController;
   bool _dissmissBarrier = false;
+
+  bool _likedPost;
 
   bool _showLikeTitle = false;
   bool _showViewProfileTitle = false;
@@ -76,6 +80,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   @override
   void initState() {
     _controller = ScrollController();
+    _likedPost = false;
     _tabController = TabController(
       length: _tab.length,
       initialIndex: 0,
@@ -311,9 +316,18 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                                                   onPointerUp: (e) =>
                                                       setState(() {
                                                     _showLikeTitle = false;
+                                                    _likedPost = true;
                                                   }),
-                                                  child: CustomIcon(
-                                                      icon: "like", size: 24),
+                                                  child: _likedPost
+                                                      ? CustomIcon(
+                                                          icon: "like_filled",
+                                                          size: klargeIconSize,
+                                                          color: Colors.red,
+                                                        )
+                                                      : CustomIcon(
+                                                          icon: "like",
+                                                          size: klargeIconSize,
+                                                        ),
                                                 ),
                                                 Spacer(),
                                                 Listener(
@@ -342,6 +356,9 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                                                   onPointerUp: (e) =>
                                                       setState(() {
                                                     _showShareTitle = false;
+                                                    Navigator.of(context).pop();
+                                                    buildShareModalBottomSheet(
+                                                        context);
                                                   }),
                                                   child: CustomIcon(
                                                       icon: "messenger",

@@ -298,23 +298,28 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
-                      onTap: () => {
-                            setState(() {
-                              _likedPost = !_likedPost;
-                              if (_likedPost) {
-                                _likedController.forward().whenComplete(
-                                    () => _likedController.reset());
-                              }
-                            })
-                          },
-                      onDoubleTap: () => {_likedController},
-                      child: _likedPost
-                          ? CustomIcon(
-                              icon: "like_filled",
-                              size: klargeIconSize,
-                              color: Colors.red,
-                            )
-                          : CustomIcon(icon: "like", size: klargeIconSize)),
+                    onTap: () => {
+                      setState(() {
+                        _likedPost = !_likedPost;
+                        if (_likedPost) {
+                          _likedController
+                              .forward()
+                              .whenComplete(() => _likedController.reset());
+                        }
+                      })
+                    },
+                    onDoubleTap: () => {_likedController},
+                    child: _likedPost
+                        ? CustomIcon(
+                            icon: "like_filled",
+                            size: klargeIconSize,
+                            color: Colors.red,
+                          )
+                        : CustomIcon(
+                            icon: "like",
+                            size: klargeIconSize,
+                          ),
+                  ),
                   SizedBox(
                     width: kmediumSpace,
                   ),
