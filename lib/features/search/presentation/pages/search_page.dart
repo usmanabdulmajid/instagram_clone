@@ -321,7 +321,14 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                                                   onPointerUp: (e) =>
                                                       setState(() {
                                                     _showLikeTitle = false;
-                                                    _likedPost = true;
+                                                    _likedPost = !_likedPost;
+                                                    Future.delayed(
+                                                      Duration(
+                                                          milliseconds: 300),
+                                                      () =>
+                                                          Navigator.of(context)
+                                                              .pop(),
+                                                    );
                                                   }),
                                                   child: _likedPost
                                                       ? CustomIcon(
