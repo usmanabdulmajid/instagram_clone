@@ -45,6 +45,10 @@ class MyApp extends StatelessWidget {
           headline5: TextStyle(fontSize: 17.0, fontWeight: FontWeight.normal),
           bodyText1: TextStyle(fontSize: 12.0, fontStyle: FontStyle.normal),
           bodyText2: TextStyle(fontSize: 14.0, fontStyle: FontStyle.normal),
+          headline6: TextStyle(
+              fontSize: 17.0,
+              fontWeight: FontWeight.normal,
+              color: Colors.blueAccent),
           caption: TextStyle(
             fontSize: 8.0,
             fontStyle: FontStyle.normal,
@@ -95,6 +99,10 @@ class MyApp extends StatelessWidget {
           headline5: TextStyle(fontSize: 17.0, fontWeight: FontWeight.normal),
           bodyText1: TextStyle(fontSize: 12.0, fontStyle: FontStyle.normal),
           bodyText2: TextStyle(fontSize: 14.0, fontStyle: FontStyle.normal),
+          headline6: TextStyle(
+              fontSize: 17.0,
+              fontWeight: FontWeight.w500,
+              color: Colors.blueAccent),
           caption: TextStyle(
             fontSize: 8.0,
             fontStyle: FontStyle.normal,
