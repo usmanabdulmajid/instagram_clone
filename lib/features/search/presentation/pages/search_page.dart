@@ -77,6 +77,9 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
       ),
     ),
   ];
+
+  bool _hasText = false;
+
   @override
   void initState() {
     _controller = ScrollController();
@@ -87,6 +90,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
       vsync: this,
     );
     _searchBoxController = TextEditingController();
+
     _selectedIndex = 0;
     super.initState();
   }
@@ -120,6 +124,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                   });
                 },
                 child: Container(
+                  height: ksmallSpace * 4.5,
                   padding: EdgeInsets.symmetric(
                       vertical: ksmallSpace, horizontal: kmediumSpace),
                   decoration: BoxDecoration(
@@ -316,7 +321,14 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                                                   onPointerUp: (e) =>
                                                       setState(() {
                                                     _showLikeTitle = false;
-                                                    _likedPost = true;
+                                                    _likedPost = !_likedPost;
+                                                    Future.delayed(
+                                                      Duration(
+                                                          milliseconds: 300),
+                                                      () =>
+                                                          Navigator.of(context)
+                                                              .pop(),
+                                                    );
                                                   }),
                                                   child: _likedPost
                                                       ? CustomIcon(
@@ -420,62 +432,65 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                 child: Icon(Icons.arrow_back),
               ),
               title: Container(
-                padding: EdgeInsets.symmetric(
-                    vertical: ksmallSpace, horizontal: kmediumSpace),
+                height: ksmallSpace * 4.5,
+                padding: EdgeInsets.only(left: kmediumSpace),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(ksmallSpace)),
                   color:
                       Theme.of(context).unselectedWidgetColor.withOpacity(0.2),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Search $_searchSuffix",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Theme.of(context).unselectedWidgetColor,
-                        ),
-                      ),
+                child: Center(
+                  child: TextField(
+                    onChanged: (e) {
+                      if (e.length > 0) {
+                        setState(() {
+                          _hasText = true;
+                        });
+                      } else {
+                        setState(() {
+                          _hasText = false;
+                        });
+                      }
+                    },
+                    controller: _searchBoxController,
+                    cursorWidth: 1,
+                    cursorColor: Colors.white,
+                    toolbarOptions: ToolbarOptions(
+                      copy: true,
+                      paste: true,
+                      selectAll: true,
+                      cut: true,
                     ),
-                  ],
+                    maxLines: 1,
+                    decoration: InputDecoration(
+                      hintText: "Search $_searchSuffix",
+                      labelStyle: Theme.of(context).textTheme.bodyText1,
+                      border: InputBorder.none,
+                      suffixIcon: _hasText
+                          ? GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _searchBoxController.text = "";
+                                  _hasText = false;
+                                });
+                              },
+                              child: Icon(
+                                Icons.close,
+                                color: Theme.of(context).iconTheme.color,
+                                size: kmediumSpace,
+                              ),
+                            )
+                          : SizedBox(),
+                      hintStyle: TextStyle(
+                          fontSize: 16,
+                          color: Theme.of(context).unselectedWidgetColor),
+                    ),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Theme.of(context).unselectedWidgetColor,
+                    ),
+                  ),
                 ),
-                // TODO(#1608): Add a search texteditor.
-                // child: Container(
-                //   decoration: BoxDecoration(
-                //     borderRadius:
-                //         BorderRadius.all(Radius.circular(ksmallSpace)),
-                //     color: Theme.of(context)
-                //         .unselectedWidgetColor
-                //         .withOpacity(0.2),
-                //   ),
-                //   child: TextField(
-                //     controller: _searchBoxController,
-                //     cursorWidth: 1,
-                //     cursorColor: Colors.white,
-                //     toolbarOptions: ToolbarOptions(
-                //       copy: true,
-                //       paste: true,
-                //       selectAll: true,
-                //       cut: true,
-                //     ),
-                //     maxLines: 1,
-                //     decoration: InputDecoration(
-                //       hintText: "Search $_searchSuffix",
-                //       labelStyle: Theme.of(context).textTheme.bodyText1,
-                //       border: InputBorder.none,
-                //       alignLabelWithHint: true,
-                //       suffixIcon: Icon(
-                //         Icons.close,
-                //         color: Theme.of(context).iconTheme.color,
-                //       ),
-                //     ),
-                //     cursorHeight: 18,
-                //   ),
-                // ),
               ),
               bottom: PreferredSize(
                 child: TabBar(
