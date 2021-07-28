@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
               YMargin(140),
               CustomIcon(
                 icon: "Instagram_logo",
-                size: 180,
+                size: 200,
               ),
               YMargin(30),
               Container(

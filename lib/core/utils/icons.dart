@@ -23,28 +23,25 @@ class CustomIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return isNotFaded
         ? Container(
-            width: size ?? 24,
-            height: size ?? 24,
             child: SvgPicture.asset(
               "assets/icons/svg/$icon.svg",
               color: color ?? Theme.of(context).iconTheme.color,
+              width: size ?? 24,
             ),
           )
         : AnimatedCrossFade(
             firstChild: Container(
-              width: size ?? 24,
-              height: size ?? 24,
               child: SvgPicture.asset(
                 "assets/icons/svg/$icon.svg",
                 color: Theme.of(context).iconTheme.color,
+                width: size ?? 24,
               ),
             ),
             secondChild: Container(
-              width: size ?? 24,
-              height: size ?? 24,
               child: SvgPicture.asset(
                 "assets/icons/svg/$iconAccent.svg",
                 color: color ?? Theme.of(context).iconTheme.color,
+                width: size ?? 24,
               ),
             ),
             crossFadeState: showFirst
