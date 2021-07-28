@@ -35,20 +35,23 @@ class _ActivityPageState extends State<ActivityPage> {
       body: Container(
         width: _size.width,
         height: _size.height,
-        child: ListView.builder(
-          physics: BouncingScrollPhysics(),
-          itemCount: activities.length,
-          itemBuilder: (context, index) {
-            return ActivityTile(
-              timeframe: activities[index].timeframe,
-              activity: activities[index].activity,
-              suggestedActivity: activities[index].suggestedActivity,
-              followers: activities[index].followers,
-              suggestedFollower: activities[index].suggestedFollower,
-              isFollowing: activities[index].isFollowing,
-              hasCurrentStatusUpdate: activities[index].hasCurrentStatusUpdate,
-            );
-          },
+        child: Scrollbar(
+          child: ListView.builder(
+            physics: BouncingScrollPhysics(),
+            itemCount: activities.length,
+            itemBuilder: (context, index) {
+              return ActivityTile(
+                timeframe: activities[index].timeframe,
+                activity: activities[index].activity,
+                suggestedActivity: activities[index].suggestedActivity,
+                followers: activities[index].followers,
+                suggestedFollower: activities[index].suggestedFollower,
+                isFollowing: activities[index].isFollowing,
+                hasCurrentStatusUpdate:
+                    activities[index].hasCurrentStatusUpdate,
+              );
+            },
+          ),
         ),
       ),
     );
