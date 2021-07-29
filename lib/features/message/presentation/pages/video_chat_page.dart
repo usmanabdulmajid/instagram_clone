@@ -124,37 +124,36 @@ class _VideoChatPageState extends State<VideoChatPage> {
                           children: [
                             Text("To:"),
                             XMargin(kmediumSpace * 2),
-                            // Padding(
-                            //   padding: const EdgeInsets.all(ksmallSpace),
-                            //   child: Container(
-                            //     child: TextField(
-                            //       controller: _searchBoxController,
-                            //       cursorWidth: 1,
-                            //       toolbarOptions: ToolbarOptions(
-                            //         copy: true,
-                            //         paste: true,
-                            //         selectAll: true,
-                            //         cut: true,
-                            //       ),
-                            //       maxLines: 1,
-                            //       decoration: InputDecoration(
-                            //         hintText: "Search",
-                            //         labelStyle:
-                            //             Theme.of(context).textTheme.bodyText1,
-                            //         border: InputBorder.none,
-                            //         hintStyle: TextStyle(
-                            //             fontSize: 16,
-                            //             color: Theme.of(context)
-                            //                 .unselectedWidgetColor),
-                            //       ),
-                            //       style: TextStyle(
-                            //         fontSize: 16,
-                            //         color:
-                            //             Theme.of(context).unselectedWidgetColor,
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
+                            Container(
+                              color: Colors.red,
+                              // child: TextField(
+                              //   controller: _searchBoxController,
+                              //   cursorWidth: 1,
+                              //   toolbarOptions: ToolbarOptions(
+                              //     copy: true,
+                              //     paste: true,
+                              //     selectAll: true,
+                              //     cut: true,
+                              //   ),
+                              //   maxLines: 1,
+                              //   decoration: InputDecoration(
+                              //     hintText: "Search",
+                              //     labelStyle:
+                              //         Theme.of(context).textTheme.bodyText1,
+                              //     border: InputBorder.none,
+                              //     hintStyle: TextStyle(
+                              //       fontSize: 16,
+                              //       color: Theme.of(context)
+                              //           .unselectedWidgetColor,
+                              //     ),
+                              //   ),
+                              //   style: TextStyle(
+                              //     fontSize: 16,
+                              //     color:
+                              //         Theme.of(context).unselectedWidgetColor,
+                              //   ),
+                              // ),
+                            ),
                           ],
                         ),
                         YMargin(kmediumSpace),
