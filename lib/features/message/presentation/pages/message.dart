@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:instagram_clone/constants.dart';
 import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
+import 'package:instagram_clone/features/home/presentation/widgets/video_post.dart';
 import 'package:instagram_clone/features/message/presentation/pages/chats_page.dart';
 import 'package:instagram_clone/features/message/presentation/pages/new_messages.dart';
 import 'package:instagram_clone/features/message/presentation/pages/rooms_page.dart';
@@ -19,8 +20,6 @@ class Messaging extends StatefulWidget {
 }
 
 class _MessagingState extends State<Messaging> with TickerProviderStateMixin {
-  int _selectedIndex = 0;
-  bool _videoChatPage = false;
   TabController _tabController;
   List<Widget> _tab = [
     Tab(
@@ -51,19 +50,6 @@ class _MessagingState extends State<Messaging> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  void gotoVideoChat() {
-    setState(() {
-      _selectedIndex = 1;
-      _videoChatPage = true;
-    });
-  }
-
-  void gotoHome() {
-    setState(() {
-      _selectedIndex = 0;
-    });
-  }
-
   Route _createRoute() {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) =>
@@ -85,65 +71,72 @@ class _MessagingState extends State<Messaging> with TickerProviderStateMixin {
     );
   }
 
+  Route _createRoute2() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          const VideoChatPage(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 0.0);
+        const end = Offset(0.0, 0.0);
+        const curve = Curves.ease;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        final offsetAnimation = animation.drive(tween);
+
+        return SlideTransition(
+          position: offsetAnimation,
+          child: child,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
-            onTap: () {
-              if (_videoChatPage) {
-                gotoHome();
-                setState(() {
-                  _videoChatPage = !_videoChatPage;
-                });
-              } else {
-                widget.gotoHomeCallback();
-              }
-            },
-            child: Icon(Icons.arrow_back)),
+            onTap: widget.gotoHomeCallback, child: Icon(Icons.arrow_back)),
         title: GestureDetector(
-          onTap: () async {
-            await buildChangeAccountModal(context);
-          },
-          child: !_videoChatPage
-              ? Row(
-                  children: [
-                    Text(
-                      "joshua_l",
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Transform.rotate(
-                        angle: 1.5708, child: Icon(Icons.chevron_right)),
-                  ],
-                )
-              : Text(
-                  "New Video Chat",
+            onTap: () async {
+              await buildChangeAccountModal(context);
+            },
+            child: Row(
+              children: [
+                Text(
+                  "joshua_l",
                   style: TextStyle(
-                    fontSize: 22,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-        ),
-        bottom: PreferredSize(
-          child: Visibility(
-            visible: !_videoChatPage,
-            child: TabBar(
-              tabs: _tab,
-              controller: _tabController,
-              isScrollable: false,
-              indicatorColor: Theme.of(context).indicatorColor,
-              indicator: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                      color: Theme.of(context).unselectedWidgetColor),
-                ),
-              ),
-              indicatorSize: TabBarIndicatorSize.tab,
-              indicatorWeight: 1,
+                Transform.rotate(
+                    angle: 1.5708, child: Icon(Icons.chevron_right)),
+              ],
+            )
+            //  Text(
+            //     "New Video Chat",
+            //     style: TextStyle(
+            //       fontSize: 18,
+            //       fontWeight: FontWeight.bold,
+            //     ),
+            //   ),
             ),
+        bottom: PreferredSize(
+          child: TabBar(
+            tabs: _tab,
+            controller: _tabController,
+            isScrollable: false,
+            indicatorColor: Theme.of(context).indicatorColor,
+            indicator: BoxDecoration(
+              border: Border(
+                bottom:
+                    BorderSide(color: Theme.of(context).unselectedWidgetColor),
+              ),
+            ),
+            indicatorSize: TabBarIndicatorSize.tab,
+            indicatorWeight: 1,
           ),
           preferredSize: Size(
             Sizing.xMargin(context, 100),
@@ -151,32 +144,24 @@ class _MessagingState extends State<Messaging> with TickerProviderStateMixin {
           ),
         ),
         actions: [
-          Visibility(
-            visible: !_videoChatPage,
-            child: GestureDetector(
-                onTap: gotoVideoChat, child: Icon(Icons.photo_camera_front)),
-          ),
-          Visibility(
-              visible: !_videoChatPage,
-              child: GestureDetector(
-                  onTap: () => Navigator.of(context).push(
-                        _createRoute(),
-                      ),
-                  child: Icon(Icons.note_add))),
+          GestureDetector(
+              onTap: () => Navigator.of(context).push(
+                    _createRoute2(),
+                  ),
+              child: Icon(Icons.photo_camera_front)),
+          GestureDetector(
+              onTap: () => Navigator.of(context).push(
+                    _createRoute(),
+                  ),
+              child: Icon(Icons.note_add)),
         ],
       ),
-      body: IndexedStack(
-        index: _selectedIndex,
+      body: TabBarView(
+        controller: _tabController,
+        physics: NeverScrollableScrollPhysics(),
         children: [
-          TabBarView(
-            controller: _tabController,
-            physics: NeverScrollableScrollPhysics(),
-            children: [
-              ChatPage(),
-              RoomPage(),
-            ],
-          ),
-          VideoChatPage(),
+          ChatPage(),
+          RoomPage(),
         ],
       ),
     );
