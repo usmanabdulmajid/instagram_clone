@@ -5,6 +5,7 @@ class ModalListTile extends StatelessWidget {
   const ModalListTile(
       {Key key,
       this.leadingWidget,
+      this.trailingWidget,
       @required this.label,
       @required this.onTap,
       this.color})
@@ -12,6 +13,7 @@ class ModalListTile extends StatelessWidget {
 
   final String label;
   final Widget leadingWidget;
+  final Widget trailingWidget;
   final VoidCallback onTap;
   final MaterialColor color;
 
@@ -30,6 +32,7 @@ class ModalListTile extends StatelessWidget {
               ? Theme.of(context).textTheme.headline5
               : Theme.of(context).textTheme.headline5.copyWith(color: color),
         ),
+        trailing: trailingWidget ?? SizedBox(),
       ),
     );
   }

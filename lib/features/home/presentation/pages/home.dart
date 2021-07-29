@@ -84,6 +84,14 @@ class _HomeState extends State<Home> {
     );
   }
 
+  void gotoHomePost() {
+    _pageController.animateToPage(
+      1,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.linearToEaseOut,
+    );
+  }
+
   void gotoMessage() {
     _pageController.animateToPage(
       2,
@@ -139,7 +147,7 @@ class _HomeState extends State<Home> {
             },
           ),
         ),
-        Messaging(),
+        Messaging(gotoHomeCallback: gotoHomePost),
       ],
     );
   }
