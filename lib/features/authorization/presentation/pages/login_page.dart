@@ -89,12 +89,12 @@ class _LoginPageState extends State<LoginPage> {
               //     print(_selectedDropdownLanguage.isoCode);
               //   },
               // ),
-              Spacer(),
+              YMargin(140),
               CustomIcon(
                 icon: "Instagram_logo",
                 size: 200,
               ),
-              Spacer(),
+              YMargin(30),
               Container(
                 width: _size.width,
                 height: 50.0,
@@ -221,9 +221,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Container(
                       margin: EdgeInsets.only(right: 15, left: 20.0),
                       child: Divider(
-                        color: darkModeOn
-                            ? Colors.grey.shade700
-                            : Colors.grey.shade100,
+                        color: Colors.grey.shade700,
                       ),
                     ),
                   ),
@@ -231,17 +229,13 @@ class _LoginPageState extends State<LoginPage> {
                     'OR',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: darkModeOn ? Colors.grey : Colors.white,
+                      color: Colors.grey,
                     ),
                   ),
                   Expanded(
                     child: Container(
                       margin: EdgeInsets.only(left: 15, right: 20.0),
-                      child: Divider(
-                        color: darkModeOn
-                            ? Colors.grey.shade700
-                            : Colors.grey.shade100,
-                      ),
+                      child: Divider(color: Colors.grey.shade700),
                     ),
                   )
                 ],
@@ -272,7 +266,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Spacer(),
               Divider(
-                color: darkModeOn ? Colors.grey.shade700 : Colors.grey.shade100,
+                color: Colors.grey.shade700,
               ),
               YMargin(10),
               Row(
