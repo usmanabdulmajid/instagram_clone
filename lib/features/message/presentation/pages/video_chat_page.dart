@@ -13,17 +13,21 @@ class VideoChatPage extends StatefulWidget {
 }
 
 class _VideoChatPageState extends State<VideoChatPage> {
-  List _selectedPeople = [];
   TextEditingController _searchBoxController;
-  List<Widget> _selectedAccount = [];
+  Map<int, Widget> _selectedAccount = Map<int, Widget>();
 
   int _tapIndex;
-  Map<int, int> _tapIndexes = {};
 
   @override
   void initState() {
     _searchBoxController = TextEditingController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _searchBoxController.dispose();
+    super.dispose();
   }
 
   Route _createRoute() {
@@ -49,13 +53,10 @@ class _VideoChatPageState extends State<VideoChatPage> {
 
   void selectAccount(String name, bool shouldAdd) {
     setState(() {
-      var choosenIndex = _tapIndexes.length ?? 0;
-      _tapIndexes.putIfAbsent(_tapIndex, () => choosenIndex);
       if (shouldAdd) {
-        _selectedAccount.add(AccountTile(name: name));
+        _selectedAccount[_tapIndex] = AccountTile(name: name);
       } else {
-        _selectedAccount.removeAt(_tapIndexes[_tapIndex]);
-        _tapIndexes.remove(_tapIndex);
+        _selectedAccount.remove(_tapIndex);
       }
     });
   }
@@ -149,7 +150,10 @@ class _VideoChatPageState extends State<VideoChatPage> {
                                   child: ListView(
                                     scrollDirection: Axis.horizontal,
                                     children: [
-                                      ..._selectedAccount,
+                                      if (_selectedAccount.length > 0)
+                                        ..._selectedAccount.entries
+                                            .map((e) => e.value)
+                                            .toList(),
                                       // Container(
                                       //   child: TextField(
                                       //     controller: _searchBoxController,
@@ -207,7 +211,7 @@ class _VideoChatPageState extends State<VideoChatPage> {
               Padding(
                 padding: const EdgeInsets.all(ksmallSpace),
                 child: Center(
-                  child: _selectedPeople.length > 0
+                  child: _selectedAccount.length > 0
                       ? Text(
                           "Start",
                           style: TextStyle(

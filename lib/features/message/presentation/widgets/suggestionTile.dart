@@ -43,7 +43,7 @@ class _SuggesstionTileState extends State<SuggesstionTile> {
         child: ListTile(
           leading: CircleAvatar(
             radius: klargeIconSize,
-            backgroundColor: Colors.teal[900],
+            backgroundColor: Colors.cyan[900],
           ),
           title: Text(widget.title ?? "joshua_l"),
           subtitle: Text("joshua_l_official"),

@@ -16,7 +16,8 @@ class AccountTile extends StatelessWidget {
             gradient: LinearGradient(
               transform: GradientRotation(5.49778715),
               colors: [
-                Colors.blueAccent,
+                Colors.blue,
+                // Colors.lightBlue,
                 Colors.lightBlueAccent,
               ],
             ),
