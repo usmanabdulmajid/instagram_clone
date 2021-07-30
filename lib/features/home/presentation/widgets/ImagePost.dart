@@ -9,8 +9,8 @@ import 'package:instagram_clone/features/home/presentation/widgets/action_modal_
 import 'package:instagram_clone/features/home/presentation/widgets/video_post.dart';
 
 class ImagePost extends StatefulWidget {
-  const ImagePost({Key key}) : super(key: key);
-
+  const ImagePost({Key key, @required this.showComment}) : super(key: key);
+  final VoidCallback showComment;
   @override
   _ImagePostState createState() => _ImagePostState();
 }
@@ -312,22 +312,24 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                     child: _likedPost
                         ? CustomIcon(
                             icon: "like_filled",
-                            size: klargeIconSize,
                             color: Colors.red,
                           )
                         : CustomIcon(
                             icon: "like",
-                            size: klargeIconSize,
                           ),
                   ),
                   SizedBox(
                     width: kmediumSpace,
                   ),
-                  CustomIcon(icon: "comment", size: klargeIconSize),
+                  CustomIcon(
+                    icon: "comment",
+                  ),
                   SizedBox(
                     width: kmediumSpace,
                   ),
-                  CustomIcon(icon: "messenger", size: klargeIconSize),
+                  CustomIcon(
+                    icon: "messenger",
+                  ),
                   Expanded(
                     flex: 3,
                     child: Visibility(
@@ -431,14 +433,16 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                     Expanded(
                       child: Container(
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: widget.showComment,
                           child: Text(
                             "Add Comment...",
                             style: TextStyle(
-                              color: Colors.black.withOpacity(0.4),
-                              fontSize: 18.0,
+                              color: Theme.of(context)
+                                  .unselectedWidgetColor
+                                  .withOpacity(0.4),
+                              fontSize: 16.0,
                               fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),

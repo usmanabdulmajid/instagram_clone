@@ -121,7 +121,8 @@ class _NewMessagesState extends State<NewMessages> {
             actions: [
               Padding(
                 padding: const EdgeInsets.all(ksmallSpace),
-                child: Center(
+                child: Container(
+                  alignment: Alignment.center,
                   child: Text(
                     "Chat",
                     style: TextStyle(
