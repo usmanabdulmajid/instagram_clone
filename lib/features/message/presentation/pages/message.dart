@@ -26,6 +26,9 @@ class _MessagingState extends State<Messaging> with TickerProviderStateMixin {
       child: Container(
         child: Text(
           'Chats',
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     ),
@@ -33,6 +36,9 @@ class _MessagingState extends State<Messaging> with TickerProviderStateMixin {
       child: Container(
         child: Text(
           'Rooms',
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     ),
