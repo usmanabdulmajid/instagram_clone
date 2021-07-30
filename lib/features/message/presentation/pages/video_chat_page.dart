@@ -49,7 +49,8 @@ class _VideoChatPageState extends State<VideoChatPage> {
 
   void selectAccount(String name, bool shouldAdd) {
     setState(() {
-      _tapIndexes.putIfAbsent(_tapIndex, () => _tapIndexes.length ?? 0);
+      var choosenIndex = _tapIndexes.length ?? 0;
+      _tapIndexes.putIfAbsent(_tapIndex, () => choosenIndex);
       if (shouldAdd) {
         _selectedAccount.add(AccountTile(name: name));
       } else {
@@ -138,48 +139,50 @@ class _VideoChatPageState extends State<VideoChatPage> {
                         ),
                         YMargin(kmediumSpace),
                         Container(
-                          height: kmediumSpace * 3,
                           child: Row(
                             children: [
                               Text("To:"),
-                              XMargin(kmediumSpace * 2),
-                              ..._selectedAccount,
-                              // Container(
-                              //     child: ListView(
-                              //   scrollDirection: Axis.horizontal,
-                              //   children: [
-                              //     AccountTile(name: "joshua_l"),
-                              //   ],
-                              // )),
-                              Container(
-                                color: Colors.red,
-                                // child: TextField(
-                                //   controller: _searchBoxController,
-                                //   cursorWidth: 1,
-                                //   toolbarOptions: ToolbarOptions(
-                                //     copy: true,
-                                //     paste: true,
-                                //     selectAll: true,
-                                //     cut: true,
-                                //   ),
-                                //   maxLines: 1,
-                                //   decoration: InputDecoration(
-                                //     hintText: "Search",
-                                //     labelStyle:
-                                //         Theme.of(context).textTheme.bodyText1,
-                                //     border: InputBorder.none,
-                                //     hintStyle: TextStyle(
-                                //       fontSize: 16,
-                                //       color: Theme.of(context)
-                                //           .unselectedWidgetColor,
-                                //     ),
-                                //   ),
-                                //   style: TextStyle(
-                                //     fontSize: 16,
-                                //     color:
-                                //         Theme.of(context).unselectedWidgetColor,
-                                //   ),
-                                // ),
+                              XMargin(kmediumSpace),
+                              Expanded(
+                                child: Container(
+                                  height: kmediumSpace * 2.5,
+                                  child: ListView(
+                                    scrollDirection: Axis.horizontal,
+                                    children: [
+                                      ..._selectedAccount,
+                                      // Container(
+                                      //   child: TextField(
+                                      //     controller: _searchBoxController,
+                                      //     cursorWidth: 1,
+                                      //     toolbarOptions: ToolbarOptions(
+                                      //       copy: true,
+                                      //       paste: true,
+                                      //       selectAll: true,
+                                      //       cut: true,
+                                      //     ),
+                                      //     maxLines: 1,
+                                      //     decoration: InputDecoration(
+                                      //       hintText: "Search",
+                                      //       labelStyle: Theme.of(context)
+                                      //           .textTheme
+                                      //           .bodyText1,
+                                      //       border: InputBorder.none,
+                                      //       hintStyle: TextStyle(
+                                      //         fontSize: 16,
+                                      //         color: Theme.of(context)
+                                      //             .unselectedWidgetColor,
+                                      //       ),
+                                      //     ),
+                                      //     style: TextStyle(
+                                      //       fontSize: 16,
+                                      //       color: Theme.of(context)
+                                      //           .unselectedWidgetColor,
+                                      //     ),
+                                      //   ),
+                                      // ),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ],
                           ),
