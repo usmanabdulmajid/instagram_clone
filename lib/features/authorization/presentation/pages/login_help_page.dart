@@ -112,7 +112,7 @@ class _LoginHelpPageState extends State<LoginHelpPage> {
                           'OR',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: darkModeOn ? Colors.grey : Colors.grey,
+                            color: Colors.grey,
                           ),
                         ),
                         Expanded(

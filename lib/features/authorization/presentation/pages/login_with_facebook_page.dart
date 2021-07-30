@@ -66,7 +66,9 @@ class _LoginWithFaceBookPageState extends State<LoginWithFaceBookPage> {
                 ],
               ),
             ),
-            Spacer(),
+            Spacer(
+              flex: 2,
+            ),
             CustomIcon(
               icon: "Instagram_logo",
               size: 200,
@@ -107,7 +109,7 @@ class _LoginWithFaceBookPageState extends State<LoginWithFaceBookPage> {
               children: [
                 Expanded(
                   child: Container(
-                    margin: EdgeInsets.only(right: 15),
+                    margin: EdgeInsets.only(right: 15, left: 20),
                     child: Divider(
                         color: darkModeOn ? Colors.grey.shade700 : Colors.grey),
                   ),
@@ -121,9 +123,7 @@ class _LoginWithFaceBookPageState extends State<LoginWithFaceBookPage> {
                 ),
                 Expanded(
                   child: Container(
-                    margin: EdgeInsets.only(
-                      left: 15,
-                    ),
+                    margin: EdgeInsets.only(left: 15, right: 20),
                     child: Divider(
                       color: darkModeOn ? Colors.grey.shade700 : Colors.grey,
                     ),
@@ -166,7 +166,7 @@ class _LoginWithFaceBookPageState extends State<LoginWithFaceBookPage> {
                 )
               ],
             ),
-            YMargin(ksmallSpace)
+            YMargin(15)
           ],
         ),
       ),
