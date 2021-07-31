@@ -26,6 +26,9 @@ class _MessagingState extends State<Messaging> with TickerProviderStateMixin {
       child: Container(
         child: Text(
           'Chats',
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     ),
@@ -33,6 +36,9 @@ class _MessagingState extends State<Messaging> with TickerProviderStateMixin {
       child: Container(
         child: Text(
           'Rooms',
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     ),
@@ -148,12 +154,20 @@ class _MessagingState extends State<Messaging> with TickerProviderStateMixin {
               onTap: () => Navigator.of(context).push(
                     _createRoute2(),
                   ),
-              child: Icon(Icons.photo_camera_front)),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.photo_camera_front,
+                ),
+              )),
           GestureDetector(
               onTap: () => Navigator.of(context).push(
                     _createRoute(),
                   ),
-              child: Icon(Icons.note_add)),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(Icons.note_add),
+              )),
         ],
       ),
       body: TabBarView(

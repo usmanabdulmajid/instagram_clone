@@ -42,11 +42,13 @@ class _ChatPageState extends State<ChatPage> {
                       XMargin(kmediumSpace),
                       Container(
                         alignment: Alignment.centerLeft,
-                        child: Text("Search",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Theme.of(context).unselectedWidgetColor,
-                            )),
+                        child: Text(
+                          "Search",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Theme.of(context).unselectedWidgetColor,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -93,13 +95,38 @@ class _ChatPageState extends State<ChatPage> {
               ),
             ),
           ),
-          SuggesstionTile(selector: false),
-          SuggesstionTile(selector: false),
-          SuggesstionTile(selector: false),
-          SuggesstionTile(selector: false),
-          SuggesstionTile(selector: false),
-          SuggesstionTile(selector: false),
-          SuggesstionTile(selector: false),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: SuggesstionTile(selector: false),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: SuggesstionTile(selector: false),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: SuggesstionTile(selector: false),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: SuggesstionTile(selector: false),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: SuggesstionTile(selector: false),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: SuggesstionTile(selector: false),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: SuggesstionTile(selector: false),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: SuggesstionTile(selector: false),
+          ),
         ],
       ),
     );

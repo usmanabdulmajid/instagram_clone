@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
+import 'package:instagram_clone/features/message/presentation/widgets/accout_tile.dart';
 import 'package:instagram_clone/features/message/presentation/widgets/suggestionTile.dart';
 
 class NewMessages extends StatefulWidget {
@@ -13,6 +14,19 @@ class NewMessages extends StatefulWidget {
 class _NewMessagesState extends State<NewMessages> {
   List _selectedPeople = [];
   TextEditingController _searchBoxController;
+  Map<int, Widget> _selectedAccount = Map<int, Widget>();
+
+  int _tapIndex;
+
+  void selectAccount(String name, bool shouldAdd) {
+    setState(() {
+      if (shouldAdd) {
+        _selectedAccount[_tapIndex] = AccountTile(name: name);
+      } else {
+        _selectedAccount.remove(_tapIndex);
+      }
+    });
+  }
 
   @override
   void initState() {
@@ -107,12 +121,13 @@ class _NewMessagesState extends State<NewMessages> {
             actions: [
               Padding(
                 padding: const EdgeInsets.all(ksmallSpace),
-                child: Center(
+                child: Container(
+                  alignment: Alignment.center,
                   child: Text(
                     "Chat",
                     style: TextStyle(
                       fontSize: 18,
-                      color: _selectedPeople.length > 0
+                      color: _selectedAccount.length > 0
                           ? Colors.blueAccent
                           : Theme.of(context).textTheme.bodyText1.color,
                     ),
@@ -122,10 +137,19 @@ class _NewMessagesState extends State<NewMessages> {
             ],
           ),
           SliverList(
-            delegate: SliverChildBuilderDelegate((ctx, int) {
-              return SuggesstionTile(
-                selector: true,
-                selected: false,
+            delegate: SliverChildBuilderDelegate((ctx, index) {
+              return Listener(
+                onPointerDown: (e) {
+                  setState(() {
+                    _tapIndex = index;
+                  });
+                },
+                child: SuggesstionTile(
+                  title: "joshua_$index",
+                  selector: true,
+                  selected: false,
+                  onTap: selectAccount,
+                ),
               );
             }, childCount: 15),
           ),

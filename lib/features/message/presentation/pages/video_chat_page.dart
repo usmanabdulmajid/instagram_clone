@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
+import 'package:instagram_clone/features/message/presentation/widgets/accout_tile.dart';
 import 'package:instagram_clone/features/message/presentation/widgets/suggestionTile.dart';
 
 import '../../../../constants.dart';
@@ -12,13 +13,21 @@ class VideoChatPage extends StatefulWidget {
 }
 
 class _VideoChatPageState extends State<VideoChatPage> {
-  List _selectedPeople = [];
   TextEditingController _searchBoxController;
+  Map<int, Widget> _selectedAccount = Map<int, Widget>();
+
+  int _tapIndex;
 
   @override
   void initState() {
     _searchBoxController = TextEditingController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _searchBoxController.dispose();
+    super.dispose();
   }
 
   Route _createRoute() {
@@ -40,6 +49,16 @@ class _VideoChatPageState extends State<VideoChatPage> {
         );
       },
     );
+  }
+
+  void selectAccount(String name, bool shouldAdd) {
+    setState(() {
+      if (shouldAdd) {
+        _selectedAccount[_tapIndex] = AccountTile(name: name);
+      } else {
+        _selectedAccount.remove(_tapIndex);
+      }
+    });
   }
 
   @override
@@ -120,42 +139,57 @@ class _VideoChatPageState extends State<VideoChatPage> {
                           textAlign: TextAlign.left,
                         ),
                         YMargin(kmediumSpace),
-                        Row(
-                          children: [
-                            Text("To:"),
-                            XMargin(kmediumSpace * 2),
-                            // Padding(
-                            //   padding: const EdgeInsets.all(ksmallSpace),
-                            //   child: Container(
-                            //     child: TextField(
-                            //       controller: _searchBoxController,
-                            //       cursorWidth: 1,
-                            //       toolbarOptions: ToolbarOptions(
-                            //         copy: true,
-                            //         paste: true,
-                            //         selectAll: true,
-                            //         cut: true,
-                            //       ),
-                            //       maxLines: 1,
-                            //       decoration: InputDecoration(
-                            //         hintText: "Search",
-                            //         labelStyle:
-                            //             Theme.of(context).textTheme.bodyText1,
-                            //         border: InputBorder.none,
-                            //         hintStyle: TextStyle(
-                            //             fontSize: 16,
-                            //             color: Theme.of(context)
-                            //                 .unselectedWidgetColor),
-                            //       ),
-                            //       style: TextStyle(
-                            //         fontSize: 16,
-                            //         color:
-                            //             Theme.of(context).unselectedWidgetColor,
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
-                          ],
+                        Container(
+                          child: Row(
+                            children: [
+                              Text("To:"),
+                              XMargin(kmediumSpace),
+                              Expanded(
+                                child: Container(
+                                  height: kmediumSpace * 2.5,
+                                  child: ListView(
+                                    scrollDirection: Axis.horizontal,
+                                    children: [
+                                      if (_selectedAccount.length > 0)
+                                        ..._selectedAccount.entries
+                                            .map((e) => e.value)
+                                            .toList(),
+                                      //       Container(
+                                      //   child: TextField(
+                                      //     controller: _searchBoxController,
+                                      //     cursorWidth: 1,
+                                      //     toolbarOptions: ToolbarOptions(
+                                      //       copy: true,
+                                      //       paste: true,
+                                      //       selectAll: true,
+                                      //       cut: true,
+                                      //     ),
+                                      //     maxLines: 1,
+                                      //     decoration: InputDecoration(
+                                      //       hintText: "Search",
+                                      //       labelStyle: Theme.of(context)
+                                      //           .textTheme
+                                      //           .bodyText1,
+                                      //       border: InputBorder.none,
+                                      //       hintStyle: TextStyle(
+                                      //         fontSize: 16,
+                                      //         color: Theme.of(context)
+                                      //             .unselectedWidgetColor,
+                                      //       ),
+                                      //     ),
+                                      //     style: TextStyle(
+                                      //       fontSize: 16,
+                                      //       color: Theme.of(context)
+                                      //           .unselectedWidgetColor,
+                                      //     ),
+                                      //   ),
+                                      // ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         YMargin(kmediumSpace),
                         Divider(
@@ -170,14 +204,14 @@ class _VideoChatPageState extends State<VideoChatPage> {
               ),
               preferredSize: Size(
                 Sizing.xMargin(context, 100),
-                Sizing.yMargin(context, 25),
+                Sizing.yMargin(context, 30),
               ),
             ),
             actions: [
               Padding(
                 padding: const EdgeInsets.all(ksmallSpace),
                 child: Center(
-                  child: _selectedPeople.length > 0
+                  child: _selectedAccount.length > 0
                       ? Text(
                           "Start",
                           style: TextStyle(
@@ -191,10 +225,19 @@ class _VideoChatPageState extends State<VideoChatPage> {
             ],
           ),
           SliverList(
-            delegate: SliverChildBuilderDelegate((ctx, int) {
-              return SuggesstionTile(
-                selector: true,
-                selected: false,
+            delegate: SliverChildBuilderDelegate((ctx, index) {
+              return Listener(
+                onPointerDown: (e) {
+                  setState(() {
+                    _tapIndex = index;
+                  });
+                },
+                child: SuggesstionTile(
+                  title: "joshua_$index",
+                  selector: true,
+                  selected: false,
+                  onTap: selectAccount,
+                ),
               );
             }, childCount: 15),
           ),
