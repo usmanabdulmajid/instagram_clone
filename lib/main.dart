@@ -8,8 +8,12 @@ import 'package:instagram_clone/features/authorization/presentation/pages/recove
 import 'package:instagram_clone/features/home/presentation/pages/home.dart';
 import 'package:instagram_clone/features/profile/presentation/pages/profile_page.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/sign_up_page.dart';
+import 'package:camera/camera.dart';
+import 'features/new_post/presentation/pages/new_story_page.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
   runApp(MyApp());
   bool isDark =
       SchedulerBinding.instance.window.platformBrightness == Brightness.dark;

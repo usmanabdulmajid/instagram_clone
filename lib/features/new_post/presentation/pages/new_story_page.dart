@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:instagram_clone/features/new_post/presentation/widgets/capture_button.dart';
+import 'package:instagram_clone/features/new_post/presentation/widgets/captured_image_view.dart';
 import 'package:instagram_clone/features/new_post/presentation/widgets/custom_ring.dart';
 
 List<CameraDescription> cameras;
@@ -15,7 +16,10 @@ class _NewStoryPageState extends State<NewStoryPage> {
   Future<void> _initailizeCamera;
   @override
   void initState() {
-    _cameraController = CameraController(cameras.first, ResolutionPreset.high);
+    _cameraController = CameraController(
+      cameras.first,
+      ResolutionPreset.high,
+    );
     _initailizeCamera = _cameraController.initialize();
     super.initState();
   }
@@ -86,7 +90,9 @@ class _NewStoryPageState extends State<NewStoryPage> {
               child: Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      capturePhoto();
+                    },
                     child: CaptureButton(),
                   ),
                 ],
@@ -102,7 +108,10 @@ class _NewStoryPageState extends State<NewStoryPage> {
     try {
       await _initailizeCamera;
 
-      final imagePath = await _cameraController.takePicture();
+      final image = await _cameraController.takePicture();
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return CapturedImageView(imagePath: image.path);
+      }));
     } catch (e) {
       print(e);
     }
