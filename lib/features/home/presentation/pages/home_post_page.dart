@@ -48,61 +48,69 @@ class _HomePostPageState extends State<HomePostPage> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        CustomScrollView(
-          physics: BouncingScrollPhysics(),
-          controller: _controller,
-          slivers: [
-            SliverAppBar(
-              elevation: 4.0,
-              title: GestureDetector(
-                onTap: () {
-                  _controller.animateTo(0,
-                      duration: Duration(milliseconds: 300),
-                      curve: Curves.easeInToLinear);
-                },
-                child: CustomIcon(
-                  icon: "Instagram_logo",
-                  size: 120,
-                ),
-              ),
-              pinned: true,
-              actions: [
-                GestureDetector(
-                  onTap: widget.addPostCallback,
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: ksmallSpace),
-                    child: CustomIcon(icon: "add", size: 24),
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              _onAddComment = false;
+            });
+            FocusScope.of(context).unfocus();
+          },
+          child: CustomScrollView(
+            physics: BouncingScrollPhysics(),
+            controller: _controller,
+            slivers: [
+              SliverAppBar(
+                elevation: 4.0,
+                title: GestureDetector(
+                  onTap: () {
+                    _controller.animateTo(0,
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.easeInToLinear);
+                  },
+                  child: CustomIcon(
+                    icon: "Instagram_logo",
+                    size: 120,
                   ),
                 ),
-                GestureDetector(
-                  onTap: widget.gotoMessageCallback,
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: ksmallSpace),
-                    child: CustomIcon(icon: "messenger", size: 24),
+                pinned: true,
+                actions: [
+                  GestureDetector(
+                    onTap: widget.addPostCallback,
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: ksmallSpace),
+                      child: CustomIcon(icon: "add", size: 24),
+                    ),
                   ),
-                ),
-                XMargin(ksmallSpace),
-              ],
-            ),
-            SliverToBoxAdapter(
-              child: StoryRolls(
-                availableStatus: 10,
+                  GestureDetector(
+                    onTap: widget.gotoMessageCallback,
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: ksmallSpace),
+                      child: CustomIcon(icon: "messenger", size: 24),
+                    ),
+                  ),
+                  XMargin(ksmallSpace),
+                ],
               ),
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (ctx, index) => ImagePost(
-                  key: PageStorageKey(index),
-                  showComment: _showCommentBox,
+              SliverToBoxAdapter(
+                child: StoryRolls(
+                  availableStatus: 10,
                 ),
-                childCount: 10,
-                addAutomaticKeepAlives: true,
-                addRepaintBoundaries: true,
               ),
-            ),
-          ],
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (ctx, index) => ImagePost(
+                    key: PageStorageKey(index),
+                    showComment: _showCommentBox,
+                  ),
+                  childCount: 10,
+                  addAutomaticKeepAlives: true,
+                  addRepaintBoundaries: true,
+                ),
+              ),
+            ],
+          ),
         ),
         AnimatedPositioned(
           duration: Duration(milliseconds: 300),
@@ -144,7 +152,7 @@ class _HomePostPageState extends State<HomePostPage> {
                       Expanded(
                         child: Container(
                           child: TextField(
-                            autofocus: true,
+                            autofocus: _onAddComment,
                             controller: _searchBoxController,
                             toolbarOptions: ToolbarOptions(
                               copy: true,
@@ -173,7 +181,6 @@ class _HomePostPageState extends State<HomePostPage> {
                       ),
                       XMargin(kmediumSpace),
                       GestureDetector(
-                        onTap: () => _showCommentBox(),
                         child: Container(
                           child: Text(
                             "Post",
