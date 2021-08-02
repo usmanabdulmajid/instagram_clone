@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:instagram_clone/constants.dart';
+import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/home/presentation/widgets/video_post.dart';

@@ -3,7 +3,7 @@ import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/message/presentation/widgets/accout_tile.dart';
 import 'package:instagram_clone/features/message/presentation/widgets/suggestionTile.dart';
 
-import '../../../../constants.dart';
+import '../../../../core/utils/constants.dart';
 
 class VideoChatPage extends StatefulWidget {
   const VideoChatPage({Key key}) : super(key: key);
@@ -15,11 +15,13 @@ class VideoChatPage extends StatefulWidget {
 class _VideoChatPageState extends State<VideoChatPage> {
   TextEditingController _searchBoxController;
   Map<int, Widget> _selectedAccount = Map<int, Widget>();
+  ScrollController _selectedAccountContoller;
 
   int _tapIndex;
 
   @override
   void initState() {
+    _selectedAccountContoller = ScrollController();
     _searchBoxController = TextEditingController();
     super.initState();
   }
@@ -148,6 +150,8 @@ class _VideoChatPageState extends State<VideoChatPage> {
                                 child: Container(
                                   height: kmediumSpace * 2.5,
                                   child: ListView(
+                                    controller: _selectedAccountContoller,
+                                    addRepaintBoundaries: true,
                                     scrollDirection: Axis.horizontal,
                                     children: [
                                       if (_selectedAccount.length > 0)

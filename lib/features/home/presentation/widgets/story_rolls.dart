@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/constants.dart';
+import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 
 class StoryRolls extends StatefulWidget {
@@ -62,12 +62,12 @@ class _StoryRollsState extends State<StoryRolls> {
                                 bottom: size * 0.06,
                                 right: size * 0.06,
                                 child: Container(
-                                  width: size * 0.24,
-                                  height: size * 0.24,
+                                  width: size * 0.25,
+                                  height: size * 0.25,
                                   decoration: BoxDecoration(
                                     color: Theme.of(context).backgroundColor,
                                     borderRadius:
-                                        BorderRadius.circular(size * 0.24),
+                                        BorderRadius.circular(size * 0.25),
                                   ),
                                   child: Center(
                                     child: Container(

@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:instagram_clone/constants.dart';
+import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/core/utils/colors.dart';
 import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';

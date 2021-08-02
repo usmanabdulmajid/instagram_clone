@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-import '../../../../constants.dart';
+import '../../../../core/utils/constants.dart';
 
 class VideoPost extends StatefulWidget {
   const VideoPost({Key key}) : super(key: key);

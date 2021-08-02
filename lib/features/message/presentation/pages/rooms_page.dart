@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 
-import '../../../../constants.dart';
+import '../../../../core/utils/constants.dart';
 
 class RoomPage extends StatefulWidget {
   const RoomPage({Key key}) : super(key: key);
