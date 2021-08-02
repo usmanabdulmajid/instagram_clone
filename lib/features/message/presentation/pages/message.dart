@@ -161,13 +161,14 @@ class _MessagingState extends State<Messaging> with TickerProviderStateMixin {
                 ),
               )),
           GestureDetector(
-              onTap: () => Navigator.of(context).push(
-                    _createRoute(),
-                  ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(Icons.note_add),
-              )),
+            onTap: () => Navigator.of(context).push(
+              _createRoute(),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.note_add),
+            ),
+          ),
         ],
       ),
       body: TabBarView(
