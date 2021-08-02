@@ -3,7 +3,7 @@ import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/message/presentation/widgets/suggestionTile.dart';
 
-import '../../../../constants.dart';
+import '../../../../core/utils/constants.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({Key key}) : super(key: key);

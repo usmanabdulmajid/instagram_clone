@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/constants.dart';
+import 'package:instagram_clone/core/utils/constants.dart';
 
 class SuggesstionTile extends StatefulWidget {
   const SuggesstionTile(

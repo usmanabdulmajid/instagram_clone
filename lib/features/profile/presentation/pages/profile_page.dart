@@ -8,6 +8,7 @@ import 'package:instagram_clone/features/profile/presentation/widgets/menu_modal
 import 'package:instagram_clone/features/profile/presentation/widgets/modal_bottom_sheet.dart';
 import 'package:instagram_clone/features/profile/presentation/widgets/profile_button_widget.dart';
 import 'package:instagram_clone/features/profile/presentation/widgets/profile_text_widget.dart';
+import 'package:instagram_clone/features/settings/settings_page.dart';
 
 class ProfilePage extends StatefulWidget {
   @override

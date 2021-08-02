@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/constants.dart';
+import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/message/presentation/widgets/accout_tile.dart';
 import 'package:instagram_clone/features/message/presentation/widgets/suggestionTile.dart';

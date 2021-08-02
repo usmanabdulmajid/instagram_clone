@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/constants.dart';
+import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/home/presentation/widgets/ImagePost.dart';
@@ -21,14 +21,15 @@ class HomePostPage extends StatefulWidget {
 }
 
 class _HomePostPageState extends State<HomePostPage> {
-  TextEditingController _searchBoxController;
+  TextEditingController commentBoxController;
   ScrollController _controller;
   bool _onAddComment = false;
+  bool _canPostComment = false;
 
   @override
   void initState() {
     _controller = ScrollController();
-    _searchBoxController = TextEditingController(text: "");
+    commentBoxController = TextEditingController(text: "");
     super.initState();
   }
 
@@ -50,10 +51,12 @@ class _HomePostPageState extends State<HomePostPage> {
       children: [
         GestureDetector(
           onTap: () {
-            setState(() {
-              _onAddComment = false;
-            });
-            FocusScope.of(context).unfocus();
+            if (_onAddComment) {
+              setState(() {
+                _onAddComment = false;
+              });
+              FocusScope.of(context).unfocus();
+            }
           },
           child: CustomScrollView(
             physics: BouncingScrollPhysics(),
@@ -113,7 +116,7 @@ class _HomePostPageState extends State<HomePostPage> {
           ),
         ),
         AnimatedPositioned(
-          duration: Duration(milliseconds: 300),
+          duration: Duration(milliseconds: 500),
           bottom: _onAddComment ? 0 : -Sizing.yMargin(context, 15),
           child: Container(
             // height: Sizing.yMargin(context, 15),
@@ -132,12 +135,76 @@ class _HomePostPageState extends State<HomePostPage> {
                 Row(
                   children: [
                     FittedBox(
-                        child: Text(
-                      "😍",
-                      style: TextStyle(
-                        fontSize: 20,
+                      child: Text(
+                        "😍",
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
                       ),
-                    )),
+                    ),
+                    Spacer(),
+                    FittedBox(
+                      child: Text(
+                        "🌚",
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    FittedBox(
+                      child: Text(
+                        "🙌",
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    FittedBox(
+                      child: Text(
+                        "👍🏾",
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    FittedBox(
+                      child: Text(
+                        "🙏🏾",
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    FittedBox(
+                      child: Text(
+                        "♥️",
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    FittedBox(
+                      child: Text(
+                        "😂",
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    FittedBox(
+                      child: Text(
+                        "🙄",
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 YMargin(ksmallSpace),
@@ -153,13 +220,22 @@ class _HomePostPageState extends State<HomePostPage> {
                         child: Container(
                           child: TextField(
                             autofocus: _onAddComment,
-                            controller: _searchBoxController,
+                            controller: commentBoxController,
                             toolbarOptions: ToolbarOptions(
                               copy: true,
                               paste: true,
                               selectAll: true,
                               cut: true,
                             ),
+                            onChanged: (value) {
+                              setState(() {
+                                if (value.length > 0) {
+                                  _canPostComment = true;
+                                } else {
+                                  _canPostComment = false;
+                                }
+                              });
+                            },
                             maxLines: 1,
                             decoration: InputDecoration(
                               hintText: "Add a comment...",
@@ -185,10 +261,11 @@ class _HomePostPageState extends State<HomePostPage> {
                           child: Text(
                             "Post",
                             style: TextStyle(
-                                fontWeight: FontWeight.w100,
-                                color: _searchBoxController.text.length > 0
-                                    ? Colors.blueAccent
-                                    : Colors.blueAccent.withOpacity(0.4)),
+                              fontWeight: FontWeight.w100,
+                              color: _canPostComment
+                                  ? Colors.blueAccent
+                                  : Colors.blueAccent.withOpacity(0.4),
+                            ),
                           ),
                         ),
                       )

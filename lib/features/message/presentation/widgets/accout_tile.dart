@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/constants.dart';
+import 'package:instagram_clone/core/utils/constants.dart';
 
 class AccountTile extends StatelessWidget {
   const AccountTile({Key key, @required this.name}) : super(key: key);

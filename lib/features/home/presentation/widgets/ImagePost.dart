@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/constants.dart';
+import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/core/utils/colors.dart';
 import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
@@ -452,6 +452,14 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                     XMargin(ksmallSpace),
                     Text("♥"),
                   ],
+                ),
+              ),
+              YMargin(ksmallSpace),
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "3 hours",
+                  style: Theme.of(context).textTheme.caption,
                 ),
               ),
             ],
