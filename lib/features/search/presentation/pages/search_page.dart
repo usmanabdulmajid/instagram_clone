@@ -2,14 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
-import 'package:instagram_clone/core/utils/colors.dart';
 import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
-import 'package:instagram_clone/features/profile/presentation/widgets/modal_list_tile.dart';
 import 'package:instagram_clone/features/search/presentation/pages/search_accounts_page.dart';
 import 'package:instagram_clone/features/search/presentation/pages/search_places_page.dart';
 import 'package:instagram_clone/features/search/presentation/pages/search_tags_page.dart';

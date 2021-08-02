@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
-import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/profile/presentation/widgets/modal_list_tile.dart';
+
+import 'notification_page.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key key}) : super(key: key);
@@ -79,7 +80,10 @@ class _SettingsState extends State<Settings> {
               ),
               ModalListTile(
                 label: "Notifications",
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => NotificationPage()));
+                },
                 leadingWidget: Icon(
                   Icons.notifications_outlined,
                 ),
