@@ -5,8 +5,10 @@ class CaptureBottomTile extends StatelessWidget {
   final Function onTap;
   final Widget leading;
   final String title;
+  final bool removeBorder;
 
-  const CaptureBottomTile({this.leading, this.title, this.onTap});
+  const CaptureBottomTile(
+      {this.leading, this.title, this.onTap, this.removeBorder});
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +25,11 @@ class CaptureBottomTile extends StatelessWidget {
             width: 20,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(
-                color: Colors.white,
-              ),
+              border: removeBorder
+                  ? null
+                  : Border.all(
+                      color: Colors.white,
+                    ),
             ),
             child: ClipOval(child: leading),
           ),

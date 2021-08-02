@@ -5,6 +5,8 @@ import 'package:instagram_clone/core/utils/colors.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/new_post/presentation/widgets/capture_bottom_tile.dart';
 
+import 'fade_circle_button.dart';
+
 class CapturedImageView extends StatelessWidget {
   final String imagePath;
 
@@ -24,6 +26,57 @@ class CapturedImageView extends StatelessWidget {
               height: _size.height,
               child: Image.file(
                 File(imagePath),
+                fit: BoxFit.cover,
+              ),
+            ),
+            Positioned(
+              top: 0.0,
+              child: Container(
+                padding: EdgeInsets.only(top: 50, left: 10.0, right: 10.0),
+                width: _size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    FadeCircleButton(
+                      child: Icon(
+                        Icons.chevron_left,
+                        size: 30.0,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        FadeCircleButton(
+                          child: Text(
+                            'Aa',
+                            style: TextStyle(
+                                fontSize: 20.0, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        XMargin(5),
+                        FadeCircleButton(
+                          child: Icon(
+                            Icons.photo_rounded,
+                            size: 30.0,
+                          ),
+                        ),
+                        XMargin(5),
+                        FadeCircleButton(
+                          child: Icon(
+                            Icons.music_note_outlined,
+                            size: 30.0,
+                          ),
+                        ),
+                        XMargin(5),
+                        FadeCircleButton(
+                          child: Icon(
+                            Icons.more_horiz,
+                            size: 30.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             Positioned(
@@ -40,6 +93,7 @@ class CapturedImageView extends StatelessWidget {
                 child: Row(
                   children: [
                     CaptureBottomTile(
+                      removeBorder: false,
                       onTap: () {},
                       leading: Image.asset(
                         'assets/images/selfie_test.jpg',
@@ -49,10 +103,16 @@ class CapturedImageView extends StatelessWidget {
                     ),
                     XMargin(10),
                     CaptureBottomTile(
+                      removeBorder: true,
                       onTap: () {},
-                      leading: Image.asset(
-                        'assets/images/selfie_test.jpg',
-                        fit: BoxFit.cover,
+                      leading: Container(
+                        //alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.green),
+                        child: Icon(
+                          Icons.star,
+                          size: 16,
+                        ),
                       ),
                       title: 'Close Friends',
                     ),

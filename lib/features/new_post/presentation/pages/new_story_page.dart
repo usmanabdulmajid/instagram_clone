@@ -30,6 +30,7 @@ class _NewStoryPageState extends State<NewStoryPage> {
     super.dispose();
   }
 
+  bool collapseTile = false;
   @override
   Widget build(BuildContext context) {
     var brightness = MediaQuery.of(context).platformBrightness;
@@ -53,6 +54,75 @@ class _NewStoryPageState extends State<NewStoryPage> {
               },
             ),
           ),
+          // AnimatedSwitcher(
+          //   duration: Duration(milliseconds: 500),
+          //   child: Container(
+          //     padding: EdgeInsets.only(top: 70.0),
+          //     child: Column(
+          //       children: [
+          //         ListTile(
+          //           leading: IconButton(
+          //             icon: Icon(Icons.set_meal),
+          //             onPressed: () {},
+          //           ),
+          //           title: Text('Create'),
+          //         ),
+          //         ListTile(
+          //           leading: IconButton(
+          //             icon: Icon(Icons.set_meal),
+          //             onPressed: () {},
+          //           ),
+          //           title: Text('Create'),
+          //         ),
+          //         collapseTile
+          //             ? SizedBox()
+          //             : ListTile(
+          //                 leading: IconButton(
+          //                   icon: Icon(Icons.set_meal),
+          //                   onPressed: () {},
+          //                 ),
+          //                 title: Text('Create'),
+          //               ),
+          //         collapseTile
+          //             ? SizedBox()
+          //             : ListTile(
+          //                 leading: IconButton(
+          //                   icon: Icon(Icons.set_meal),
+          //                   onPressed: () {},
+          //                 ),
+          //                 title: Text('Create'),
+          //               ),
+          //         collapseTile
+          //             ? SizedBox()
+          //             : ListTile(
+          //                 leading: IconButton(
+          //                   icon: Icon(Icons.set_meal),
+          //                   onPressed: () {},
+          //                 ),
+          //                 title: Text('Create'),
+          //               ),
+          //         ListTile(
+          //           leading: IconButton(
+          //             icon: Icon(Icons.set_meal),
+          //             onPressed: () {},
+          //           ),
+          //           title: Text('Create'),
+          //         ),
+          //         ListTile(
+          //           leading: IconButton(
+          //             icon: Icon(Icons.arrow_drop_down_outlined),
+          //             onPressed: () {
+          //               setState(() {
+          //                 collapseTile = !collapseTile;
+          //               });
+          //             },
+          //           ),
+          //           title: Text('Create'),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           Container(
             padding: EdgeInsets.only(top: 40.0),
             child: Row(
@@ -109,9 +179,14 @@ class _NewStoryPageState extends State<NewStoryPage> {
       await _initailizeCamera;
 
       final image = await _cameraController.takePicture();
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return CapturedImageView(imagePath: image.path);
-      }));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return CapturedImageView(imagePath: image.path);
+          },
+        ),
+      );
     } catch (e) {
       print(e);
     }
