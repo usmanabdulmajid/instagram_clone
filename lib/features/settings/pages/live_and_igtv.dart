@@ -30,18 +30,11 @@ class _LiveAndIGTVState extends State<LiveAndIGTV> {
             selectedIndex: 1,
           ),
           CustomToggle(
-            title: "Support Request",
+            title: "IGTV View Counts",
             subtitle:
                 "Your IGTV video has more than 100k views: \"My New Video\".",
             options: ["Off", "On"],
             selectedIndex: 1,
-          ),
-          CustomToggle(
-            title: "Unrecognized Logins",
-            subtitle:
-                "An unrecognised Apple iPhone 11 has logged in from Foster City, CA USA.",
-            options: ["Off", "Ons"],
-            selectedIndex: 0,
           ),
         ]),
       ),

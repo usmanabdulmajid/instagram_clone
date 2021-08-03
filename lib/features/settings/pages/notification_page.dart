@@ -3,6 +3,7 @@ import 'package:instagram_clone/core/utils/Tile.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/settings/pages/fundraisers.dart';
+import 'package:instagram_clone/features/settings/pages/live_and_igtv.dart';
 
 import 'emailandsms.dart';
 import 'from_instagram.dart';
@@ -78,7 +79,13 @@ class _NotificationPageState extends State<NotificationPage> {
                 ),
                 Tile(
                   label: "Live and IGTV",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => LiveAndIGTV(),
+                      ),
+                    );
+                  },
                 ),
                 Tile(
                   label: "Fundraisers",
