@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/Tile.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
+import 'package:instagram_clone/features/settings/pages/direct_messages.dart';
 import 'package:instagram_clone/features/settings/pages/fundraisers.dart';
 import 'package:instagram_clone/features/settings/pages/live_and_igtv.dart';
 
@@ -75,7 +76,13 @@ class _NotificationPageState extends State<NotificationPage> {
                 ),
                 Tile(
                   label: "Direct Messages",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => DirectMessages(),
+                      ),
+                    );
+                  },
                 ),
                 Tile(
                   label: "Live and IGTV",
