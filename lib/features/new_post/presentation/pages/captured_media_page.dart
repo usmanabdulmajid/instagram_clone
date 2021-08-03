@@ -24,12 +24,13 @@ class _CapturedMediaPageState extends State<CapturedMediaPage> {
   void initState() {
     _videoController = VideoPlayerController.file(File(widget.path));
     _initializeVideoplayerFuture = _videoController.initialize()
-      ..then((value) {
+      ..then((_) {
         setState(() {
           _videoController.play();
         });
       });
     super.initState();
+    _videoController.setLooping(true);
   }
 
   @override
