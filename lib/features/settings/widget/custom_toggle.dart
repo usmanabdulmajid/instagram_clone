@@ -5,16 +5,18 @@ import 'package:instagram_clone/core/utils/sizing.dart';
 class CustomToggle extends StatefulWidget {
   const CustomToggle({
     Key key,
-    @required this.title,
-    @required this.subtitle,
-    @required this.options,
+    this.title,
+    this.subtitle,
+    this.options,
     this.defaultSelectedIndex,
+    this.spacing = 0,
     this.onChanged,
   }) : super(key: key);
 
   final String title;
   final String subtitle;
   final int defaultSelectedIndex;
+  final double spacing;
   final List<String> options;
   final VoidCallback onChanged;
 
@@ -29,6 +31,7 @@ class _CustomToggleState extends State<CustomToggle> {
   List<String> options;
   List<bool> isSelected = [];
   List<Widget> _optionChildren = [];
+  double spacing = 0;
 
   @override
   void initState() {
@@ -36,6 +39,7 @@ class _CustomToggleState extends State<CustomToggle> {
     subtitle = widget.subtitle;
     options = widget.options;
     defaultSelectedIndex = widget.defaultSelectedIndex;
+    spacing = widget.spacing;
 
     isSelected = [];
     _optionChildren = [];
@@ -115,7 +119,7 @@ class _CustomToggleState extends State<CustomToggle> {
           ),
         ),
       );
-      _options.add(YMargin(kmediumSpace));
+      _options.add(YMargin(kmediumSpace + spacing));
     }
     return _options;
   }
@@ -128,22 +132,25 @@ class _CustomToggleState extends State<CustomToggle> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+            if (title != null)
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
             if (_optionChildren.length > 0)
               YMargin(kmediumSpace * 2)
             else
               YMargin(kmediumSpace),
             ..._getOptions(),
-            Text(
-              subtitle,
-              style: Theme.of(context).textTheme.caption.copyWith(fontSize: 12),
-            ),
+            if (subtitle != null)
+              Text(
+                subtitle,
+                style:
+                    Theme.of(context).textTheme.caption.copyWith(fontSize: 12),
+              ),
             YMargin(kmediumSpace),
             Divider(
               color: Theme.of(context).accentColor,
