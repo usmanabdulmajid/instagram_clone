@@ -4,13 +4,40 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/colors.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/new_post/presentation/widgets/capture_bottom_tile.dart';
+import 'package:video_player/video_player.dart';
+import '../widgets/fade_circle_button.dart';
 
-import 'fade_circle_button.dart';
+class CapturedMediaPage extends StatefulWidget {
+  final bool image;
+  final String path;
 
-class CapturedImageView extends StatelessWidget {
-  final String imagePath;
+  const CapturedMediaPage({Key key, this.path, this.image});
 
-  const CapturedImageView({Key key, this.imagePath});
+  @override
+  _CapturedMediaPageState createState() => _CapturedMediaPageState();
+}
+
+class _CapturedMediaPageState extends State<CapturedMediaPage> {
+  VideoPlayerController _videoController;
+  Future<void> _initializeVideoplayerFuture;
+  @override
+  void initState() {
+    _videoController = VideoPlayerController.file(File(widget.path));
+    _initializeVideoplayerFuture = _videoController.initialize()
+      ..then((value) {
+        setState(() {
+          _videoController.play();
+        });
+      });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _videoController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     var brightness = MediaQuery.of(context).platformBrightness;
@@ -24,10 +51,22 @@ class CapturedImageView extends StatelessWidget {
           children: [
             Container(
               height: _size.height,
-              child: Image.file(
-                File(imagePath),
-                fit: BoxFit.cover,
-              ),
+              child: widget.image
+                  ? Image.file(
+                      File(widget.path),
+                      fit: BoxFit.cover,
+                    )
+                  : FutureBuilder(
+                      future: _initializeVideoplayerFuture,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          return VideoPlayer(_videoController);
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      }),
             ),
             Positioned(
               top: 0.0,
@@ -108,7 +147,9 @@ class CapturedImageView extends StatelessWidget {
                       leading: Container(
                         //alignment: Alignment.center,
                         decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.green),
+                          shape: BoxShape.circle,
+                          color: Colors.green,
+                        ),
                         child: Icon(
                           Icons.star,
                           size: 16,
