@@ -35,6 +35,13 @@ class _FollowingAndFollowerState extends State<FollowingAndFollower> {
             options: ["Off", "From People I follow", "From Everyone"],
             selectedIndex: 2,
           ),
+          CustomToggle(
+            title: "Additional options in system settings",
+            subtitle:
+                "These settings may affect any Instagram accounts logged into this devices.",
+            options: [],
+            selectedIndex: 2,
+          ),
         ]),
       ),
     );

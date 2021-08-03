@@ -36,6 +36,13 @@ class _LiveAndIGTVState extends State<LiveAndIGTV> {
             options: ["Off", "On"],
             selectedIndex: 1,
           ),
+          CustomToggle(
+            title: "Additional options in system settings",
+            subtitle:
+                "These settings may affect any Instagram accounts logged into this devices.",
+            options: [],
+            selectedIndex: 2,
+          ),
         ]),
       ),
     );

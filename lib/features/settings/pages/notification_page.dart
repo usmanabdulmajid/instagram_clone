@@ -3,8 +3,10 @@ import 'package:instagram_clone/core/utils/Tile.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/settings/pages/direct_messages.dart';
+import 'package:instagram_clone/features/settings/pages/following_and_followers.dart';
 import 'package:instagram_clone/features/settings/pages/fundraisers.dart';
 import 'package:instagram_clone/features/settings/pages/live_and_igtv.dart';
+import 'package:instagram_clone/features/settings/pages/post_stories_comment.dart';
 
 import 'emailandsms.dart';
 import 'from_instagram.dart';
@@ -68,11 +70,25 @@ class _NotificationPageState extends State<NotificationPage> {
                     )),
                 Tile(
                   label: "Post, Share and Comments",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            PostStoriesCommentPage(),
+                      ),
+                    );
+                  },
                 ),
                 Tile(
                   label: "Following and Follower",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            FollowingAndFollower(),
+                      ),
+                    );
+                  },
                 ),
                 Tile(
                   label: "Direct Messages",
