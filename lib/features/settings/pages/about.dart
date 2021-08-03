@@ -17,7 +17,7 @@ class _AboutPageState extends State<AboutPage> {
         title: Text('About'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(ksmallSpace),
+        padding: const EdgeInsets.all(kmediumSpace),
         child: Column(
           children: [
             Tile(label: "App Update"),
