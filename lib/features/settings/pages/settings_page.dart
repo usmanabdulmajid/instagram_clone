@@ -3,6 +3,10 @@ import 'package:instagram_clone/core/utils/Tile.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/profile/presentation/pages/profile_page.dart';
+import 'package:instagram_clone/features/settings/pages/ThemeSettings.dart';
+import 'package:instagram_clone/features/settings/pages/about.dart';
+import 'package:instagram_clone/features/settings/pages/account_settings.dart';
+import 'package:instagram_clone/features/settings/pages/help.dart';
 import 'package:instagram_clone/features/settings/pages/privacy/privacy_page.dart';
 
 import 'Notifications/notification_page.dart';
@@ -115,28 +119,40 @@ class _SettingsState extends State<Settings> {
               ),
               Tile(
                 label: "Account",
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => AccountSettingsPage()));
+                },
                 leadingWidget: Icon(
                   Icons.account_circle_outlined,
                 ),
               ),
               Tile(
                 label: "Help",
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => HelpPage()));
+                },
                 leadingWidget: Icon(
                   Icons.help,
                 ),
               ),
               Tile(
                 label: "About",
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => AboutPage()));
+                },
                 leadingWidget: Icon(
                   Icons.ac_unit,
                 ),
               ),
               Tile(
                 label: "Theme",
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => ThemeSettings()));
+                },
                 leadingWidget: Icon(
                   Icons.palette_outlined,
                 ),
