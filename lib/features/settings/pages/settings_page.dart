@@ -6,8 +6,10 @@ import 'package:instagram_clone/features/profile/presentation/pages/profile_page
 import 'package:instagram_clone/features/settings/pages/ThemeSettings.dart';
 import 'package:instagram_clone/features/settings/pages/about.dart';
 import 'package:instagram_clone/features/settings/pages/account_settings.dart';
+import 'package:instagram_clone/features/settings/pages/ad_page.dart';
 import 'package:instagram_clone/features/settings/pages/help.dart';
 import 'package:instagram_clone/features/settings/pages/privacy/privacy_page.dart';
+import 'package:instagram_clone/features/settings/pages/security_settings.dart';
 
 import 'Notifications/notification_page.dart';
 
@@ -105,14 +107,20 @@ class _SettingsState extends State<Settings> {
               ),
               Tile(
                 label: "Security",
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => SecuritySettingsPage()));
+                },
                 leadingWidget: Icon(
                   Icons.security_outlined,
                 ),
               ),
               Tile(
                 label: "Ads",
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => AdPage()));
+                },
                 leadingWidget: Icon(
                   Icons.speaker,
                 ),

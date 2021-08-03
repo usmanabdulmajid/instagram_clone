@@ -24,20 +24,20 @@ class _FundraisersState extends State<Fundraisers> {
               title: "Your Fundraisers",
               subtitle: "joshua_l donated to your your fundraiser.",
               options: ["Off", "On"],
-              selectedIndex: 1,
+              defaultSelectedIndex: 1,
             ),
             CustomToggle(
               title: "Fundraisers by Others",
               subtitle: "joshual_l started a fundraiser.",
               options: ["Off", "On"],
-              selectedIndex: 1,
+              defaultSelectedIndex: 1,
             ),
             CustomToggle(
               title: "Additional options in system settings",
               subtitle:
                   "These settings may affect any Instagram accounts logged into this devices.",
               options: [],
-              selectedIndex: 2,
+              defaultSelectedIndex: 2,
             ),
           ]),
         ),

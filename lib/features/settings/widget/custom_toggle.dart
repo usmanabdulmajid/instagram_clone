@@ -8,13 +8,15 @@ class CustomToggle extends StatefulWidget {
     @required this.title,
     @required this.subtitle,
     @required this.options,
-    @required this.selectedIndex,
+    this.defaultSelectedIndex,
+    this.onChanged,
   }) : super(key: key);
 
   final String title;
   final String subtitle;
-  final int selectedIndex;
+  final int defaultSelectedIndex;
   final List<String> options;
+  final VoidCallback onChanged;
 
   @override
   _CustomToggleState createState() => _CustomToggleState();
@@ -23,77 +25,57 @@ class CustomToggle extends StatefulWidget {
 class _CustomToggleState extends State<CustomToggle> {
   String title;
   String subtitle;
-  int selectedIndex;
+  int defaultSelectedIndex;
   List<String> options;
   List<bool> isSelected = [];
   List<Widget> _optionChildren = [];
+
   @override
   void initState() {
     title = widget.title;
     subtitle = widget.subtitle;
     options = widget.options;
-    selectedIndex = widget.selectedIndex;
+    defaultSelectedIndex = widget.defaultSelectedIndex;
 
     isSelected = [];
     _optionChildren = [];
 
     for (int i = 0; i < options.length; i++) {
-      if (widget.selectedIndex == i) {
-        isSelected.add(true);
-      } else {
-        isSelected.add(false);
-      }
+      isSelected.add(false);
     }
+    if (options.length > 0) isSelected[defaultSelectedIndex] = true;
+
+    super.initState();
+  }
+
+  List<Widget> _getOptions() {
+    List<Widget> _options = [];
     for (int i = 0; i < options.length; i++) {
-      _optionChildren.add(
-        StatefulBuilder(
-          builder: (context, setState) => GestureDetector(
-            onTap: () {
-              setState(() {
-                selectedIndex = i;
-                for (int j = 0; j < isSelected.length; j++) {
-                  if (j == i) {
-                    isSelected[j] = true;
-                  } else {
+      _options.add(
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              isSelected[i] = true;
+              for (int j = 0; j < isSelected.length; j++) {
+                if (j != i) {
+                  setState(() {
                     isSelected[j] = false;
-                  }
+                  });
                 }
-              });
-            },
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Text(
-                    options[i],
-                    style: TextStyle(fontSize: 16),
-                  ),
+              }
+            });
+          },
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Text(
+                  options[i],
+                  style: TextStyle(fontSize: 16),
                 ),
-                isSelected[i]
-                    ? ClipOval(
-                        child: Container(
-                          height: kmediumSpace * 1.5,
-                          width: kmediumSpace * 1.5,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 2,
-                              color: Theme.of(context)
-                                  .unselectedWidgetColor
-                                  .withOpacity(0.2),
-                            ),
-                            borderRadius:
-                                BorderRadius.circular(kmediumSpace * 1.5),
-                            color: Colors.blueAccent,
-                          ),
-                          child: Center(
-                            child: Icon(
-                              Icons.check,
-                              color: Theme.of(context).primaryColor,
-                              size: 16,
-                            ),
-                          ),
-                        ),
-                      )
-                    : Container(
+              ),
+              isSelected[i]
+                  ? ClipOval(
+                      child: Container(
                         height: kmediumSpace * 1.5,
                         width: kmediumSpace * 1.5,
                         decoration: BoxDecoration(
@@ -105,16 +87,37 @@ class _CustomToggleState extends State<CustomToggle> {
                           ),
                           borderRadius:
                               BorderRadius.circular(kmediumSpace * 1.5),
+                          color: Colors.blueAccent,
+                        ),
+                        child: Center(
+                          child: Icon(
+                            Icons.check,
+                            color: Theme.of(context).primaryColor,
+                            size: 16,
+                          ),
                         ),
                       ),
-              ],
-            ),
+                    )
+                  : Container(
+                      height: kmediumSpace * 1.5,
+                      width: kmediumSpace * 1.5,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 2,
+                          color: Theme.of(context)
+                              .unselectedWidgetColor
+                              .withOpacity(0.2),
+                        ),
+                        borderRadius: BorderRadius.circular(kmediumSpace * 1.5),
+                      ),
+                    ),
+            ],
           ),
         ),
       );
-      _optionChildren.add(YMargin(kmediumSpace));
+      _options.add(YMargin(kmediumSpace));
     }
-    super.initState();
+    return _options;
   }
 
   @override
@@ -136,7 +139,7 @@ class _CustomToggleState extends State<CustomToggle> {
               YMargin(kmediumSpace * 2)
             else
               YMargin(kmediumSpace),
-            ..._optionChildren,
+            ..._getOptions(),
             Text(
               subtitle,
               style: Theme.of(context).textTheme.caption.copyWith(fontSize: 12),
