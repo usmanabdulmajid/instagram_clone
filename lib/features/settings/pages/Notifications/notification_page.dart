@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/Tile.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
-import 'package:instagram_clone/features/settings/pages/direct_messages.dart';
-import 'package:instagram_clone/features/settings/pages/following_and_followers.dart';
-import 'package:instagram_clone/features/settings/pages/fundraisers.dart';
-import 'package:instagram_clone/features/settings/pages/live_and_igtv.dart';
-import 'package:instagram_clone/features/settings/pages/post_stories_comment.dart';
+import 'package:instagram_clone/features/settings/pages/Notifications/following_and_followers.dart';
+import 'package:instagram_clone/features/settings/pages/Notifications/post_stories_comment.dart';
 
+import 'direct_messages.dart';
 import 'emailandsms.dart';
 import 'from_instagram.dart';
+import 'fundraisers.dart';
+import 'live_and_igtv.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({Key key}) : super(key: key);

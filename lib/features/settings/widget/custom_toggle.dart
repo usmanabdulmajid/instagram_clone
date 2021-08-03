@@ -23,6 +23,7 @@ class CustomToggle extends StatefulWidget {
 class _CustomToggleState extends State<CustomToggle> {
   String title;
   String subtitle;
+  int selectedIndex;
   List<String> options;
   List<bool> isSelected = [];
   List<Widget> _optionChildren = [];
@@ -31,6 +32,7 @@ class _CustomToggleState extends State<CustomToggle> {
     title = widget.title;
     subtitle = widget.subtitle;
     options = widget.options;
+    selectedIndex = widget.selectedIndex;
 
     isSelected = [];
     _optionChildren = [];
@@ -44,30 +46,54 @@ class _CustomToggleState extends State<CustomToggle> {
     }
     for (int i = 0; i < options.length; i++) {
       _optionChildren.add(
-        Builder(
-          builder: (context) => Row(
-            children: <Widget>[
-              Text(
-                options[i],
-                style: TextStyle(fontSize: 16),
-              ),
-              Spacer(),
-              isSelected[i]
-                  ? Container(
-                      height: kmediumSpace * 1.5,
-                      width: kmediumSpace * 1.5,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 2,
-                          color: Theme.of(context)
-                              .unselectedWidgetColor
-                              .withOpacity(0.2),
+        StatefulBuilder(
+          builder: (context, setState) => GestureDetector(
+            onTap: () {
+              setState(() {
+                selectedIndex = i;
+                for (int j = 0; j < isSelected.length; j++) {
+                  if (j == i) {
+                    isSelected[j] = true;
+                  } else {
+                    isSelected[j] = false;
+                  }
+                }
+              });
+            },
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Text(
+                    options[i],
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+                isSelected[i]
+                    ? ClipOval(
+                        child: Container(
+                          height: kmediumSpace * 1.5,
+                          width: kmediumSpace * 1.5,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 2,
+                              color: Theme.of(context)
+                                  .unselectedWidgetColor
+                                  .withOpacity(0.2),
+                            ),
+                            borderRadius:
+                                BorderRadius.circular(kmediumSpace * 1.5),
+                            color: Colors.blueAccent,
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.check,
+                              color: Theme.of(context).primaryColor,
+                              size: 16,
+                            ),
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(kmediumSpace * 1.5),
-                      ),
-                    )
-                  : ClipOval(
-                      child: Container(
+                      )
+                    : Container(
                         height: kmediumSpace * 1.5,
                         width: kmediumSpace * 1.5,
                         decoration: BoxDecoration(
@@ -79,23 +105,14 @@ class _CustomToggleState extends State<CustomToggle> {
                           ),
                           borderRadius:
                               BorderRadius.circular(kmediumSpace * 1.5),
-                          color: Colors.blueAccent,
-                        ),
-                        child: Center(
-                          child: Icon(
-                            Icons.check,
-                            color: Theme.of(context).primaryColor,
-                            size: 16,
-                          ),
                         ),
                       ),
-                    ),
-            ],
+              ],
+            ),
           ),
         ),
       );
       _optionChildren.add(YMargin(kmediumSpace));
-      isSelected.add(false);
     }
     super.initState();
   }
@@ -115,7 +132,10 @@ class _CustomToggleState extends State<CustomToggle> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            YMargin(kmediumSpace * 2),
+            if (_optionChildren.length > 0)
+              YMargin(kmediumSpace * 2)
+            else
+              YMargin(kmediumSpace),
             ..._optionChildren,
             Text(
               subtitle,

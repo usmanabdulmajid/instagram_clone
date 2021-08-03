@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/Tile.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
+import 'package:instagram_clone/features/profile/presentation/pages/profile_page.dart';
+import 'package:instagram_clone/features/settings/pages/privacy/privacy_page.dart';
 
-import 'notification_page.dart';
+import 'Notifications/notification_page.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key key}) : super(key: key);
@@ -91,7 +93,10 @@ class _SettingsState extends State<Settings> {
               ),
               Tile(
                 label: "Privacy",
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => PrivacyPage()));
+                },
                 leadingWidget: Icon(Icons.lock_outline),
               ),
               Tile(
