@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utils/Tile.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
-import 'package:instagram_clone/features/profile/presentation/widgets/modal_list_tile.dart';
 
 import 'notification_page.dart';
 
@@ -32,7 +32,8 @@ class _SettingsState extends State<Settings> {
             children: [
               Container(
                 height: kmediumSpace * 2.5,
-                padding: EdgeInsets.symmetric(horizontal: kmediumSpace - 4),
+                // margin: EdgeInsets.symmetric(horizontal: kmediumSpace),
+                padding: EdgeInsets.symmetric(horizontal: kmediumSpace),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(ksmallSpace + 4),
                   color: Theme.of(context).accentColor,
@@ -71,14 +72,14 @@ class _SettingsState extends State<Settings> {
                 ),
               ),
               YMargin(kmediumSpace),
-              ModalListTile(
+              Tile(
                 label: "Follow and Invite Friends",
                 onTap: () {},
                 leadingWidget: Icon(
                   Icons.person_add_outlined,
                 ),
               ),
-              ModalListTile(
+              Tile(
                 label: "Notifications",
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
@@ -88,47 +89,47 @@ class _SettingsState extends State<Settings> {
                   Icons.notifications_outlined,
                 ),
               ),
-              ModalListTile(
+              Tile(
                 label: "Privacy",
                 onTap: () {},
                 leadingWidget: Icon(Icons.lock_outline),
               ),
-              ModalListTile(
+              Tile(
                 label: "Security",
                 onTap: () {},
                 leadingWidget: Icon(
                   Icons.security_outlined,
                 ),
               ),
-              ModalListTile(
+              Tile(
                 label: "Ads",
                 onTap: () {},
                 leadingWidget: Icon(
                   Icons.speaker,
                 ),
               ),
-              ModalListTile(
+              Tile(
                 label: "Account",
                 onTap: () {},
                 leadingWidget: Icon(
                   Icons.account_circle_outlined,
                 ),
               ),
-              ModalListTile(
+              Tile(
                 label: "Help",
                 onTap: () {},
                 leadingWidget: Icon(
                   Icons.help,
                 ),
               ),
-              ModalListTile(
+              Tile(
                 label: "About",
                 onTap: () {},
                 leadingWidget: Icon(
                   Icons.ac_unit,
                 ),
               ),
-              ModalListTile(
+              Tile(
                 label: "Theme",
                 onTap: () {},
                 leadingWidget: Icon(
