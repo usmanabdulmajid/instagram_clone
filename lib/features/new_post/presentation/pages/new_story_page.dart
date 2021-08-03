@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:instagram_clone/features/new_post/presentation/widgets/capture_button.dart';
-import 'package:instagram_clone/features/new_post/presentation/widgets/captured_image_view.dart';
+import 'package:instagram_clone/features/new_post/presentation/pages/captured_media_page.dart';
 import 'package:instagram_clone/features/new_post/presentation/widgets/custom_ring.dart';
 
 List<CameraDescription> cameras;
@@ -13,14 +13,14 @@ class NewStoryPage extends StatefulWidget {
 
 class _NewStoryPageState extends State<NewStoryPage> {
   CameraController _cameraController;
-  Future<void> _initailizeCamera;
+  Future<void> _initailizeCameraFuture;
   @override
   void initState() {
     _cameraController = CameraController(
       cameras.first,
       ResolutionPreset.high,
     );
-    _initailizeCamera = _cameraController.initialize();
+    _initailizeCameraFuture = _cameraController.initialize();
     super.initState();
   }
 
@@ -42,7 +42,7 @@ class _NewStoryPageState extends State<NewStoryPage> {
           Container(
             height: _size.height,
             child: FutureBuilder(
-              future: _initailizeCamera,
+              future: _initailizeCameraFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return CameraPreview(_cameraController);
@@ -160,6 +160,17 @@ class _NewStoryPageState extends State<NewStoryPage> {
               child: Column(
                 children: [
                   GestureDetector(
+                    onLongPress: () async {
+                      try {
+                        await _initailizeCameraFuture;
+                        await _cameraController.startVideoRecording();
+                      } catch (e) {
+                        print(e);
+                      }
+                    },
+                    onLongPressUp: () {
+                      onStopVideoRecord();
+                    },
                     onTap: () {
                       capturePhoto();
                     },
@@ -176,14 +187,36 @@ class _NewStoryPageState extends State<NewStoryPage> {
 
   void capturePhoto() async {
     try {
-      await _initailizeCamera;
+      await _initailizeCameraFuture;
 
       final image = await _cameraController.takePicture();
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) {
-            return CapturedImageView(imagePath: image.path);
+            return CapturedMediaPage(
+              path: image.path,
+              image: true,
+            );
+          },
+        ),
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void onStopVideoRecord() async {
+    try {
+      final video = await _cameraController.stopVideoRecording();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return CapturedMediaPage(
+              path: video.path,
+              image: false,
+            );
           },
         ),
       );
