@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:instagram_clone/core/utils/Tile.dart';
+import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/features/new_post/presentation/widgets/capture_button.dart';
 import 'package:instagram_clone/features/new_post/presentation/pages/captured_media_page.dart';
 import 'package:instagram_clone/features/new_post/presentation/widgets/custom_ring.dart';
@@ -11,11 +13,18 @@ class NewStoryPage extends StatefulWidget {
   _NewStoryPageState createState() => _NewStoryPageState();
 }
 
-class _NewStoryPageState extends State<NewStoryPage> {
+class _NewStoryPageState extends State<NewStoryPage>
+    with TickerProviderStateMixin {
   CameraController _cameraController;
   Future<void> _initailizeCameraFuture;
+
+  AnimationController rotationController;
+  Animation<double> _animation;
+
   @override
   void initState() {
+    rotationController = AnimationController(
+        duration: const Duration(milliseconds: 300), vsync: this);
     _cameraController = CameraController(
       cameras.first,
       ResolutionPreset.high,
@@ -41,6 +50,7 @@ class _NewStoryPageState extends State<NewStoryPage> {
         children: [
           Container(
             height: _size.height,
+            width: _size.width,
             child: FutureBuilder(
               future: _initailizeCameraFuture,
               builder: (context, snapshot) {
@@ -54,77 +64,131 @@ class _NewStoryPageState extends State<NewStoryPage> {
               },
             ),
           ),
-          // AnimatedSwitcher(
-          //   duration: Duration(milliseconds: 500),
-          //   child: Container(
-          //     padding: EdgeInsets.only(top: 70.0),
-          //     child: Column(
-          //       children: [
-          //         ListTile(
-          //           leading: IconButton(
-          //             icon: Icon(Icons.set_meal),
-          //             onPressed: () {},
-          //           ),
-          //           title: Text('Create'),
-          //         ),
-          //         ListTile(
-          //           leading: IconButton(
-          //             icon: Icon(Icons.set_meal),
-          //             onPressed: () {},
-          //           ),
-          //           title: Text('Create'),
-          //         ),
-          //         collapseTile
-          //             ? SizedBox()
-          //             : ListTile(
-          //                 leading: IconButton(
-          //                   icon: Icon(Icons.set_meal),
-          //                   onPressed: () {},
-          //                 ),
-          //                 title: Text('Create'),
-          //               ),
-          //         collapseTile
-          //             ? SizedBox()
-          //             : ListTile(
-          //                 leading: IconButton(
-          //                   icon: Icon(Icons.set_meal),
-          //                   onPressed: () {},
-          //                 ),
-          //                 title: Text('Create'),
-          //               ),
-          //         collapseTile
-          //             ? SizedBox()
-          //             : ListTile(
-          //                 leading: IconButton(
-          //                   icon: Icon(Icons.set_meal),
-          //                   onPressed: () {},
-          //                 ),
-          //                 title: Text('Create'),
-          //               ),
-          //         ListTile(
-          //           leading: IconButton(
-          //             icon: Icon(Icons.set_meal),
-          //             onPressed: () {},
-          //           ),
-          //           title: Text('Create'),
-          //         ),
-          //         ListTile(
-          //           leading: IconButton(
-          //             icon: Icon(Icons.arrow_drop_down_outlined),
-          //             onPressed: () {
-          //               setState(() {
-          //                 collapseTile = !collapseTile;
-          //               });
-          //             },
-          //           ),
-          //           title: Text('Create'),
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
+          AnimatedContainer(
+            duration: Duration(milliseconds: 300),
+            width: _size.width / 2,
+            padding: EdgeInsets.only(left: ksmallSpace),
+            // color: Colors.blueAccent,
+            decoration: BoxDecoration(
+              boxShadow: collapseTile
+                  ? [
+                      BoxShadow(
+                        color: Colors.black54,
+                        blurRadius: _size.width,
+                        offset: Offset(-_size.width / 4, 0),
+                        spreadRadius: 0,
+                      )
+                    ]
+                  : [
+                      BoxShadow(
+                        color: Colors.transparent,
+                        blurRadius: _size.width,
+                        offset: Offset(-_size.width / 4, 0),
+                        spreadRadius: 0,
+                      )
+                    ],
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Tile(
+                  leadingWidget: Icon(Icons.set_meal),
+                  title: AnimatedOpacity(
+                      duration: Duration(milliseconds: 300),
+                      opacity: collapseTile ? 1 : 0,
+                      child: Text('Create')),
+                ),
+                Tile(
+                  leadingWidget: Icon(Icons.all_inclusive_outlined),
+                  title: AnimatedOpacity(
+                      duration: Duration(milliseconds: 300),
+                      opacity: collapseTile ? 1 : 0,
+                      child: Text('Boomerang')),
+                ),
+                Tile(
+                  leadingWidget: Icon(Icons.set_meal),
+                  title: AnimatedOpacity(
+                      duration: Duration(milliseconds: 300),
+                      opacity: collapseTile ? 1 : 0,
+                      child: Text('Layout')),
+                ),
+                AnimatedSize(
+                  vsync: this,
+                  duration: Duration(milliseconds: 300),
+                  curve: Curves.easeIn,
+                  child: Container(
+                    height: collapseTile ? _size.height / 5.2 : 0,
+                    child: Stack(
+                      children: [
+                        Column(
+                          children: [
+                            Tile(
+                              leadingWidget: Icon(Icons.set_meal),
+                              title: AnimatedOpacity(
+                                  duration: Duration(milliseconds: 300),
+                                  opacity: collapseTile ? 1 : 0,
+                                  child: Text('Multi-Capture')),
+                            ),
+                            Tile(
+                              leadingWidget: Icon(Icons.set_meal),
+                              title: AnimatedOpacity(
+                                  duration: Duration(milliseconds: 300),
+                                  opacity: collapseTile ? 1 : 0,
+                                  child: Text('Photobooth')),
+                            ),
+                            Tile(
+                              leadingWidget: Icon(Icons.set_meal),
+                              title: AnimatedOpacity(
+                                  duration: Duration(milliseconds: 300),
+                                  opacity: collapseTile ? 1 : 0,
+                                  child: Text('Hands-Free')),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Tile(
+                  leadingWidget: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        collapseTile = !collapseTile;
+                        if (collapseTile) {
+                          rotationController.forward();
+                        } else {
+                          rotationController.reverse();
+                        }
+                      });
+                    },
+                    child: RotationTransition(
+                      turns: Tween(begin: 0.0, end: 0.5)
+                          .animate(rotationController),
+                      child: Icon(Icons.expand_more),
+                    ),
+                  ),
+                  title: AnimatedOpacity(
+                    duration: Duration(milliseconds: 300),
+                    opacity: collapseTile ? 1 : 0,
+                    child: Text('Close'),
+                  ),
+                  onTap: () {
+                    if (collapseTile) {
+                      setState(() {
+                        collapseTile = !collapseTile;
+                        if (collapseTile) {
+                          rotationController.forward();
+                        } else {
+                          rotationController.reverse();
+                        }
+                      });
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
           Container(
-            padding: EdgeInsets.only(top: 40.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

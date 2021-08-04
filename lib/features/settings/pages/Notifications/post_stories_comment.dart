@@ -60,7 +60,6 @@ class _PostStoriesCommentPageState extends State<PostStoriesCommentPage> {
             subtitle:
                 "These settings may affect any Instagram accounts logged into this devices.",
             options: [],
-            defaultSelectedIndex: 1,
           ),
         ]),
       ),
