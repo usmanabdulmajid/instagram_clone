@@ -25,23 +25,25 @@ class _NewPostState extends State<NewPost> {
     var brightness = MediaQuery.of(context).platformBrightness;
     bool darkModeOn = brightness == Brightness.dark;
     var _size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: IndexedStack(
-        index: selectedIndex,
-        children: [
-          NewPostPage(),
-          NewStoryPage(),
-          NewReelsPage(),
-          NewLivePage()
-        ],
-      ),
-      bottomNavigationBar: CustomBottomNavBar(
-        selectedIndex: selectedIndex,
-        onChanged: (index) {
-          setState(() {
-            selectedIndex = index;
-          });
-        },
+    return SafeArea(
+      child: Scaffold(
+        body: IndexedStack(
+          index: selectedIndex,
+          children: [
+            NewPostPage(),
+            NewStoryPage(),
+            NewReelsPage(),
+            NewLivePage()
+          ],
+        ),
+        bottomNavigationBar: CustomBottomNavBar(
+          selectedIndex: selectedIndex,
+          onChanged: (index) {
+            setState(() {
+              selectedIndex = index;
+            });
+          },
+        ),
       ),
     );
   }

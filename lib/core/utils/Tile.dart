@@ -3,17 +3,19 @@ import 'package:flutter/material.dart';
 class Tile extends StatelessWidget {
   const Tile(
       {Key key,
+      this.title,
       this.leadingWidget,
       this.trailingWidget,
       this.titleWeight = FontWeight.normal,
       this.titleSize = 17,
-      @required this.label,
+      this.label,
       this.subtitle,
       this.onTap,
       this.color})
       : super(key: key);
 
   final String label;
+  final Widget title;
   final String subtitle;
   final Widget leadingWidget;
   final Widget trailingWidget;
@@ -41,16 +43,19 @@ class Tile extends StatelessWidget {
                     .copyWith(fontSize: titleSize - 2),
               )
             : null,
-        title: Text(
-          label,
-          style: color == null
-              ? Theme.of(context)
-                  .textTheme
-                  .headline5
-                  .copyWith(fontWeight: titleWeight, fontSize: titleSize)
-              : Theme.of(context).textTheme.headline5.copyWith(
-                  color: color, fontWeight: titleWeight, fontSize: titleSize),
-        ),
+        title: title ??
+            Text(
+              label,
+              style: color == null
+                  ? Theme.of(context)
+                      .textTheme
+                      .headline5
+                      .copyWith(fontWeight: titleWeight, fontSize: titleSize)
+                  : Theme.of(context).textTheme.headline5.copyWith(
+                      color: color,
+                      fontWeight: titleWeight,
+                      fontSize: titleSize),
+            ),
         trailing: trailingWidget ?? SizedBox(),
       ),
     );

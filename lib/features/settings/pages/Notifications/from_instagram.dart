@@ -21,41 +21,44 @@ class _FromInstagramPageState extends State<FromInstagramPage> {
         title: Text('From Instagram'),
       ),
       body: SingleChildScrollView(
-        child: Column(children: <Widget>[
-          CustomToggle(
-            title: "Reminder",
-            subtitle:
-                "You have unseen notifications, and other similar notifications.",
-            options: ["Off", "On"],
-            selectedIndex: 1,
-          ),
-          CustomToggle(
-            title: "Product Announcements",
-            subtitle: "Download Boomerang, Instagram's latest app.",
-            options: ["Off", "On"],
-            selectedIndex: 1,
-          ),
-          CustomToggle(
-            title: "Support Request",
-            subtitle: "Your support request from July 10 was just updated.",
-            options: ["Off", "On"],
-            selectedIndex: 1,
-          ),
-          CustomToggle(
-            title: "Unrecognized Logins",
-            subtitle:
-                "An unrecognised Apple iPhone 11 has logged in from Foster City, CA USA.",
-            options: ["Off", "Ons"],
-            selectedIndex: 0,
-          ),
-          CustomToggle(
-            title: "Additional options in system settings",
-            subtitle:
-                "These settings may affect any Instagram accounts logged into this devices.",
-            options: [],
-            selectedIndex: 2,
-          ),
-        ]),
+        child: Padding(
+          padding: const EdgeInsets.all(ksmallSpace),
+          child: Column(children: <Widget>[
+            CustomToggle(
+              title: "Reminder",
+              subtitle:
+                  "You have unseen notifications, and other similar notifications.",
+              options: ["Off", "On"],
+              defaultSelectedIndex: 1,
+            ),
+            CustomToggle(
+              title: "Product Announcements",
+              subtitle: "Download Boomerang, Instagram's latest app.",
+              options: ["Off", "On"],
+              defaultSelectedIndex: 1,
+            ),
+            CustomToggle(
+              title: "Support Request",
+              subtitle: "Your support request from July 10 was just updated.",
+              options: ["Off", "On"],
+              defaultSelectedIndex: 1,
+            ),
+            CustomToggle(
+              title: "Unrecognized Logins",
+              subtitle:
+                  "An unrecognised Apple iPhone 11 has logged in from Foster City, CA USA.",
+              options: ["Off", "Ons"],
+              defaultSelectedIndex: 0,
+            ),
+            CustomToggle(
+              title: "Additional options in system settings",
+              subtitle:
+                  "These settings may affect any Instagram accounts logged into this devices.",
+              options: [],
+              defaultSelectedIndex: 2,
+            ),
+          ]),
+        ),
       ),
     );
   }

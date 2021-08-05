@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utils/constants.dart';
+import 'package:instagram_clone/features/settings/widget/custom_toggle.dart';
 
 class ThemeSettings extends StatefulWidget {
   const ThemeSettings({Key key}) : super(key: key);
@@ -14,7 +16,18 @@ class _ThemeSettingsState extends State<ThemeSettings> {
       appBar: AppBar(
         title: Text('Set Theme'),
       ),
-      body: Container(),
+      body: Padding(
+        padding: const EdgeInsets.all(ksmallSpace),
+        child: Column(
+          children: <Widget>[
+            CustomToggle(
+              options: ["Light", "Dark", "System Default"],
+              spacing: 8.0,
+              defaultSelectedIndex: 2,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -20,7 +20,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(ksmallSpace),
+          padding: const EdgeInsets.all(kmediumSpace),
           child: Column(
             children: [
               Tile(label: "Personal Information"),

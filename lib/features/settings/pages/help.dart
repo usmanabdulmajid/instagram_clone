@@ -17,7 +17,7 @@ class _HelpPageState extends State<HelpPage> {
         title: Text('Help'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(ksmallSpace),
+        padding: const EdgeInsets.all(kmediumSpace),
         child: Column(
           children: [
             Tile(label: "Report a Problem"),
