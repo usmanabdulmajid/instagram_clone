@@ -114,10 +114,10 @@ class _NewStoryPageState extends State<NewStoryPage>
                 ),
                 AnimatedSize(
                   vsync: this,
-                  duration: Duration(milliseconds: 300),
+                  duration: Duration(milliseconds: 500),
                   curve: Curves.easeIn,
                   child: Container(
-                    height: collapseTile ? _size.height / 5.2 : 0,
+                    height: collapseTile ? null : 0,
                     child: Stack(
                       children: [
                         Column(
@@ -125,7 +125,7 @@ class _NewStoryPageState extends State<NewStoryPage>
                             Tile(
                               leadingWidget: Icon(Icons.set_meal),
                               title: AnimatedOpacity(
-                                  duration: Duration(milliseconds: 300),
+                                  duration: Duration(milliseconds: 500),
                                   opacity: collapseTile ? 1 : 0,
                                   child: Text('Multi-Capture')),
                             ),

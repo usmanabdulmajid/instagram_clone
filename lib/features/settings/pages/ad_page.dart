@@ -12,7 +12,10 @@ class _AdPageState extends State<AdPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ads'),
+        title: Text(
+          'Ads',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
       body: Container(),
     );

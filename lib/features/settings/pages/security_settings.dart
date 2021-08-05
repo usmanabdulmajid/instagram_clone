@@ -12,7 +12,10 @@ class _SecuritySettingsPageState extends State<SecuritySettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Security Settings'),
+        title: Text(
+          'Security Settings',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
       body: Container(),
     );
