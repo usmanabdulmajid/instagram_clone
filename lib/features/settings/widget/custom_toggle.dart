@@ -82,17 +82,7 @@ class _CustomToggleState extends State<CustomToggle> {
                       child: Container(
                         height: kmediumSpace * 1.5,
                         width: kmediumSpace * 1.5,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 2,
-                            color: Theme.of(context)
-                                .unselectedWidgetColor
-                                .withOpacity(0.2),
-                          ),
-                          borderRadius:
-                              BorderRadius.circular(kmediumSpace * 1.5),
-                          color: Colors.blueAccent,
-                        ),
+                        color: Colors.blueAccent,
                         child: Center(
                           child: Icon(
                             Icons.check,

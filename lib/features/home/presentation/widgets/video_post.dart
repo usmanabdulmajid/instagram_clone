@@ -9,7 +9,7 @@ class VideoPost extends StatefulWidget {
   _VideoPostState createState() => _VideoPostState();
 }
 
-class _VideoPostState extends State<VideoPost> {
+class _VideoPostState extends State<VideoPost> with TickerProviderStateMixin {
   VideoPlayerController _controller;
   Future<void> _initializeVideoPlayerFuture;
   bool _isItv = false;
@@ -47,6 +47,17 @@ class _VideoPostState extends State<VideoPost> {
           setState(() {
             _isItv = true;
           });
+          if (_controller.value.duration > Duration(seconds: 30)) {
+            setState(() {
+              _isWatchTv = true;
+            });
+
+            Future.delayed(Duration(seconds: 4), () {
+              setState(() {
+                _showWatchTvText = false;
+              });
+            });
+          }
         }
       }
     });
@@ -165,18 +176,20 @@ class _VideoPostState extends State<VideoPost> {
                             SizedBox(
                               width: 8.0,
                             ),
-                            AnimatedContainer(
-                              duration: Duration(milliseconds: 100),
-                              width: _showWatchTvText ? 70 : 0,
-                              child: _showWatchTvText
-                                  ? Text(
-                                      "Watch TV",
-                                      maxLines: 1,
-                                      overflow: TextOverflow.clip,
-                                      style:
-                                          Theme.of(context).textTheme.bodyText1,
-                                    )
-                                  : SizedBox(),
+                            AnimatedSize(
+                              duration: Duration(milliseconds: 300),
+                              vsync: this,
+                              curve: Curves.easeIn,
+                              child: Container(
+                                padding: EdgeInsets.only(right: 8.0),
+                                width: _showWatchTvText ? null : 0,
+                                child: Text(
+                                  "Watch TV",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.clip,
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                ),
+                              ),
                             ),
                           ],
                         ),

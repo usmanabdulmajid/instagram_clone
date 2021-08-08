@@ -16,7 +16,10 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 4.0,
-        title: Text('Account'),
+        title: Text(
+          'Account',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(

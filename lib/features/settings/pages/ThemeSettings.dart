@@ -14,7 +14,10 @@ class _ThemeSettingsState extends State<ThemeSettings> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Set Theme'),
+        title: Text(
+          'Set Theme',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(ksmallSpace),
