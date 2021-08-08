@@ -123,11 +123,12 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
           child: Row(
             children: [
               Padding(
-                  padding: const EdgeInsets.all(ksmallSpace),
-                  child: ProfileAvatar(
-                    size: ksmallAvatarRadius,
-                    hasUserTag: false,
-                  )),
+                padding: const EdgeInsets.all(ksmallSpace),
+                child: ProfileAvatar(
+                  size: ksmallAvatarRadius,
+                  hasUserTag: false,
+                ),
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

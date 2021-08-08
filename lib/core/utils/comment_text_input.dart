@@ -115,6 +115,7 @@ class _CommentTextInputState extends State<CommentTextInput> {
           ),
           YMargin(ksmallSpace),
           Container(
+            padding: EdgeInsets.symmetric(horizontal: ksmallSpace),
             child: Row(
               children: [
                 CircleAvatar(

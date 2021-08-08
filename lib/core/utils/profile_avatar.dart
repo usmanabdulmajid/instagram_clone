@@ -47,17 +47,19 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
                   width: _avatarSize,
                   height: _avatarSize,
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      transform: GradientRotation(5.49778715),
-                      colors: [
-                        Colors.orange[500],
-                        Colors.orange[700],
-                        Colors.pink[400],
-                        Colors.pinkAccent,
-                        Colors.pinkAccent,
-                        Colors.purple[700],
-                      ],
-                    ),
+                    gradient: _hasStatus
+                        ? LinearGradient(
+                            transform: GradientRotation(5.49778715),
+                            colors: [
+                              Colors.orange[500],
+                              Colors.orange[700],
+                              Colors.pink[400],
+                              Colors.pinkAccent,
+                              Colors.pinkAccent,
+                              Colors.purple[700],
+                            ],
+                          )
+                        : null,
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(_avatarSize),
                   ),
