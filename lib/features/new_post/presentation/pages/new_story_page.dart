@@ -68,7 +68,7 @@ class _NewStoryPageState extends State<NewStoryPage>
           ),
           //side camera menu
           AnimatedPositioned(
-            duration: Duration(milliseconds: 300),
+            duration: Duration(milliseconds: 500),
             right: leftPosition ? _size.width * 0.5 : 0.0,
             top: 0.0,
             curve: Curves.decelerate,
@@ -84,11 +84,21 @@ class _NewStoryPageState extends State<NewStoryPage>
                         BoxShadow(
                           color: Colors.black54,
                           blurRadius: _size.width,
-                          offset: Offset(-_size.width / 4, 0),
+                          offset: Offset(
+                              (leftPosition ? -_size.width : _size.width) / 4,
+                              0),
                           spreadRadius: 0,
                         )
                       ]
-                    : null,
+                    : [
+                        BoxShadow(
+                          color: Colors.transparent,
+                          offset: Offset(
+                              (leftPosition ? -_size.width : _size.width) / 4,
+                              0),
+                          spreadRadius: 0,
+                        )
+                      ],
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

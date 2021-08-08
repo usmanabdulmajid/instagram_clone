@@ -11,6 +11,7 @@ class CustomToggle extends StatefulWidget {
     this.defaultSelectedIndex,
     this.spacing = 0,
     this.onChanged,
+    this.divides = false,
   }) : super(key: key);
 
   final String title;
@@ -19,6 +20,7 @@ class CustomToggle extends StatefulWidget {
   final double spacing;
   final List<String> options;
   final VoidCallback onChanged;
+  final bool divides;
 
   @override
   _CustomToggleState createState() => _CustomToggleState();
@@ -32,6 +34,7 @@ class _CustomToggleState extends State<CustomToggle> {
   List<bool> isSelected = [];
   List<Widget> _optionChildren = [];
   double spacing = 0;
+  bool divides = false;
 
   @override
   void initState() {
@@ -40,6 +43,7 @@ class _CustomToggleState extends State<CustomToggle> {
     options = widget.options;
     defaultSelectedIndex = widget.defaultSelectedIndex;
     spacing = widget.spacing;
+    divides = widget.divides;
 
     isSelected = [];
     _optionChildren = [];
@@ -142,9 +146,10 @@ class _CustomToggleState extends State<CustomToggle> {
                     Theme.of(context).textTheme.caption.copyWith(fontSize: 12),
               ),
             YMargin(kmediumSpace),
-            Divider(
-              color: Theme.of(context).accentColor,
-            ),
+            if (divides)
+              Divider(
+                color: Theme.of(context).accentColor,
+              ),
           ],
         ),
       ),

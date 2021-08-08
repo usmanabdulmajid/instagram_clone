@@ -27,6 +27,7 @@ class _ThemeSettingsState extends State<ThemeSettings> {
               options: ["Light", "Dark", "System Default"],
               spacing: 8.0,
               defaultSelectedIndex: 2,
+              divides: false,
             ),
           ],
         ),

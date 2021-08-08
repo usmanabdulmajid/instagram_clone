@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
+import 'package:instagram_clone/core/utils/profile_avatar.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 
 class StoryRolls extends StatefulWidget {
@@ -14,10 +15,10 @@ class _StoryRollsState extends State<StoryRolls> {
   @override
   Widget build(BuildContext context) {
     double size = Sizing.xMargin(context, 32) - (5 * 8);
+
     return Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.all(3.0),
-      height: Sizing.xMargin(context, 33),
+      height: Sizing.xMargin(context, 32),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
@@ -95,48 +96,10 @@ class _StoryRollsState extends State<StoryRolls> {
                       ),
                     ],
                   )
-                : Column(
-                    children: [
-                      ClipOval(
-                        child: Container(
-                          width: size,
-                          height: size,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              transform: GradientRotation(5.49778715),
-                              colors: [
-                                Colors.orange[500],
-                                Colors.orange[700],
-                                Colors.pink[400],
-                                Colors.pinkAccent,
-                                Colors.pinkAccent,
-                                Colors.purple[700],
-                              ],
-                            ),
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(size),
-                          ),
-                          child: Center(
-                            child: Container(
-                              width: size * 0.94,
-                              height: size * 0.94,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.circular(size * 0.94),
-                                border: Border.all(
-                                  style: BorderStyle.solid,
-                                  color: Theme.of(context).primaryColor,
-                                  width: size * 0.04,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      YMargin(ksmallSpace),
-                      Text("joshua_l")
-                    ],
+                : ProfileAvatar(
+                    size: size,
+                    hasUserTag: true,
+                    userTag: "joshua_l",
                   ),
           );
         },
