@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
-import 'package:instagram_clone/features/profile/presentation/widgets/modal_list_tile.dart';
 
 Future buildChangeAccountModal(BuildContext context) {
   return showModalBottomSheet(

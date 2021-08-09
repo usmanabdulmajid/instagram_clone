@@ -2,9 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
-import 'package:instagram_clone/core/utils/colors.dart';
 import 'package:instagram_clone/core/utils/icons.dart';
+import 'package:instagram_clone/core/utils/profile_avatar.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
+import 'package:instagram_clone/features/comment/presentation/comment.dart';
 import 'package:instagram_clone/features/home/presentation/widgets/action_modal_bottomsheet.dart';
 import 'package:instagram_clone/features/home/presentation/widgets/video_post.dart';
 
@@ -122,9 +123,9 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
             children: [
               Padding(
                 padding: const EdgeInsets.all(ksmallSpace),
-                child: Icon(
-                  Icons.account_circle,
+                child: ProfileAvatar(
                   size: ksmallAvatarRadius,
+                  hasUserTag: false,
                 ),
               ),
               Column(
@@ -413,12 +414,18 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
               Text('more', style: Theme.of(context).textTheme.caption),
               YMargin(ksmallSpace),
               if (_hasComment)
-                RichText(
-                  text: TextSpan(children: [
-                    TextSpan(text: 'View'),
-                    TextSpan(text: " $_commentCount "),
-                    TextSpan(text: _commentCount > 1 ? "comment" : "comments")
-                  ], style: Theme.of(context).textTheme.caption),
+                GestureDetector(
+                  onTap: () => {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => CommentPage()))
+                  },
+                  child: RichText(
+                    text: TextSpan(children: [
+                      TextSpan(text: 'View'),
+                      TextSpan(text: " $_commentCount "),
+                      TextSpan(text: _commentCount > 1 ? "comment" : "comments")
+                    ], style: Theme.of(context).textTheme.caption),
+                  ),
                 ),
               YMargin(ksmallSpace),
               Container(
@@ -451,6 +458,14 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                     Text("🙌"),
                     XMargin(ksmallSpace),
                     Text("♥"),
+                    XMargin(ksmallSpace),
+                    Icon(
+                      Icons.add_circle_outline,
+                      size: 14,
+                      color: Theme.of(context)
+                          .unselectedWidgetColor
+                          .withOpacity(0.4),
+                    )
                   ],
                 ),
               ),
