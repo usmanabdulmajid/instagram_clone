@@ -157,6 +157,7 @@ class _CommentPageState extends State<CommentPage> {
             child: CommentTextInput(
               showReplyTo: _showReplyTo,
               onHideReplyTo: hidReplyTo,
+              replyTo: "joshua_l",
             ),
           ),
         ],
