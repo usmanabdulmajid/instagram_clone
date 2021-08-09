@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/features/new_post/presentation/pages/new_live_page.dart';
 import 'package:instagram_clone/features/new_post/presentation/pages/new_post_page.dart';
@@ -20,6 +21,18 @@ class _NewPostState extends State<NewPost> {
     });
   }
 
+  List<CameraDescription> cameras;
+  CameraDescription camera;
+
+  @override
+  void initState() {
+    availableCameras().then((value) {
+      cameras = value;
+      camera = cameras.first;
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var brightness = MediaQuery.of(context).platformBrightness;
@@ -31,7 +44,9 @@ class _NewPostState extends State<NewPost> {
           index: selectedIndex,
           children: [
             NewPostPage(),
-            NewStoryPage(),
+            NewStoryPage(
+              cameraDescription: camera,
+            ),
             NewReelsPage(),
             NewLivePage()
           ],

@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'custom_ring.dart';
 
 class CaptureButton extends StatelessWidget {
+  final Widget child;
+
+  const CaptureButton({this.child});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,11 +25,13 @@ class CaptureButton extends StatelessWidget {
             ),
           ),
           Container(
+            alignment: Alignment.center,
             height: 65.0,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.white,
             ),
+            child: child ?? null,
           )
         ],
       ),

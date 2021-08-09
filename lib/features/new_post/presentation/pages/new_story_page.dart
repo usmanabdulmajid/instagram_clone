@@ -10,6 +10,9 @@ import 'package:instagram_clone/features/new_post/presentation/widgets/custom_ri
 List<CameraDescription> cameras;
 
 class NewStoryPage extends StatefulWidget {
+  final CameraDescription cameraDescription;
+
+  const NewStoryPage({Key key, this.cameraDescription}) : super(key: key);
   @override
   _NewStoryPageState createState() => _NewStoryPageState();
 }
@@ -27,7 +30,7 @@ class _NewStoryPageState extends State<NewStoryPage>
     rotationController = AnimationController(
         duration: const Duration(milliseconds: 300), vsync: this);
     _cameraController = CameraController(
-      cameras.first,
+      widget.cameraDescription,
       ResolutionPreset.high,
     );
     _initailizeCameraFuture = _cameraController.initialize();
@@ -37,6 +40,7 @@ class _NewStoryPageState extends State<NewStoryPage>
   @override
   void dispose() {
     _cameraController.dispose();
+    rotationController.dispose();
     super.dispose();
   }
 
@@ -59,6 +63,7 @@ class _NewStoryPageState extends State<NewStoryPage>
                 if (snapshot.connectionState == ConnectionState.done) {
                   return CameraPreview(_cameraController);
                 } else {
+                  print('omo ${snapshot.connectionState}');
                   return Center(
                     child: CircularProgressIndicator(),
                   );
