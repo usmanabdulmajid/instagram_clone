@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/Tile.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
-import 'package:instagram_clone/features/profile/presentation/pages/profile_page.dart';
-import 'package:instagram_clone/features/settings/pages/ThemeSettings.dart';
-import 'package:instagram_clone/features/settings/pages/about.dart';
-import 'package:instagram_clone/features/settings/pages/account_settings.dart';
-import 'package:instagram_clone/features/settings/pages/ad_page.dart';
-import 'package:instagram_clone/features/settings/pages/help.dart';
-import 'package:instagram_clone/features/settings/pages/privacy/privacy_page.dart';
-import 'package:instagram_clone/features/settings/pages/security_settings.dart';
+import 'package:instagram_clone/features/settings/presentation/pages/privacy/privacy_page.dart';
+import 'package:instagram_clone/features/settings/presentation/pages/security_settings.dart';
 
 import 'Notifications/notification_page.dart';
+import 'ThemeSettings.dart';
+import 'about.dart';
+import 'account_settings.dart';
+import 'ad_page.dart';
+import 'help.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key key}) : super(key: key);

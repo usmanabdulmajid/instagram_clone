@@ -1,26 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/core/utils/icons.dart';
-import 'package:instagram_clone/core/utils/profile_avatar.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/comment/widgets/reply_tile.dart';
 
 class CommentTile extends StatefulWidget {
-  const CommentTile({Key key, this.toggleReplyInput}) : super(key: key);
+  const CommentTile({
+    Key key,
+    @required this.toggleReplyInput,
+    @required this.toggleSelection,
+    @required this.onSelection,
+  }) : super(key: key);
   final VoidCallback toggleReplyInput;
+  final VoidCallback toggleSelection;
+  final bool onSelection;
   @override
   _CommentTileState createState() => _CommentTileState();
 }
 
 class _CommentTileState extends State<CommentTile> {
   bool replyExpanded = false;
-  List<Widget> replies = [ReplyTile(), ReplyTile(), ReplyTile()];
+  bool more = false;
+  List<Widget> replies = [];
+  int shownedReplies = 3;
+  bool selected = false;
+
+  @override
+  void initState() {
+    replies = [
+      ReplyTile(),
+      ReplyTile(),
+      ReplyTile(),
+      ReplyTile(),
+      ReplyTile(),
+      ReplyTile(),
+      ReplyTile(),
+      ReplyTile(),
+      ReplyTile(),
+      ReplyTile(),
+      ReplyTile(),
+    ];
+    if (replies.length > 3) more = true;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: ksmallSpace),
+    return GestureDetector(
+      onTap: () {
+        widget.toggleSelection();
+        setState(() {
+          selected = !selected;
+        });
+        print(widget.onSelection);
+      },
       child: Container(
+          padding: const EdgeInsets.symmetric(vertical: ksmallSpace),
           width: Sizing.yMargin(context, 100),
+          color: selected
+              ? Theme.of(context).accentColor.withOpacity(1)
+              : Colors.transparent,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,6 +142,9 @@ class _CommentTileState extends State<CommentTile> {
                           onTap: () {
                             setState(() {
                               replyExpanded = !replyExpanded;
+                              if (!replyExpanded) {
+                                shownedReplies = 3;
+                              }
                             });
                           },
                           child: Row(
@@ -118,13 +160,44 @@ class _CommentTileState extends State<CommentTile> {
                               Text(
                                 replyExpanded
                                     ? "Hide replies"
-                                    : "View 3 replies",
+                                    : "View ${replies.length} replies",
                                 style: Theme.of(context).textTheme.caption,
                               ),
                             ],
                           ),
                         ),
-                        if (replyExpanded) ...replies
+                        if (replyExpanded) ...replies.take(shownedReplies),
+                        if (replyExpanded &&
+                            more &&
+                            replies.length > shownedReplies)
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                if (shownedReplies + 3 >= replies.length)
+                                  shownedReplies = replies.length;
+                                else
+                                  shownedReplies += 3;
+                              });
+                            },
+                            child: Container(
+                              child: Row(
+                                children: [
+                                  Container(
+                                    height: 1,
+                                    width: 30,
+                                    color: Theme.of(context)
+                                        .unselectedWidgetColor
+                                        .withOpacity(0.4),
+                                  ),
+                                  XMargin(ksmallSpace),
+                                  Text(
+                                    "View ${replies.length - shownedReplies} more replies",
+                                    style: Theme.of(context).textTheme.caption,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                       ],
                     )
                   ],

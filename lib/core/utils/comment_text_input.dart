@@ -41,30 +41,38 @@ class _CommentTextInputState extends State<CommentTextInput> {
         AnimatedPositioned(
           top: widget.showReplyTo ? -50 : 0.0,
           duration: Duration(milliseconds: 300),
-          child: Container(
-            width: Sizing.xMargin(context, 100),
-            color: Theme.of(context).accentColor,
-            child: Padding(
-              padding: const EdgeInsets.all(kmediumSpace),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Replying to joshua_l",
-                    style: TextStyle(
-                      color: Theme.of(context)
-                          .unselectedWidgetColor
-                          .withOpacity(0.4),
+          child: InkWell(
+            child: Container(
+              width: Sizing.xMargin(context, 100),
+              color: Theme.of(context).accentColor,
+              child: Padding(
+                padding: const EdgeInsets.all(kmediumSpace),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Replying to joshua_l",
+                      style: TextStyle(
+                        color: Theme.of(context)
+                            .unselectedWidgetColor
+                            .withOpacity(0.4),
+                      ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: widget.onHideReplyTo,
-                    child: Icon(
-                      Icons.close_outlined,
-                      color: Theme.of(context).iconTheme.color.withOpacity(0.7),
+                    GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: widget.onHideReplyTo,
+                      child: Container(
+                        child: Icon(
+                          Icons.close_outlined,
+                          color: Theme.of(context)
+                              .iconTheme
+                              .color
+                              .withOpacity(0.7),
+                        ),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

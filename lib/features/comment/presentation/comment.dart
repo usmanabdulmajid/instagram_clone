@@ -16,6 +16,7 @@ class CommentPage extends StatefulWidget {
 
 class _CommentPageState extends State<CommentPage> {
   bool _showReplyTo = false;
+  bool _selectedComment = false;
   void applyhowReplyTo() {
     setState(() {
       _showReplyTo = true;
@@ -32,17 +33,34 @@ class _CommentPageState extends State<CommentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Comment'),
+        leading: _selectedComment
+            ? IconButton(
+                icon: Icon(Icons.close_outlined),
+                onPressed: () {
+                  setState(() {
+                    _selectedComment = false;
+                  });
+                },
+              )
+            : null,
+        title: Text(_selectedComment ? "1 Selected" : 'Comment'),
+        backgroundColor:
+            _selectedComment ? Colors.blue : Theme.of(context).primaryColor,
         actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(ksmallSpace),
-            child: GestureDetector(
-              onTap: () {
-                buildShareModalBottomSheet(context);
-              },
-              child: CustomIcon(icon: "messenger"),
+          if (_selectedComment)
+            IconButton(
+                icon: Icon(Icons.notification_important_outlined),
+                onPressed: () {}),
+          if (!_selectedComment)
+            Padding(
+              padding: const EdgeInsets.all(ksmallSpace),
+              child: GestureDetector(
+                onTap: () {
+                  buildShareModalBottomSheet(context);
+                },
+                child: CustomIcon(icon: "messenger"),
+              ),
             ),
-          ),
         ],
       ),
       body: Stack(
@@ -114,8 +132,14 @@ class _CommentPageState extends State<CommentPage> {
                       ),
                     ),
                   )
-                : GestureDetector(
-                    child: CommentTile(toggleReplyInput: applyhowReplyTo)),
+                : CommentTile(
+                    toggleReplyInput: applyhowReplyTo,
+                    toggleSelection: () {
+                      setState(() {
+                        _selectedComment = !_selectedComment;
+                      });
+                    },
+                  ),
             itemCount: 10,
           ),
           Positioned(
