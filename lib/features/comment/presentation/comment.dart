@@ -15,6 +15,19 @@ class CommentPage extends StatefulWidget {
 }
 
 class _CommentPageState extends State<CommentPage> {
+  bool _showReplyTo = false;
+  void applyhowReplyTo() {
+    setState(() {
+      _showReplyTo = true;
+    });
+  }
+
+  void hidReplyTo() {
+    setState(() {
+      _showReplyTo = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,14 +115,16 @@ class _CommentPageState extends State<CommentPage> {
                     ),
                   )
                 : GestureDetector(
-                    child: CommentTile(),
-                  ),
+                    child: CommentTile(toggleReplyInput: applyhowReplyTo)),
             itemCount: 10,
           ),
           Positioned(
             left: 0.0,
             bottom: 0.0,
-            child: CommentTextInput(),
+            child: CommentTextInput(
+              showReplyTo: _showReplyTo,
+              onHideReplyTo: hidReplyTo,
+            ),
           ),
         ],
       ),

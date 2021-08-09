@@ -6,8 +6,8 @@ import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/comment/widgets/reply_tile.dart';
 
 class CommentTile extends StatefulWidget {
-  const CommentTile({Key key}) : super(key: key);
-
+  const CommentTile({Key key, this.toggleReplyInput}) : super(key: key);
+  final VoidCallback toggleReplyInput;
   @override
   _CommentTileState createState() => _CommentTileState();
 }
@@ -87,9 +87,12 @@ class _CommentTileState extends State<CommentTile> {
                           style: Theme.of(context).textTheme.caption,
                         ),
                         XMargin(ksmallSpace),
-                        Text(
-                          "Reply",
-                          style: Theme.of(context).textTheme.caption,
+                        GestureDetector(
+                          onTap: widget.toggleReplyInput,
+                          child: Text(
+                            "Reply",
+                            style: Theme.of(context).textTheme.caption,
+                          ),
                         ),
                       ],
                     ),
