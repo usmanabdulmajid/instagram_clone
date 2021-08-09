@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
-import 'package:instagram_clone/core/utils/colors.dart';
 import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/profile_avatar.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
@@ -463,6 +462,9 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                     Icon(
                       Icons.add_circle_outline,
                       size: 14,
+                      color: Theme.of(context)
+                          .unselectedWidgetColor
+                          .withOpacity(0.4),
                     )
                   ],
                 ),

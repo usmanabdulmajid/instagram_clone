@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:instagram_clone/core/utils/Tile.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/features/new_post/presentation/widgets/camera_side_menu_tile.dart';
 import 'package:instagram_clone/features/new_post/presentation/widgets/capture_button.dart';
 import 'package:instagram_clone/features/new_post/presentation/pages/captured_media_page.dart';
-import 'package:instagram_clone/features/new_post/presentation/widgets/custom_ring.dart';
 
 List<CameraDescription> cameras;
 
@@ -20,7 +18,6 @@ class _NewStoryPageState extends State<NewStoryPage>
   Future<void> _initailizeCameraFuture;
 
   AnimationController rotationController;
-  Animation<double> _animation;
 
   @override
   void initState() {

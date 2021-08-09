@@ -24,6 +24,7 @@ class _CommentTileState extends State<CommentTile> {
   List<Widget> replies = [];
   int shownedReplies = 3;
   bool selected = false;
+  bool isPinned = false;
 
   @override
   void initState() {
@@ -131,6 +132,12 @@ class _CommentTileState extends State<CommentTile> {
                           "10 likes",
                           style: Theme.of(context).textTheme.caption,
                         ),
+                        if (isPinned) XMargin(ksmallSpace),
+                        if (isPinned)
+                          Text(
+                            "📌Pinned",
+                            style: Theme.of(context).textTheme.caption,
+                          ),
                         XMargin(ksmallSpace),
                         GestureDetector(
                           onTap: widget.toggleReplyInput,

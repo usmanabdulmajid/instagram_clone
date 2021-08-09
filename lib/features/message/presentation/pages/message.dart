@@ -1,16 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:instagram_clone/core/utils/constants.dart';
-import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
-import 'package:instagram_clone/features/home/presentation/widgets/video_post.dart';
 import 'package:instagram_clone/features/message/presentation/pages/chats_page.dart';
 import 'package:instagram_clone/features/message/presentation/pages/new_messages.dart';
 import 'package:instagram_clone/features/message/presentation/pages/rooms_page.dart';
 import 'package:instagram_clone/features/message/presentation/pages/video_chat_page.dart';
 import 'package:instagram_clone/features/message/presentation/widgets/account_modal_sheet.dart';
-import 'package:instagram_clone/features/message/presentation/widgets/suggestionTile.dart';
 
 class Messaging extends StatefulWidget {
   const Messaging({Key key, @required this.gotoHomeCallback}) : super(key: key);

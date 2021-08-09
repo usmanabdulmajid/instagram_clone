@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utils/colors.dart';
 
 class ModalListTile extends StatelessWidget {
   const ModalListTile(

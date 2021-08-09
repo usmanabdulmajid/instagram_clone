@@ -100,12 +100,6 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  void __showT() {
-    setState(() {
-      _showLikeTitle = _showLikeTitle;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return IndexedStack(

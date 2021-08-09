@@ -20,7 +20,6 @@ class CommentTextInput extends StatefulWidget {
 class _CommentTextInputState extends State<CommentTextInput>
     with TickerProviderStateMixin {
   bool _canPostComment = false;
-  bool _showCommentBox = false;
   bool _onAddComment = false;
   TextEditingController _commentBoxController;
 

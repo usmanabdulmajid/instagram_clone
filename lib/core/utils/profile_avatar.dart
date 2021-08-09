@@ -18,7 +18,6 @@ class ProfileAvatar extends StatefulWidget {
 class _ProfileAvatarState extends State<ProfileAvatar> {
   double _avatarSize;
   bool _hasStatus = true;
-  bool _hasPhoto = true;
   bool _hasUserTag = false;
 
   String userTag;
@@ -27,7 +26,6 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
   void initState() {
     _avatarSize = widget.size;
     _hasStatus = true;
-    _hasPhoto = false;
     _hasUserTag = widget.hasUserTag;
     userTag = widget.userTag;
 

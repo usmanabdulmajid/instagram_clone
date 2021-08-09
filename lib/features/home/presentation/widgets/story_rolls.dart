@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/core/utils/profile_avatar.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 
