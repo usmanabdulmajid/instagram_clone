@@ -8,9 +8,6 @@ import 'package:instagram_clone/features/new_post/presentation/pages/captured_me
 List<CameraDescription> cameras;
 
 class NewStoryPage extends StatefulWidget {
-  final CameraDescription cameraDescription;
-
-  const NewStoryPage({Key key, this.cameraDescription}) : super(key: key);
   @override
   _NewStoryPageState createState() => _NewStoryPageState();
 }
@@ -27,7 +24,7 @@ class _NewStoryPageState extends State<NewStoryPage>
     rotationController = AnimationController(
         duration: const Duration(milliseconds: 300), vsync: this);
     _cameraController = CameraController(
-      widget.cameraDescription,
+      cameras.first,
       ResolutionPreset.high,
     );
     _initailizeCameraFuture = _cameraController.initialize();

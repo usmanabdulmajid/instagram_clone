@@ -14,7 +14,7 @@ import 'features/new_post/presentation/pages/new_story_page.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   cameras = await availableCameras();
-  print('zero ${cameras.length}');
+
   runApp(MyApp());
   bool isDark =
       SchedulerBinding.instance.window.platformBrightness == Brightness.dark;

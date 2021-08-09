@@ -21,15 +21,8 @@ class _NewPostState extends State<NewPost> {
     });
   }
 
-  List<CameraDescription> cameras;
-  CameraDescription camera;
-
   @override
   void initState() {
-    availableCameras().then((value) {
-      cameras = value;
-      camera = cameras.first;
-    });
     super.initState();
   }
 
@@ -44,9 +37,7 @@ class _NewPostState extends State<NewPost> {
           index: selectedIndex,
           children: [
             NewPostPage(),
-            NewStoryPage(
-              cameraDescription: camera,
-            ),
+            NewStoryPage(),
             NewReelsPage(),
             NewLivePage()
           ],
