@@ -139,6 +139,7 @@ class _CommentPageState extends State<CommentPage> {
                         _selectedComment = !_selectedComment;
                       });
                     },
+                    onSelection: _selectedComment,
                   ),
             itemCount: 10,
           ),

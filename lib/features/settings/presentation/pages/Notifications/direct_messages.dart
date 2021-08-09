@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
-import 'package:instagram_clone/features/settings/widget/custom_toggle.dart';
+import 'package:instagram_clone/features/settings/presentation/widget/custom_toggle.dart';
 
 class DirectMessages extends StatefulWidget {
   const DirectMessages({Key key}) : super(key: key);

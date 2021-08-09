@@ -48,11 +48,12 @@ class _CommentTileState extends State<CommentTile> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.toggleSelection();
-        setState(() {
-          selected = !selected;
-        });
-        print(widget.onSelection);
+        if (!widget.onSelection || selected) {
+          widget.toggleSelection();
+          setState(() {
+            selected = !selected;
+          });
+        }
       },
       child: Container(
           padding: const EdgeInsets.symmetric(vertical: ksmallSpace),
