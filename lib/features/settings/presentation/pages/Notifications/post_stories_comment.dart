@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/features/settings/widget/custom_toggle.dart';
+import 'package:instagram_clone/features/settings/presentation/widget/custom_toggle.dart';
 
 class PostStoriesCommentPage extends StatefulWidget {
   const PostStoriesCommentPage({Key key}) : super(key: key);

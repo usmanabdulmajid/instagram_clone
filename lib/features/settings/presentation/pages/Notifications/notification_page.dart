@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/Tile.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
-import 'package:instagram_clone/features/settings/pages/Notifications/following_and_followers.dart';
-import 'package:instagram_clone/features/settings/pages/Notifications/post_stories_comment.dart';
+import 'package:instagram_clone/features/settings/presentation/pages/Notifications/post_stories_comment.dart';
 
 import 'direct_messages.dart';
 import 'emailandsms.dart';
+import 'following_and_followers.dart';
 import 'from_instagram.dart';
 import 'fundraisers.dart';
 import 'live_and_igtv.dart';

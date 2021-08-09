@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
-import 'package:instagram_clone/features/settings/widget/custom_toggle.dart';
+import 'package:instagram_clone/features/settings/presentation/widget/custom_toggle.dart';
 
 class ThemeSettings extends StatefulWidget {
   const ThemeSettings({Key key}) : super(key: key);
@@ -27,6 +27,7 @@ class _ThemeSettingsState extends State<ThemeSettings> {
               options: ["Light", "Dark", "System Default"],
               spacing: 8.0,
               defaultSelectedIndex: 2,
+              divides: false,
             ),
           ],
         ),

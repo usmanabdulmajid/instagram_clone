@@ -1,42 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
-import 'package:instagram_clone/features/settings/widget/custom_toggle.dart';
+import 'package:instagram_clone/features/settings/presentation/widget/custom_toggle.dart';
 
-class DirectMessages extends StatefulWidget {
-  const DirectMessages({Key key}) : super(key: key);
+class Fundraisers extends StatefulWidget {
+  const Fundraisers({Key key}) : super(key: key);
 
   @override
-  _DirectMessagesState createState() => _DirectMessagesState();
+  _FundraisersState createState() => _FundraisersState();
 }
 
-class _DirectMessagesState extends State<DirectMessages> {
+class _FundraisersState extends State<Fundraisers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Direct Messages'),
+        title: Text('Fundraisers'),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(ksmallSpace),
           child: Column(children: <Widget>[
             CustomToggle(
-              title: "Message Requests",
-              subtitle: "joshual_ wants to send you a message.",
+              title: "Your Fundraisers",
+              subtitle: "joshua_l donated to your your fundraiser.",
               options: ["Off", "On"],
               defaultSelectedIndex: 1,
             ),
             CustomToggle(
-              title: "Mesages",
-              subtitle: "joshua_l sent you a message.",
+              title: "Fundraisers by Others",
+              subtitle: "joshual_l started a fundraiser.",
               options: ["Off", "On"],
               defaultSelectedIndex: 1,
-            ),
-            CustomToggle(
-              title: "Video chats",
-              subtitle: "Incoming video chat from joshua_l.",
-              options: ["Off", "From People I follow", "From Everyone"],
-              defaultSelectedIndex: 2,
             ),
             CustomToggle(
               title: "Additional options in system settings",

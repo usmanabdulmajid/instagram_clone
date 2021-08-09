@@ -12,7 +12,7 @@ class NewMessages extends StatefulWidget {
 }
 
 class _NewMessagesState extends State<NewMessages> {
-  List _selectedPeople = [];
+  // List _selectedPeople = [];
   TextEditingController _searchBoxController;
   Map<int, Widget> _selectedAccount = Map<int, Widget>();
 

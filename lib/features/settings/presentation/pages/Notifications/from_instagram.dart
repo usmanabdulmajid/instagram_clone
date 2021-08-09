@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utils/Tile.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
-import 'package:instagram_clone/core/utils/sizing.dart';
-import 'package:instagram_clone/features/settings/widget/custom_toggle.dart';
+import 'package:instagram_clone/features/settings/presentation/widget/custom_toggle.dart';
 
 class FromInstagramPage extends StatefulWidget {
   const FromInstagramPage({Key key}) : super(key: key);
