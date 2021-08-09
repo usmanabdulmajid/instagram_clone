@@ -39,7 +39,7 @@ class _CommentTextInputState extends State<CommentTextInput> {
       clipBehavior: Clip.none,
       children: [
         AnimatedPositioned(
-          top: widget.showReplyTo ? -50 : 0.0,
+          top: widget.showReplyTo ? -50 : 0,
           duration: Duration(milliseconds: 300),
           child: InkWell(
             child: Container(

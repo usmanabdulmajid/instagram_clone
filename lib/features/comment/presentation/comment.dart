@@ -5,6 +5,7 @@ import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/core/utils/profile_avatar.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/comment/widgets/comment_tile.dart';
+import 'package:instagram_clone/features/comment/widgets/modal_comment_report.dart';
 import 'package:instagram_clone/features/search/presentation/widgets/shareModalSheet.dart';
 
 class CommentPage extends StatefulWidget {
@@ -43,14 +44,21 @@ class _CommentPageState extends State<CommentPage> {
                 },
               )
             : null,
-        title: Text(_selectedComment ? "1 Selected" : 'Comment'),
+        title: Text(
+          _selectedComment ? "1 Selected" : 'Comment',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         backgroundColor:
             _selectedComment ? Colors.blue : Theme.of(context).primaryColor,
         actions: <Widget>[
           if (_selectedComment)
             IconButton(
                 icon: Icon(Icons.notification_important_outlined),
-                onPressed: () {}),
+                onPressed: () {
+                  buildCommentReportBottomSheet(context, "joshua_l");
+                }),
           if (!_selectedComment)
             Padding(
               padding: const EdgeInsets.all(ksmallSpace),
