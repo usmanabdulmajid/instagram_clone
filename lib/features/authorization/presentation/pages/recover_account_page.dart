@@ -88,27 +88,28 @@ class _RecoverAccountPageState extends State<RecoverAccountPage> {
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent),
                     child: ListTile(
-                        onTap: () {},
-                        contentPadding: EdgeInsets.all(0.0),
-                        title: Text(
-                          'Phone Number',
-                          style: TextStyle(fontSize: 12.0, color: Colors.grey),
-                        ),
-                        subtitle: Text(
-                          '+234 ... ... ..26',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: darkModeOn ? Colors.white : Colors.black),
-                        ),
-                        trailing: CustomRadioButton<RecoveryMethod>(
-                          value: RecoveryMethod.phoneNumber,
-                          groupValue: _value,
-                          onChanged: (value) {
-                            setState(() {
-                              _value = value;
-                            });
-                          },
-                        )),
+                      onTap: () {},
+                      contentPadding: EdgeInsets.all(0.0),
+                      title: Text(
+                        'Phone Number',
+                        style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                      ),
+                      subtitle: Text(
+                        '+234 ... ... ..26',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: darkModeOn ? Colors.white : Colors.black),
+                      ),
+                      trailing: CustomRadioButton<RecoveryMethod>(
+                        value: RecoveryMethod.phoneNumber,
+                        groupValue: _value,
+                        onChanged: (value) {
+                          setState(() {
+                            _value = value;
+                          });
+                        },
+                      ),
+                    ),
                   ),
                   Theme(
                     data: ThemeData(

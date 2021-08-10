@@ -5,36 +5,77 @@ import 'package:instagram_clone/features/new_post/presentation/widgets/camera_si
 import 'package:instagram_clone/features/new_post/presentation/widgets/capture_button.dart';
 import 'package:instagram_clone/features/new_post/presentation/pages/captured_media_page.dart';
 
-List<CameraDescription> cameras;
-
 class NewStoryPage extends StatefulWidget {
   @override
   _NewStoryPageState createState() => _NewStoryPageState();
 }
 
 class _NewStoryPageState extends State<NewStoryPage>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, WidgetsBindingObserver {
   CameraController _cameraController;
   Future<void> _initailizeCameraFuture;
 
   AnimationController rotationController;
 
+  int _selected = 0;
+
+  List<CameraDescription> cameras;
+
   @override
   void initState() {
     rotationController = AnimationController(
         duration: const Duration(milliseconds: 300), vsync: this);
-    _cameraController = CameraController(
-      cameras.first,
+    setupCamera();
+    WidgetsBinding.instance.addObserver(this);
+
+    super.initState();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    final CameraController controller = _cameraController;
+    if (controller == null || !controller.value.isInitialized) {
+      return;
+    }
+
+    if (state == AppLifecycleState.inactive) {
+      controller.dispose();
+    } else if (state == AppLifecycleState.resumed) {
+      setupCamera(cameraDescription: controller.description);
+    }
+  }
+
+  Future<void> setupCamera({CameraDescription cameraDescription}) async {
+    cameras = await availableCameras();
+    if (_cameraController != null) {
+      await _cameraController.dispose();
+    }
+    var cameraController = CameraController(
+      cameraDescription,
       ResolutionPreset.high,
     );
+    _cameraController = cameraController;
     _initailizeCameraFuture = _cameraController.initialize();
-    super.initState();
+
+    var controller = await selectCamera();
+    setState(() {
+      _cameraController = controller;
+      _initailizeCameraFuture = _cameraController.initialize();
+    });
+  }
+
+  selectCamera() async {
+    var controller =
+        CameraController(cameras[_selected], ResolutionPreset.high);
+    await controller.initialize();
+    return controller;
   }
 
   @override
   void dispose() {
     _cameraController.dispose();
     rotationController.dispose();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 

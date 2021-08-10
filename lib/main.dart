@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:instagram_clone/features/archive/presentation/pages/live_archive_page.dart';
+import 'package:instagram_clone/features/archive/presentation/pages/posts_archive_page.dart';
+import 'package:instagram_clone/features/archive/presentation/pages/stories_archive.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/login_help_page.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/login_page.dart';
 import 'package:instagram_clone/features/authorization/presentation/pages/login_with_facebook_page.dart';
@@ -13,7 +16,7 @@ import 'features/new_post/presentation/pages/new_story_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  cameras = await availableCameras();
+  //cameras = await availableCameras();
 
   runApp(MyApp());
   bool isDark =
