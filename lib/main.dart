@@ -13,7 +13,7 @@ import 'features/new_post/presentation/pages/new_story_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  cameras = await availableCameras();
+  //cameras = await availableCameras();
 
   runApp(MyApp());
   bool isDark =
