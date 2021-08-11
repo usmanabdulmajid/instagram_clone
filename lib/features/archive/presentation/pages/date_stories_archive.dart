@@ -61,8 +61,9 @@ class _DateStoriesArchiveState extends State<DateStoriesArchive> {
             startingDayOfWeek: StartingDayOfWeek.monday,
             calendarStyle: CalendarStyle(
               defaultTextStyle: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: darkModeOn ? Colors.white : Colors.grey.shade300),
+                fontWeight: FontWeight.bold,
+                color: darkModeOn ? Colors.white : Colors.grey.shade300,
+              ),
               outsideDaysVisible: false,
               weekendTextStyle: TextStyle(
                   fontWeight: FontWeight.bold,
