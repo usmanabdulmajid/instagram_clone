@@ -89,9 +89,11 @@ class _StoriesArchiveState extends State<StoriesArchive>
               child: TabBar(
                 tabs: _tabs,
                 controller: _tabController,
-                indicatorColor: Colors.white,
+                labelColor: darkModeOn ? Colors.white : Colors.black,
+                indicatorColor: darkModeOn ? Colors.white : Colors.black,
                 overlayColor: MaterialStateColor.resolveWith(
-                    (states) => Colors.transparent),
+                  (states) => Colors.transparent,
+                ),
                 indicatorWeight: 1,
               ),
             ),
