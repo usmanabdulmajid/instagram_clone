@@ -3,6 +3,8 @@ import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/archive/presentation/pages/add_stories_archive.dart';
 import 'package:instagram_clone/features/archive/presentation/pages/date_stories_archive.dart';
 import 'package:instagram_clone/features/archive/presentation/pages/location_stories_archive.dart';
+import 'package:instagram_clone/features/archive/presentation/widgets/archive_bottom_sheet.dart';
+import 'package:instagram_clone/features/archive/presentation/widgets/options_bottom_sheet.dart';
 
 class StoriesArchive extends StatefulWidget {
   @override
@@ -43,11 +45,15 @@ class _StoriesArchiveState extends State<StoriesArchive>
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.pop(context);
+          },
           child: Icon(Icons.arrow_back),
         ),
         title: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            archiveBottomSheet(context);
+          },
           child: Row(
             children: [
               Text(
@@ -66,7 +72,9 @@ class _StoriesArchiveState extends State<StoriesArchive>
         ),
         actions: [
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              optionsBottomSheet(context);
+            },
             child: Icon(Icons.more_vert),
           )
         ],

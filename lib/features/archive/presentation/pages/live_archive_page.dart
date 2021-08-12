@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
+import 'package:instagram_clone/features/archive/presentation/widgets/archive_bottom_sheet.dart';
+import 'package:instagram_clone/features/archive/presentation/widgets/options_bottom_sheet.dart';
 
 class LiveArchivePage extends StatelessWidget {
   @override
@@ -10,11 +12,15 @@ class LiveArchivePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.pop(context);
+          },
           child: Icon(Icons.arrow_back),
         ),
         title: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            archiveBottomSheet(context);
+          },
           child: Row(
             children: [
               Text(
@@ -33,7 +39,9 @@ class LiveArchivePage extends StatelessWidget {
         ),
         actions: [
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              optionsBottomSheet(context);
+            },
             child: Icon(Icons.more_vert),
           )
         ],
