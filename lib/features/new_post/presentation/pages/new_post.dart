@@ -172,42 +172,45 @@ class _NewPostState extends State<NewPost>
                 Stack(
                   clipBehavior: Clip.none,
                   children: [
-                    AnimatedPositioned(
-                      duration: Duration(milliseconds: 500),
-                      right: leftPosition ? _size.width * 0.5 : 0.0,
-                      child: AnimatedContainer(
-                        alignment: Alignment.center,
-                        duration: Duration(milliseconds: 300),
-                        width: _size.width / 2,
-                        height: _size.height,
-                        padding: EdgeInsets.only(bottom: klargeIconSize),
-                        decoration: BoxDecoration(
-                          boxShadow: collapseTile
-                              ? [
-                                  BoxShadow(
-                                    color: Colors.black54,
-                                    blurRadius: _size.width,
-                                    offset: Offset(
-                                        (leftPosition
-                                                ? -_size.width
-                                                : _size.width) /
-                                            4,
-                                        0),
-                                    spreadRadius: 0,
-                                  )
-                                ]
-                              : [
-                                  BoxShadow(
-                                    color: Colors.transparent,
-                                    offset: Offset(
-                                        (leftPosition
-                                                ? -_size.width
-                                                : _size.width) /
-                                            4,
-                                        0),
-                                    spreadRadius: 0,
-                                  )
-                                ],
+                    Visibility(
+                      visible: selectedIndex != 3,
+                      child: AnimatedPositioned(
+                        duration: Duration(milliseconds: 500),
+                        right: leftPosition ? _size.width * 0.5 : 0.0,
+                        child: AnimatedContainer(
+                          alignment: Alignment.center,
+                          duration: Duration(milliseconds: 300),
+                          width: _size.width / 2,
+                          height: _size.height,
+                          padding: EdgeInsets.only(bottom: klargeIconSize),
+                          decoration: BoxDecoration(
+                            boxShadow: collapseTile
+                                ? [
+                                    BoxShadow(
+                                      color: Colors.black54,
+                                      blurRadius: _size.width,
+                                      offset: Offset(
+                                          (leftPosition
+                                                  ? -_size.width
+                                                  : _size.width) /
+                                              4,
+                                          0),
+                                      spreadRadius: 0,
+                                    )
+                                  ]
+                                : [
+                                    BoxShadow(
+                                      color: Colors.transparent,
+                                      offset: Offset(
+                                          (leftPosition
+                                                  ? -_size.width
+                                                  : _size.width) /
+                                              4,
+                                          0),
+                                      spreadRadius: 0,
+                                    )
+                                  ],
+                          ),
                         ),
                       ),
                     ),
@@ -614,7 +617,7 @@ class _NewPostState extends State<NewPost>
                       right: leftPosition ? _size.width - 36 : 12.0,
                       child: Container(
                         child: Visibility(
-                          visible: collapseTile,
+                          visible: collapseTile && selectedIndex != 3,
                           child: InkWell(
                             onTap: () {
                               setState(() {
@@ -644,11 +647,7 @@ class _NewPostState extends State<NewPost>
               selectedIndex = index;
             });
             if (index == 0 || index == 1) {
-              _pageController.animateToPage(
-                index,
-                duration: Duration(milliseconds: 1000),
-                curve: Curves.easeIn,
-              );
+              _pageController.jumpToPage(index);
             }
           },
         ),
