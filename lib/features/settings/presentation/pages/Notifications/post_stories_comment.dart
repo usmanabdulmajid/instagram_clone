@@ -36,7 +36,7 @@ class _PostStoriesCommentPageState extends State<PostStoriesCommentPage> {
             defaultSelectedIndex: 1,
           ),
           CustomToggle(
-            title: "COMMENTS",
+            title: "Comments",
             subtitle: "joshua_l COMMENTED \"Nice shot!\".",
             options: ["Off", "From People I follow", "From Everyone"],
             defaultSelectedIndex: 1,

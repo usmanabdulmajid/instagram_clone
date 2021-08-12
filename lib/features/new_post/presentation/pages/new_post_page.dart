@@ -9,7 +9,7 @@ class _NewPostPageState extends State<NewPostPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(child: Text('post')),
+      child: Container(color: Colors.blue, child: Center(child: Text('post'))),
     );
   }
 }

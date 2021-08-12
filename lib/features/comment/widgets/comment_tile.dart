@@ -26,6 +26,8 @@ class _CommentTileState extends State<CommentTile> {
   bool selected = false;
   bool isPinned = false;
 
+  bool likedComment = false;
+
   @override
   void initState() {
     replies = [
@@ -47,45 +49,45 @@ class _CommentTileState extends State<CommentTile> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        if (!widget.onSelection) {
-          widget.toggleSelection();
-          setState(() {
-            selected = true;
-          });
-        } else if (selected) {
-          widget.toggleSelection();
-          setState(() {
-            selected = false;
-          });
-        }
-      },
-      child: Container(
-          padding: const EdgeInsets.symmetric(vertical: ksmallSpace),
-          width: Sizing.yMargin(context, 100),
-          color: selected && widget.onSelection
-              ? Theme.of(context).accentColor
-              : Colors.transparent,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: ksmallSpace),
-                child: Icon(
-                  Icons.account_circle,
-                  size: 48,
-                ),
+    return Container(
+        padding: const EdgeInsets.symmetric(vertical: ksmallSpace),
+        width: Sizing.yMargin(context, 100),
+        color: selected && widget.onSelection
+            ? Theme.of(context).accentColor
+            : Colors.transparent,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: ksmallSpace),
+              child: Icon(
+                Icons.account_circle,
+                size: 48,
               ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
+            ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            if (!widget.onSelection) {
+                              widget.toggleSelection();
+                              setState(() {
+                                selected = true;
+                              });
+                            } else if (selected) {
+                              widget.toggleSelection();
+                              setState(() {
+                                selected = false;
+                              });
+                            }
+                          },
                           child: RichText(
                             overflow: TextOverflow.ellipsis,
                             maxLines: 3,
@@ -111,113 +113,129 @@ class _CommentTileState extends State<CommentTile> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: kmediumSpace),
-                          child: CustomIcon(icon: "like", size: 14),
-                        )
-                      ],
-                    ),
-                    YMargin(ksmallSpace),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: kmediumSpace),
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              likedComment = !likedComment;
+                            });
+                          },
+                          child: likedComment
+                              ? CustomIcon(
+                                  icon: "liked_filled",
+                                  size: 14,
+                                  color: Colors.red,
+                                )
+                              : CustomIcon(
+                                  icon: "like",
+                                  size: 14,
+                                ),
+                        ),
+                      )
+                    ],
+                  ),
+                  YMargin(ksmallSpace),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "5h",
+                        style: Theme.of(context).textTheme.caption,
+                      ),
+                      XMargin(ksmallSpace),
+                      Text(
+                        "10 likes",
+                        style: Theme.of(context).textTheme.caption,
+                      ),
+                      if (isPinned) XMargin(ksmallSpace),
+                      if (isPinned)
                         Text(
-                          "5h",
+                          "📌Pinned",
                           style: Theme.of(context).textTheme.caption,
                         ),
-                        XMargin(ksmallSpace),
-                        Text(
-                          "10 likes",
+                      XMargin(ksmallSpace),
+                      GestureDetector(
+                        onTap: widget.toggleReplyInput,
+                        child: Text(
+                          "Reply",
                           style: Theme.of(context).textTheme.caption,
                         ),
-                        if (isPinned) XMargin(ksmallSpace),
-                        if (isPinned)
-                          Text(
-                            "📌Pinned",
-                            style: Theme.of(context).textTheme.caption,
-                          ),
-                        XMargin(ksmallSpace),
-                        GestureDetector(
-                          onTap: widget.toggleReplyInput,
-                          child: Text(
-                            "Reply",
-                            style: Theme.of(context).textTheme.caption,
-                          ),
+                      ),
+                    ],
+                  ),
+                  YMargin(kmediumSpace),
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            replyExpanded = !replyExpanded;
+                            if (!replyExpanded) {
+                              shownedReplies = 3;
+                            }
+                          });
+                        },
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 30,
+                              height: 1,
+                              color: Theme.of(context)
+                                  .unselectedWidgetColor
+                                  .withOpacity(0.2),
+                            ),
+                            XMargin(ksmallSpace),
+                            Text(
+                              replyExpanded
+                                  ? "Hide replies"
+                                  : "View ${replies.length} replies",
+                              style: Theme.of(context).textTheme.caption,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    YMargin(kmediumSpace),
-                    Column(
-                      children: [
+                      ),
+                      if (replyExpanded) ...replies.take(shownedReplies),
+                      if (replyExpanded &&
+                          more &&
+                          replies.length > shownedReplies)
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              replyExpanded = !replyExpanded;
-                              if (!replyExpanded) {
-                                shownedReplies = 3;
-                              }
+                              if (shownedReplies + 3 >= replies.length)
+                                shownedReplies = replies.length;
+                              else
+                                shownedReplies += 3;
                             });
                           },
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 30,
-                                height: 1,
-                                color: Theme.of(context)
-                                    .unselectedWidgetColor
-                                    .withOpacity(0.2),
-                              ),
-                              XMargin(ksmallSpace),
-                              Text(
-                                replyExpanded
-                                    ? "Hide replies"
-                                    : "View ${replies.length} replies",
-                                style: Theme.of(context).textTheme.caption,
-                              ),
-                            ],
-                          ),
-                        ),
-                        if (replyExpanded) ...replies.take(shownedReplies),
-                        if (replyExpanded &&
-                            more &&
-                            replies.length > shownedReplies)
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                if (shownedReplies + 3 >= replies.length)
-                                  shownedReplies = replies.length;
-                                else
-                                  shownedReplies += 3;
-                              });
-                            },
-                            child: Container(
-                              child: Row(
-                                children: [
-                                  Container(
-                                    height: 1,
-                                    width: 30,
-                                    color: Theme.of(context)
-                                        .unselectedWidgetColor
-                                        .withOpacity(0.4),
-                                  ),
-                                  XMargin(ksmallSpace),
-                                  Text(
-                                    "View ${replies.length - shownedReplies} more replies",
-                                    style: Theme.of(context).textTheme.caption,
-                                  ),
-                                ],
-                              ),
+                          child: Container(
+                            child: Row(
+                              children: [
+                                Container(
+                                  height: 1,
+                                  width: 30,
+                                  color: Theme.of(context)
+                                      .unselectedWidgetColor
+                                      .withOpacity(0.4),
+                                ),
+                                XMargin(ksmallSpace),
+                                Text(
+                                  "View ${replies.length - shownedReplies} more replies",
+                                  style: Theme.of(context).textTheme.caption,
+                                ),
+                              ],
                             ),
                           ),
-                      ],
-                    )
-                  ],
-                ),
-              )
-            ],
-          )),
-    );
+                        ),
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ));
   }
 }

@@ -78,7 +78,8 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
                         child: Icon(
                           Icons.account_circle_rounded,
                           size: _avatarSize * 0.80,
-                          color: Theme.of(context).primaryColor,
+                          color:
+                              Theme.of(context).primaryColor.withOpacity(0.1),
                         ),
                       ),
                     ),
