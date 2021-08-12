@@ -13,8 +13,12 @@ import 'package:instagram_clone/features/profile/presentation/pages/profile_page
 import 'package:instagram_clone/features/authorization/presentation/pages/sign_up_page.dart';
 import 'package:camera/camera.dart';
 import 'package:instagram_clone/features/settings/presentation/pages/account/add_number_page.dart';
+import 'package:instagram_clone/features/settings/presentation/pages/account/captions_page.dart';
+import 'package:instagram_clone/features/settings/presentation/pages/account/cellular_data_page.dart';
 import 'package:instagram_clone/features/settings/presentation/pages/account/change_email_page.dart';
+import 'package:instagram_clone/features/settings/presentation/pages/account/contacts_syncing_page.dart';
 import 'package:instagram_clone/features/settings/presentation/pages/account/gender_page.dart';
+import 'package:instagram_clone/features/settings/presentation/pages/account/original_post_page.dart';
 import 'package:instagram_clone/features/settings/presentation/pages/account/personal_information_page.dart';
 import 'features/new_post/presentation/pages/new_story_page.dart';
 
@@ -130,7 +134,7 @@ class MyApp extends StatelessWidget {
         ),
         bottomAppBarColor: Color(0xFF000000),
       ),
-      home: GenderPage(),
+      home: Home(),
     );
   }
 }
