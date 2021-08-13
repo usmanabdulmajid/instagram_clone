@@ -9,8 +9,8 @@ import 'package:instagram_clone/features/comment/widgets/modal_comment_report.da
 import 'package:instagram_clone/features/search/presentation/widgets/shareModalSheet.dart';
 
 class CommentPage extends StatefulWidget {
-  const CommentPage({Key key}) : super(key: key);
-
+  const CommentPage({Key key, this.focusKeyboard = false}) : super(key: key);
+  final bool focusKeyboard;
   @override
   _CommentPageState createState() => _CommentPageState();
 }
@@ -155,6 +155,7 @@ class _CommentPageState extends State<CommentPage> {
             left: 0.0,
             bottom: 0.0,
             child: CommentTextInput(
+              autoFocus: widget.focusKeyboard,
               showReplyTo: _showReplyTo,
               onHideReplyTo: hidReplyTo,
               replyTo: "joshua_l",

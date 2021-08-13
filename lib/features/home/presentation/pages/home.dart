@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/icons.dart';
 import 'package:instagram_clone/features/activity/presentation/pages/activity_page.dart';
-import 'package:instagram_clone/features/authorization/presentation/pages/login_page.dart';
-import 'package:instagram_clone/features/authorization/presentation/pages/sign_up_page.dart';
 import 'package:instagram_clone/features/home/presentation/pages/home_post_page.dart';
 import 'package:instagram_clone/features/message/presentation/pages/message.dart';
 import 'package:instagram_clone/features/new_post/presentation/pages/new_post.dart';
@@ -110,7 +108,9 @@ class _HomeState extends State<Home> {
           : NeverScrollableScrollPhysics(),
       pageSnapping: true,
       children: [
-        NewPost(),
+        NewPost(
+          gotoHomePage: gotoHomePost,
+        ),
         Scaffold(
           backgroundColor: Theme.of(context).backgroundColor,
           body: IndexedStack(
@@ -127,6 +127,7 @@ class _HomeState extends State<Home> {
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
             elevation: 0.0,
             iconSize: 16,
             selectedIconTheme: Theme.of(context).iconTheme,

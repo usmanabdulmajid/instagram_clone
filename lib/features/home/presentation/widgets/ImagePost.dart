@@ -8,6 +8,7 @@ import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/comment/presentation/comment.dart';
 import 'package:instagram_clone/features/home/presentation/widgets/action_modal_bottomsheet.dart';
 import 'package:instagram_clone/features/home/presentation/widgets/video_post.dart';
+import 'package:instagram_clone/features/search/presentation/widgets/shareModalSheet.dart';
 
 class ImagePost extends StatefulWidget {
   const ImagePost({Key key, @required this.showComment}) : super(key: key);
@@ -322,14 +323,26 @@ class _ImagePostState extends State<ImagePost> with TickerProviderStateMixin {
                   SizedBox(
                     width: kmediumSpace,
                   ),
-                  CustomIcon(
-                    icon: "comment",
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              CommentPage(focusKeyboard: true)));
+                    },
+                    child: CustomIcon(
+                      icon: "comment",
+                    ),
                   ),
                   SizedBox(
                     width: kmediumSpace,
                   ),
-                  CustomIcon(
-                    icon: "messenger",
+                  InkWell(
+                    onTap: () {
+                      buildShareModalBottomSheet(context);
+                    },
+                    child: CustomIcon(
+                      icon: "messenger",
+                    ),
                   ),
                   Expanded(
                     flex: 3,
