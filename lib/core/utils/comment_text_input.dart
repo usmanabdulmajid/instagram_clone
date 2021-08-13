@@ -4,15 +4,17 @@ import 'package:instagram_clone/core/utils/sizing.dart';
 import 'constants.dart';
 
 class CommentTextInput extends StatefulWidget {
-  const CommentTextInput(
-      {Key key,
-      this.showReplyTo = false,
-      this.replyTo = "",
-      this.onHideReplyTo})
-      : super(key: key);
+  const CommentTextInput({
+    Key key,
+    this.showReplyTo = false,
+    this.replyTo = "",
+    this.onHideReplyTo,
+    this.autoFocus = false,
+  }) : super(key: key);
   final bool showReplyTo;
   final String replyTo;
   final VoidCallback onHideReplyTo;
+  final bool autoFocus;
   @override
   _CommentTextInputState createState() => _CommentTextInputState();
 }
@@ -173,7 +175,7 @@ class _CommentTextInputState extends State<CommentTextInput>
                       Expanded(
                         child: Container(
                           child: TextField(
-                            autofocus: _onAddComment,
+                            autofocus: _onAddComment || widget.autoFocus,
                             controller: _commentBoxController,
                             toolbarOptions: ToolbarOptions(
                               copy: true,
