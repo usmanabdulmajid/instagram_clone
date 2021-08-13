@@ -384,7 +384,7 @@ class _NewPostState extends State<NewPost>
                     //This is visible only in NewStoryPage, NewReelsPage, NewLivePage
                     AnimatedOpacity(
                       duration: Duration(milliseconds: 300),
-                      opacity: collapseTile ? 0.45 : 1,
+                      opacity: collapseTile && selectedIndex != 3 ? 0.45 : 1,
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 12),
                         child: Row(
