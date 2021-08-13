@@ -108,7 +108,9 @@ class _HomeState extends State<Home> {
           : NeverScrollableScrollPhysics(),
       pageSnapping: true,
       children: [
-        NewPost(),
+        NewPost(
+          gotoHomePage: gotoHomePost,
+        ),
         Scaffold(
           backgroundColor: Theme.of(context).backgroundColor,
           body: IndexedStack(

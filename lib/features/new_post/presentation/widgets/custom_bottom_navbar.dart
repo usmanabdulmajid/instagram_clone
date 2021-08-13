@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/colors.dart';
+import 'package:instagram_clone/core/utils/constants.dart';
 
 class CustomBottomNavBar extends StatefulWidget {
   final ValueChanged onChanged;
@@ -13,11 +14,12 @@ class CustomBottomNavBar extends StatefulWidget {
 class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   @override
   Widget build(BuildContext context) {
-    var _size = MediaQuery.of(context).size;
     return Container(
-      color: AppColors.black,
-      height: 80.0,
-      width: _size.width,
+      padding: EdgeInsets.symmetric(horizontal: kmediumSpace),
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.7),
+        borderRadius: BorderRadius.circular(100),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -31,8 +33,8 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
             child: Text(
               'POST',
               style: TextStyle(
-                  color:
-                      widget.selectedIndex == 0 ? Colors.white : Colors.grey),
+                  color: widget.selectedIndex == 0 ? Colors.white : Colors.grey,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           TextButton(
@@ -45,8 +47,9 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
             child: Text(
               'STORY',
               style: TextStyle(
-                  color:
-                      widget.selectedIndex == 1 ? Colors.white : Colors.grey),
+                color: widget.selectedIndex == 1 ? Colors.white : Colors.grey,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           TextButton(
@@ -59,8 +62,9 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
             child: Text(
               'REELS',
               style: TextStyle(
-                  color:
-                      widget.selectedIndex == 2 ? Colors.white : Colors.grey),
+                color: widget.selectedIndex == 2 ? Colors.white : Colors.grey,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           TextButton(
@@ -73,8 +77,9 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
             child: Text(
               'LIVE',
               style: TextStyle(
-                  color:
-                      widget.selectedIndex == 3 ? Colors.white : Colors.grey),
+                color: widget.selectedIndex == 3 ? Colors.white : Colors.grey,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],

@@ -5,14 +5,14 @@ import 'package:instagram_clone/features/new_post/presentation/pages/new_live_pa
 import 'package:instagram_clone/features/new_post/presentation/pages/new_post_page.dart';
 import 'package:instagram_clone/features/new_post/presentation/pages/new_reels_page.dart';
 import 'package:instagram_clone/features/new_post/presentation/pages/new_story_page.dart';
-import 'package:instagram_clone/features/new_post/presentation/widgets/camera_side_menu_tile.dart';
 import 'package:instagram_clone/features/new_post/presentation/widgets/capture_button.dart';
 import 'package:instagram_clone/features/new_post/presentation/widgets/custom_bottom_navbar.dart';
 
 import 'captured_media_page.dart';
 
 class NewPost extends StatefulWidget {
-  const NewPost({Key key}) : super(key: key);
+  const NewPost({Key key, @required this.gotoHomePage}) : super(key: key);
+  final VoidCallback gotoHomePage;
 
   @override
   _NewPostState createState() => _NewPostState();
@@ -23,8 +23,6 @@ class _NewPostState extends State<NewPost>
   int selectedIndex = 1;
   CameraController _cameraController;
   Future<void> _initailizeCameraFuture;
-
-  double cPos = 0.0;
 
   int _selected = 0;
 
@@ -38,8 +36,16 @@ class _NewPostState extends State<NewPost>
   PageController _pageController =
       PageController(initialPage: 1, keepPage: true);
   AnimationController rotationController;
+
+  ScrollController _bottomNavScrollController;
+  double _bottomNavOpacity = 1;
+
   @override
   void initState() {
+    _bottomNavScrollController = ScrollController(initialScrollOffset: 100);
+    _bottomNavScrollController.addListener(() {
+      changePages();
+    });
     _pageController = PageController(initialPage: 1, keepPage: true);
     rotationController = AnimationController(
         duration: const Duration(milliseconds: 300), vsync: this);
@@ -47,6 +53,38 @@ class _NewPostState extends State<NewPost>
     WidgetsBinding.instance.addObserver(this);
 
     super.initState();
+  }
+
+  //Navigating through pages as the offset of the CustomBottomNavBar changes
+  void changePages() {
+    setState(() {
+      if (_bottomNavScrollController.offset <
+          _bottomNavScrollController.position.maxScrollExtent / 3.2) {
+        selectedIndex = 0;
+        _pageController.jumpToPage(0);
+      } else if (_bottomNavScrollController.offset >=
+          _bottomNavScrollController.position.maxScrollExtent / 2.7) {
+        if (_bottomNavScrollController.offset <=
+            _bottomNavScrollController.position.maxScrollExtent / 2) {
+          if (selectedIndex == 0) {
+            _pageController.jumpToPage(1);
+          }
+          selectedIndex = 1;
+        } else if (_bottomNavScrollController.offset <=
+            _bottomNavScrollController.position.maxScrollExtent / 1.3) {
+          if (selectedIndex == 0) {
+            _pageController.jumpToPage(1);
+          }
+          selectedIndex = 2;
+        } else if (_bottomNavScrollController.offset <=
+            _bottomNavScrollController.position.maxScrollExtent / 0.8) {
+          if (selectedIndex == 0) {
+            _pageController.jumpToPage(1);
+          }
+          selectedIndex = 3;
+        }
+      }
+    });
   }
 
   @override
@@ -136,8 +174,34 @@ class _NewPostState extends State<NewPost>
     }
   }
 
-  bool collapseTile = false;
-  bool leftPosition = true;
+  //Toggle side list Tile expansion only if collapseTile is true
+  void toggleExpanseTile() {
+    if (collapseTile) {
+      setState(() {
+        collapseTile = !collapseTile;
+        if (collapseTile) {
+          rotationController.forward();
+        } else {
+          rotationController.reverse();
+        }
+      });
+    }
+  }
+
+  //Toggle side list Tile expansion
+  void toggleifExpanseTile() {
+    setState(() {
+      collapseTile = !collapseTile;
+      if (collapseTile) {
+        rotationController.forward();
+      } else {
+        rotationController.reverse();
+      }
+    });
+  }
+
+  bool collapseTile = false; //if side tile is expanded
+  bool leftPosition = true; //if side tile is in the left position
 
   @override
   Widget build(BuildContext context) {
@@ -146,32 +210,42 @@ class _NewPostState extends State<NewPost>
       child: Scaffold(
         body: Stack(
           children: [
-            Container(
-              height: _size.height,
-              width: _size.width,
-              child: FutureBuilder(
-                future: _initailizeCameraFuture,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return CameraPreview(_cameraController);
-                  } else {
-                    print('omo ${snapshot.connectionState}');
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
-              ),
-            ),
+            //PageView for 2 pages
+            // 1: The NewPostPage ;if selectedIndex is 0 : NewPostPage is in view
+            // 2: Stack Pages (NewStoryPage, NewReelsPage, NewLivePage)
+            //selectedIndex is used to display current page in the PageView
+            //Opacity and Visibility of (NewStoryPage, NewReelsPage, NewLivePage) changes based on selectedIndex
             PageView(
               controller: _pageController,
               scrollDirection: Axis.horizontal,
               physics: NeverScrollableScrollPhysics(),
               children: [
-                NewPostPage(),
+                NewPostPage(
+                  close: widget.gotoHomePage,
+                ),
                 Stack(
                   clipBehavior: Clip.none,
                   children: [
+                    Container(
+                      height: _size.height,
+                      width: _size.width,
+                      child: FutureBuilder(
+                        future: _initailizeCameraFuture,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            return CameraPreview(_cameraController);
+                          } else {
+                            print('omo ${snapshot.connectionState}');
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                    //This is the shadow behind the list tile it is visible only when the list tile in
+                    //MewStoryPage and NewReelsPage are in view and expanded
                     Visibility(
                       visible: selectedIndex != 3,
                       child: AnimatedPositioned(
@@ -214,6 +288,7 @@ class _NewPostState extends State<NewPost>
                         ),
                       ),
                     ),
+                    //If selectedIndex == 1 NewStoryPage is visible and snaps to positon in stack
                     AnimatedPositioned(
                       duration: Duration(milliseconds: 500),
                       right: leftPosition
@@ -228,131 +303,15 @@ class _NewPostState extends State<NewPost>
                               : -20.0
                           : _size.width * 0.5,
                       curve: Curves.decelerate,
-                      child: AnimatedOpacity(
-                        duration: Duration(milliseconds: 300),
-                        opacity: selectedIndex == 1 ? 1 : 0,
-                        child: Container(
-                          alignment: Alignment.center,
-                          width: _size.width / 2,
-                          height: _size.height,
-                          padding: EdgeInsets.only(bottom: klargeIconSize),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CameraSideMenuTile(
-                                leftSide: leftPosition,
-                                leading: Text(
-                                  'Aa',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20.0),
-                                ),
-                                title: AnimatedOpacity(
-                                  duration: Duration(milliseconds: 300),
-                                  opacity: collapseTile ? 1 : 0,
-                                  child: Text('Create'),
-                                ),
-                              ),
-                              CameraSideMenuTile(
-                                leftSide: leftPosition,
-                                leading: Icon(Icons.all_inclusive_outlined),
-                                title: AnimatedOpacity(
-                                  duration: Duration(milliseconds: 300),
-                                  opacity: collapseTile ? 1 : 0,
-                                  child: Text('Boomerang'),
-                                ),
-                              ),
-                              CameraSideMenuTile(
-                                leftSide: leftPosition,
-                                leading: Icon(Icons.dashboard),
-                                title: AnimatedOpacity(
-                                  duration: Duration(milliseconds: 300),
-                                  opacity: collapseTile ? 1 : 0,
-                                  child: Text('Layout'),
-                                ),
-                              ),
-                              AnimatedSize(
-                                vsync: this,
-                                duration: Duration(milliseconds: 300),
-                                curve: Curves.easeIn,
-                                child: Container(
-                                  height: collapseTile ? null : 0,
-                                  child: Column(
-                                    children: [
-                                      CameraSideMenuTile(
-                                        leftSide: leftPosition,
-                                        leading: Icon(Icons.set_meal),
-                                        title: AnimatedOpacity(
-                                          duration: Duration(milliseconds: 300),
-                                          opacity: collapseTile ? 1 : 0,
-                                          child: Text('Multi-Capture'),
-                                        ),
-                                      ),
-                                      CameraSideMenuTile(
-                                        leftSide: leftPosition,
-                                        leading: Icon(Icons.set_meal),
-                                        title: AnimatedOpacity(
-                                          duration: Duration(milliseconds: 300),
-                                          opacity: collapseTile ? 1 : 0,
-                                          child: Text('Photobooth'),
-                                        ),
-                                      ),
-                                      CameraSideMenuTile(
-                                        leftSide: leftPosition,
-                                        leading:
-                                            Icon(Icons.stop_circle_outlined),
-                                        title: AnimatedOpacity(
-                                          duration: Duration(milliseconds: 300),
-                                          opacity: collapseTile ? 1 : 0,
-                                          child: Text('Hands-Free'),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              CameraSideMenuTile(
-                                leftSide: leftPosition,
-                                leading: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      collapseTile = !collapseTile;
-                                      if (collapseTile) {
-                                        rotationController.forward();
-                                      } else {
-                                        rotationController.reverse();
-                                      }
-                                    });
-                                  },
-                                  child: RotationTransition(
-                                    turns: Tween(begin: 0.0, end: 0.5)
-                                        .animate(rotationController),
-                                    child: Icon(Icons.expand_more),
-                                  ),
-                                ),
-                                title: AnimatedOpacity(
-                                  duration: Duration(milliseconds: 300),
-                                  opacity: collapseTile ? 1 : 0,
-                                  child: Text('Close'),
-                                ),
-                                onTap: () {
-                                  if (collapseTile) {
-                                    setState(() {
-                                      collapseTile = !collapseTile;
-                                      if (collapseTile) {
-                                        rotationController.forward();
-                                      } else {
-                                        rotationController.reverse();
-                                      }
-                                    });
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
+                      child: NewStoryPage(
+                        selectedIndex: selectedIndex,
+                        collapseTile: collapseTile,
+                        leftPosition: leftPosition,
+                        onExpand: toggleExpanseTile,
+                        onIfExpand: toggleifExpanseTile,
                       ),
                     ),
+                    //If selectedIndex == 2 NewReelsPage is visible and snaps to positon in stack
                     AnimatedPositioned(
                       duration: Duration(milliseconds: 500),
                       right: leftPosition ? _size.width * 0.5 : 0.0,
@@ -367,139 +326,15 @@ class _NewPostState extends State<NewPost>
                               ? -_size.width * 2
                               : 0.0,
                       curve: Curves.decelerate,
-                      child: AnimatedOpacity(
-                        duration: Duration(milliseconds: 300),
-                        opacity: selectedIndex == 2 ? 1 : 0,
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: _size.height,
-                          padding: EdgeInsets.only(bottom: klargeIconSize),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CameraSideMenuTile(
-                                leftSide: leftPosition,
-                                leading: Icon(Icons.audiotrack),
-                                title: AnimatedOpacity(
-                                  duration: Duration(milliseconds: 300),
-                                  opacity: collapseTile ? 1 : 0,
-                                  child: Text('Audio'),
-                                ),
-                              ),
-                              CameraSideMenuTile(
-                                leftSide: leftPosition,
-                                leading: Icon(Icons.all_inclusive_outlined),
-                                title: AnimatedOpacity(
-                                  duration: Duration(milliseconds: 300),
-                                  opacity: collapseTile ? 1 : 0,
-                                  child: Text('Length'),
-                                ),
-                              ),
-                              CameraSideMenuTile(
-                                leftSide: leftPosition,
-                                leading: Text(
-                                  '1X',
-                                  style: TextStyle(
-                                    //fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                title: AnimatedOpacity(
-                                  duration: Duration(milliseconds: 300),
-                                  opacity: collapseTile ? 1 : 0,
-                                  child: Text('Speed'),
-                                ),
-                              ),
-                              CameraSideMenuTile(
-                                leftSide: leftPosition,
-                                leading: Icon(Icons.auto_awesome),
-                                title: AnimatedOpacity(
-                                  duration: Duration(milliseconds: 300),
-                                  opacity: collapseTile ? 1 : 0,
-                                  child: Text('Effects'),
-                                ),
-                              ),
-                              CameraSideMenuTile(
-                                leftSide: leftPosition,
-                                leading: Icon(Icons.stop_circle_outlined),
-                                title: AnimatedOpacity(
-                                  duration: Duration(milliseconds: 300),
-                                  opacity: collapseTile ? 1 : 0,
-                                  child: Text('Touch up'),
-                                ),
-                              ),
-                              CameraSideMenuTile(
-                                leftSide: leftPosition,
-                                leading: Icon(Icons.dashboard),
-                                title: AnimatedOpacity(
-                                  duration: Duration(milliseconds: 300),
-                                  opacity: collapseTile ? 1 : 0,
-                                  child: Text('Video layout'),
-                                ),
-                              ),
-                              AnimatedSize(
-                                vsync: this,
-                                duration: Duration(milliseconds: 300),
-                                curve: Curves.easeIn,
-                                child: Container(
-                                  height: collapseTile ? null : 0,
-                                  child: Column(
-                                    children: [
-                                      CameraSideMenuTile(
-                                        leftSide: leftPosition,
-                                        leading: Icon(Icons.timer),
-                                        title: AnimatedOpacity(
-                                          duration: Duration(milliseconds: 300),
-                                          opacity: collapseTile ? 1 : 0,
-                                          child: Text('Timer'),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              CameraSideMenuTile(
-                                leftSide: leftPosition,
-                                leading: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      collapseTile = !collapseTile;
-                                      if (collapseTile) {
-                                        rotationController.forward();
-                                      } else {
-                                        rotationController.reverse();
-                                      }
-                                    });
-                                  },
-                                  child: RotationTransition(
-                                    turns: Tween(begin: 0.0, end: 0.5)
-                                        .animate(rotationController),
-                                    child: Icon(Icons.expand_more),
-                                  ),
-                                ),
-                                title: AnimatedOpacity(
-                                  duration: Duration(milliseconds: 300),
-                                  opacity: collapseTile ? 1 : 0,
-                                  child: Text('Close'),
-                                ),
-                                onTap: () {
-                                  if (collapseTile) {
-                                    setState(() {
-                                      collapseTile = !collapseTile;
-                                      if (collapseTile) {
-                                        rotationController.forward();
-                                      } else {
-                                        rotationController.reverse();
-                                      }
-                                    });
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
+                      child: NewReelsPage(
+                        selectedIndex: selectedIndex,
+                        collapseTile: collapseTile,
+                        leftPosition: leftPosition,
+                        onExpand: toggleExpanseTile,
+                        onIfExpand: toggleifExpanseTile,
                       ),
                     ),
+                    //If selectedIndex == 3 NewLivePage is visible and snaps to positon in stack
                     AnimatedPositioned(
                       duration: Duration(milliseconds: 500),
                       right: leftPosition ? _size.width * 0.5 : 0.0,
@@ -512,28 +347,14 @@ class _NewPostState extends State<NewPost>
                               ? -_size.width * 2
                               : 0.0,
                       curve: Curves.decelerate,
-                      child: AnimatedOpacity(
-                        duration: Duration(milliseconds: 300),
-                        opacity: selectedIndex == 3 ? 1 : 0,
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: _size.height,
-                          padding: EdgeInsets.only(bottom: klargeIconSize),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CameraSideMenuTile(
-                                leftSide: leftPosition,
-                                leading: Icon(Icons.list),
-                                title: Text('List'),
-                              ),
-                            ],
-                          ),
-                        ),
+                      child: NewLivePage(
+                        selectedIndex: selectedIndex,
+                        leftPosition: leftPosition,
                       ),
                     ),
+                    // Camera Control button
                     Positioned(
-                      bottom: 0.0,
+                      bottom: 50.0,
                       child: Container(
                         width: _size.width,
                         child: Column(
@@ -559,7 +380,8 @@ class _NewPostState extends State<NewPost>
                         ),
                       ),
                     ),
-                    //top camera button bar
+                    //Top camera button bar
+                    //This is visible only in NewStoryPage, NewReelsPage, NewLivePage
                     AnimatedOpacity(
                       duration: Duration(milliseconds: 300),
                       opacity: collapseTile ? 0.45 : 1,
@@ -591,6 +413,7 @@ class _NewPostState extends State<NewPost>
                                       size: 30.0,
                                     ),
                                   ),
+                                  //Changes visibility to true when the NewReelsPage is in view ; selectedIndex is equals to 2
                                   Visibility(
                                     visible: selectedIndex == 2,
                                     child: InkWell(
@@ -602,7 +425,7 @@ class _NewPostState extends State<NewPost>
                               ),
                             ),
                             InkWell(
-                              onTap: () {},
+                              onTap: widget.gotoHomePage,
                               child: Icon(
                                 Icons.close,
                                 size: 30.0,
@@ -612,6 +435,8 @@ class _NewPostState extends State<NewPost>
                         ),
                       ),
                     ),
+                    //Toggle button for changing the list tile position from left to right
+                    //It is visible only when the tiles are expanded
                     AnimatedPositioned(
                       duration: Duration(milliseconds: 300),
                       right: leftPosition ? _size.width - 36 : 12.0,
@@ -638,18 +463,138 @@ class _NewPostState extends State<NewPost>
                 });
               },
             ),
+            //The BottomNavBar
+            Positioned(
+              left: 0.0,
+              bottom: 0.0,
+              child: ConstrainedBox(
+                constraints:
+                    BoxConstraints(maxWidth: _size.width, maxHeight: 60),
+                child: AnimatedContainer(
+                  duration: Duration(milliseconds: 300),
+                  color: Colors.black.withOpacity(selectedIndex == 0 ? 0 : 1),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: ksmallSpace,
+                      top: ksmallSpace,
+                      bottom: ksmallSpace,
+                    ),
+                    child: ListView(
+                      controller: _bottomNavScrollController,
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        SizedBox(
+                          width: _size.width / 2.6,
+                        ),
+                        Container(
+                          child: CustomBottomNavBar(
+                            selectedIndex: selectedIndex,
+                            onChanged: (index) {
+                              setState(() {
+                                selectedIndex = index;
+                              });
+                              if (index == 0) {
+                                _bottomNavScrollController.animateTo(0.0,
+                                    duration: Duration(milliseconds: 600),
+                                    curve: Curves.easeIn);
+                              } else if (index == 1) {
+                                _bottomNavScrollController.animateTo(
+                                  _bottomNavScrollController
+                                          .position.maxScrollExtent /
+                                      2,
+                                  duration: Duration(milliseconds: 300),
+                                  curve: Curves.easeIn,
+                                );
+                              } else if (index == 2) {
+                                _bottomNavScrollController.animateTo(
+                                  _bottomNavScrollController
+                                          .position.maxScrollExtent /
+                                      1.3,
+                                  duration: Duration(milliseconds: 300),
+                                  curve: Curves.easeIn,
+                                );
+                              } else if (index == 3) {
+                                _bottomNavScrollController.animateTo(
+                                  _bottomNavScrollController
+                                          .position.maxScrollExtent /
+                                      0.8,
+                                  duration: Duration(milliseconds: 300),
+                                  curve: Curves.easeIn,
+                                );
+                              }
+                              if (index == 0 || index == 1) {
+                                _pageController.jumpToPage(index);
+                              }
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          width: _size.width / 4,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              left: ksmallSpace,
+              bottom: 0,
+              child: Visibility(
+                visible: selectedIndex != 0,
+                child: Padding(
+                  padding: const EdgeInsets.all(ksmallSpace),
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      border: Border.all(
+                        color: Colors.white,
+                        width: ksmallSpace / 4,
+                      ),
+                      borderRadius: BorderRadius.circular(ksmallSpace),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black,
+                          offset: Offset(25, 0),
+                          blurRadius: 30,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              right: ksmallSpace,
+              bottom: 0,
+              child: Visibility(
+                visible: selectedIndex != 0,
+                child: Padding(
+                  padding: const EdgeInsets.all(ksmallSpace),
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(ksmallSpace),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black,
+                          offset: Offset(-25, 0),
+                          blurRadius: 30,
+                        )
+                      ],
+                    ),
+                    child: Icon(
+                      Icons.flip_camera_ios_rounded,
+                      size: 40,
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
-        ),
-        bottomNavigationBar: CustomBottomNavBar(
-          selectedIndex: selectedIndex,
-          onChanged: (index) {
-            setState(() {
-              selectedIndex = index;
-            });
-            if (index == 0 || index == 1) {
-              _pageController.jumpToPage(index);
-            }
-          },
         ),
       ),
     );
