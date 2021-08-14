@@ -423,7 +423,11 @@ class _NewPostState extends State<NewPost>
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        //TODO change flashmode
+                                        _cameraController
+                                            .setFlashMode(FlashMode.auto);
+                                      },
                                       child: Icon(
                                         Icons.flash_off,
                                         size: 30.0,
@@ -609,9 +613,27 @@ class _NewPostState extends State<NewPost>
                         )
                       ],
                     ),
-                    child: Icon(
-                      Icons.flip_camera_ios_rounded,
-                      size: 45,
+                    child: InkWell(
+                      onTap: () async {
+                        //TODO flip camera to front or rear
+                        setState(() {
+                          if (_selected == 0) {
+                            _selected = 1;
+                          } else {
+                            _selected = 0;
+                          }
+                        });
+                        var controller = await selectCamera();
+                        setState(() {
+                          _cameraController = controller;
+                          _initailizeCameraFuture =
+                              _cameraController.initialize();
+                        });
+                      },
+                      child: Icon(
+                        Icons.flip_camera_ios_rounded,
+                        size: 45,
+                      ),
                     ),
                   ),
                 ),
