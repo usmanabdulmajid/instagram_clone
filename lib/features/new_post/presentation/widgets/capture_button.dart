@@ -32,7 +32,7 @@ class CaptureButton extends StatelessWidget {
               color: Colors.white,
             ),
             child: child ?? null,
-          )
+          ),
         ],
       ),
     );

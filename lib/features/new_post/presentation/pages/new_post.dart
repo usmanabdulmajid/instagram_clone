@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
+import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/new_post/presentation/pages/new_live_page.dart';
 import 'package:instagram_clone/features/new_post/presentation/pages/new_post_page.dart';
 import 'package:instagram_clone/features/new_post/presentation/pages/new_reels_page.dart';
@@ -38,7 +39,7 @@ class _NewPostState extends State<NewPost>
   AnimationController rotationController;
 
   ScrollController _bottomNavScrollController;
-  double _bottomNavOpacity = 1;
+  bool pauseAutoScroll = false;
 
   @override
   void initState() {
@@ -58,30 +59,32 @@ class _NewPostState extends State<NewPost>
   //Navigating through pages as the offset of the CustomBottomNavBar changes
   void changePages() {
     setState(() {
-      if (_bottomNavScrollController.offset <
-          _bottomNavScrollController.position.maxScrollExtent / 3.2) {
-        selectedIndex = 0;
-        _pageController.jumpToPage(0);
-      } else if (_bottomNavScrollController.offset >=
-          _bottomNavScrollController.position.maxScrollExtent / 2.7) {
-        if (_bottomNavScrollController.offset <=
-            _bottomNavScrollController.position.maxScrollExtent / 2) {
-          if (selectedIndex == 0) {
-            _pageController.jumpToPage(1);
+      if (!pauseAutoScroll) {
+        if (_bottomNavScrollController.offset <
+            _bottomNavScrollController.position.maxScrollExtent / 3.2) {
+          selectedIndex = 0;
+          _pageController.jumpToPage(0);
+        } else if (_bottomNavScrollController.offset >=
+            _bottomNavScrollController.position.maxScrollExtent / 2.7) {
+          if (_bottomNavScrollController.offset <=
+              _bottomNavScrollController.position.maxScrollExtent / 2) {
+            if (selectedIndex == 0) {
+              _pageController.jumpToPage(1);
+            }
+            selectedIndex = 1;
+          } else if (_bottomNavScrollController.offset <=
+              _bottomNavScrollController.position.maxScrollExtent / 1.3) {
+            if (selectedIndex == 0) {
+              _pageController.jumpToPage(1);
+            }
+            selectedIndex = 2;
+          } else if (_bottomNavScrollController.offset <=
+              _bottomNavScrollController.position.maxScrollExtent / 0.8) {
+            if (selectedIndex == 0) {
+              _pageController.jumpToPage(1);
+            }
+            selectedIndex = 3;
           }
-          selectedIndex = 1;
-        } else if (_bottomNavScrollController.offset <=
-            _bottomNavScrollController.position.maxScrollExtent / 1.3) {
-          if (selectedIndex == 0) {
-            _pageController.jumpToPage(1);
-          }
-          selectedIndex = 2;
-        } else if (_bottomNavScrollController.offset <=
-            _bottomNavScrollController.position.maxScrollExtent / 0.8) {
-          if (selectedIndex == 0) {
-            _pageController.jumpToPage(1);
-          }
-          selectedIndex = 3;
         }
       }
     });
@@ -206,6 +209,7 @@ class _NewPostState extends State<NewPost>
   @override
   Widget build(BuildContext context) {
     var _size = MediaQuery.of(context).size;
+    print(_size.height);
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -354,7 +358,7 @@ class _NewPostState extends State<NewPost>
                     ),
                     // Camera Control button
                     Positioned(
-                      bottom: 50.0,
+                      bottom: Sizing.yMargin(context, ksmallSpace),
                       child: Container(
                         width: _size.width,
                         child: Column(
@@ -468,8 +472,9 @@ class _NewPostState extends State<NewPost>
               left: 0.0,
               bottom: 0.0,
               child: ConstrainedBox(
-                constraints:
-                    BoxConstraints(maxWidth: _size.width, maxHeight: 60),
+                constraints: BoxConstraints(
+                    maxWidth: _size.width,
+                    maxHeight: Sizing.yMargin(context, ksmallSpace)),
                 child: AnimatedContainer(
                   duration: Duration(milliseconds: 300),
                   color: Colors.black.withOpacity(selectedIndex == 0 ? 0 : 1),
@@ -492,6 +497,10 @@ class _NewPostState extends State<NewPost>
                             onChanged: (index) {
                               setState(() {
                                 selectedIndex = index;
+                                pauseAutoScroll = true;
+                                Future.delayed(Duration(milliseconds: 350), () {
+                                  pauseAutoScroll = false;
+                                });
                               });
                               if (index == 0) {
                                 _bottomNavScrollController.animateTo(0.0,
@@ -509,7 +518,7 @@ class _NewPostState extends State<NewPost>
                                 _bottomNavScrollController.animateTo(
                                   _bottomNavScrollController
                                           .position.maxScrollExtent /
-                                      1.3,
+                                      1.2,
                                   duration: Duration(milliseconds: 300),
                                   curve: Curves.easeIn,
                                 );
@@ -517,7 +526,7 @@ class _NewPostState extends State<NewPost>
                                 _bottomNavScrollController.animateTo(
                                   _bottomNavScrollController
                                           .position.maxScrollExtent /
-                                      0.8,
+                                      0.7,
                                   duration: Duration(milliseconds: 300),
                                   curve: Curves.easeIn,
                                 );
