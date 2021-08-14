@@ -112,7 +112,7 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.w500,
               color: Colors.blueAccent),
           caption: TextStyle(
-            fontSize: 8.0,
+            fontSize: 10.0,
             fontStyle: FontStyle.normal,
           ),
           overline: TextStyle(

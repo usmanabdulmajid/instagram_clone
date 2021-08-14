@@ -9,6 +9,7 @@ import 'package:instagram_clone/features/new_post/presentation/pages/new_story_p
 import 'package:instagram_clone/features/new_post/presentation/widgets/capture_button.dart';
 import 'package:instagram_clone/features/new_post/presentation/widgets/custom_bottom_navbar.dart';
 
+import 'camera_settings.dart';
 import 'captured_media_page.dart';
 
 class NewPost extends StatefulWidget {
@@ -358,7 +359,7 @@ class _NewPostState extends State<NewPost>
                     ),
                     // Camera Control button
                     Positioned(
-                      bottom: Sizing.yMargin(context, ksmallSpace),
+                      bottom: Sizing.yMargin(context, 7),
                       child: Container(
                         width: _size.width,
                         child: Column(
@@ -386,56 +387,68 @@ class _NewPostState extends State<NewPost>
                     ),
                     //Top camera button bar
                     //This is visible only in NewStoryPage, NewReelsPage, NewLivePage
-                    AnimatedOpacity(
-                      duration: Duration(milliseconds: 300),
-                      opacity: collapseTile && selectedIndex != 3 ? 0.45 : 1,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            InkWell(
-                              onTap: () {},
-                              child: Icon(
-                                Icons.settings,
-                                size: 30.0,
-                              ),
-                            ),
-                            AnimatedContainer(
-                              duration: Duration(milliseconds: 600),
-                              width: selectedIndex == 2
-                                  ? _size.width * 0.75
-                                  : _size.width * 0.175,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  InkWell(
-                                    onTap: () {},
-                                    child: Icon(
-                                      Icons.flash_off,
-                                      size: 30.0,
+                    AbsorbPointer(
+                      absorbing: collapseTile,
+                      child: AnimatedOpacity(
+                        duration: Duration(milliseconds: 300),
+                        opacity: collapseTile && selectedIndex != 3 ? 0.45 : 1,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 12),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (ctx) => CameraSettingsPage(
+                                        toolSide: leftPosition,
+                                        onChangeCameraToolSide: () {},
+                                      ),
                                     ),
-                                  ),
-                                  //Changes visibility to true when the NewReelsPage is in view ; selectedIndex is equals to 2
-                                  Visibility(
-                                    visible: selectedIndex == 2,
-                                    child: InkWell(
+                                  );
+                                },
+                                child: Icon(
+                                  Icons.settings,
+                                  size: 30.0,
+                                ),
+                              ),
+                              AnimatedContainer(
+                                duration: Duration(milliseconds: 600),
+                                width: selectedIndex == 2
+                                    ? _size.width * 0.75
+                                    : _size.width * 0.175,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    InkWell(
                                       onTap: () {},
-                                      child: Icon(Icons.airplanemode_active),
+                                      child: Icon(
+                                        Icons.flash_off,
+                                        size: 30.0,
+                                      ),
                                     ),
-                                  )
-                                ],
+                                    //Changes visibility to true when the NewReelsPage is in view ; selectedIndex is equals to 2
+                                    Visibility(
+                                      visible: selectedIndex == 2,
+                                      child: InkWell(
+                                        onTap: () {},
+                                        child: Icon(Icons.airplanemode_active),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                            InkWell(
-                              onTap: widget.gotoHomePage,
-                              child: Icon(
-                                Icons.close,
-                                size: 30.0,
+                              InkWell(
+                                onTap: widget.gotoHomePage,
+                                child: Icon(
+                                  Icons.close,
+                                  size: 30.0,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -474,7 +487,7 @@ class _NewPostState extends State<NewPost>
               child: ConstrainedBox(
                 constraints: BoxConstraints(
                     maxWidth: _size.width,
-                    maxHeight: Sizing.yMargin(context, ksmallSpace)),
+                    maxHeight: Sizing.yMargin(context, 7)),
                 child: AnimatedContainer(
                   duration: Duration(milliseconds: 300),
                   color: Colors.black.withOpacity(selectedIndex == 0 ? 0 : 1),
@@ -583,8 +596,9 @@ class _NewPostState extends State<NewPost>
                 child: Padding(
                   padding: const EdgeInsets.all(ksmallSpace),
                   child: Container(
-                    width: 40,
-                    height: 40,
+                    alignment: Alignment.center,
+                    width: 45,
+                    height: 45,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(ksmallSpace),
                       boxShadow: [
@@ -597,7 +611,7 @@ class _NewPostState extends State<NewPost>
                     ),
                     child: Icon(
                       Icons.flip_camera_ios_rounded,
-                      size: 40,
+                      size: 45,
                     ),
                   ),
                 ),

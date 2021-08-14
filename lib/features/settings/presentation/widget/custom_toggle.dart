@@ -8,6 +8,7 @@ class CustomToggle extends StatefulWidget {
     this.title,
     this.subtitle,
     this.options,
+    this.labelWidget,
     this.defaultSelectedIndex,
     this.spacing = 0,
     this.onChanged,
@@ -17,6 +18,7 @@ class CustomToggle extends StatefulWidget {
   final String title;
   final String subtitle;
   final int defaultSelectedIndex;
+  final Widget labelWidget;
   final double spacing;
   final List<String> options;
   final VoidCallback onChanged;
@@ -134,6 +136,7 @@ class _CustomToggleState extends State<CustomToggle> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+            if (widget.labelWidget != null) widget.labelWidget,
             if (_optionChildren.length > 0)
               YMargin(kmediumSpace * 2)
             else
