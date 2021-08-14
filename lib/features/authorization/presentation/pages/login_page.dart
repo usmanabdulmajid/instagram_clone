@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
 
   String _userNameNullTracker = '';
   String _passwordNameNullTracker = '';
-  Language _selectedDropdownLanguage = Languages.korean;
+  // Language _selectedDropdownLanguage = Languages.korean;
   Language _selectedDialogLanguage = Languages.korean;
   final String defaultLocale = Platform.localeName;
 
@@ -48,14 +48,14 @@ class _LoginPageState extends State<LoginPage> {
         ],
       );
 
-  Widget _buildDropdownItem(Language language) {
-    return Row(
-      children: <Widget>[
-        XMargin(8),
-        Text("${language.name} (${language.isoCode})"),
-      ],
-    );
-  }
+  // Widget _buildDropdownItem(Language language) {
+  //   return Row(
+  //     children: <Widget>[
+  //       XMargin(8),
+  //       Text("${language.name} (${language.isoCode})"),
+  //     ],
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
