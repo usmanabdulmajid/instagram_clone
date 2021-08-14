@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  List<BottomNavigationBarItem> _getBAppBArIcon(int index) {
+  List<BottomNavigationBarItem> _getBAppBarIcon(int index) {
     var list = [
       BottomNavigationBarItem(
         icon: CustomIcon(
@@ -132,7 +132,7 @@ class _HomeState extends State<Home> {
             iconSize: 16,
             selectedIconTheme: Theme.of(context).iconTheme,
             unselectedIconTheme: Theme.of(context).iconTheme,
-            items: _getBAppBArIcon(_selectedIndex),
+            items: _getBAppBarIcon(_selectedIndex),
             showSelectedLabels: false,
             showUnselectedLabels: false,
             onTap: (int index) {

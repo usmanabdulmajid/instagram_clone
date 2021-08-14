@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/comment_text_input.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/core/utils/icons.dart';
-import 'package:instagram_clone/core/utils/profile_avatar.dart';
+// import 'package:instagram_clone/core/utils/profile_avatar.dart';
 import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/comment/widgets/comment_tile.dart';
 import 'package:instagram_clone/features/comment/widgets/modal_comment_report.dart';

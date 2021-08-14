@@ -16,9 +16,9 @@ class LoginWithFaceBookPage extends StatefulWidget {
 }
 
 class _LoginWithFaceBookPageState extends State<LoginWithFaceBookPage> {
-  String _userNameNullTracker = '';
-  String _passwordNameNullTracker = '';
-  Language _selectedDropdownLanguage = Languages.korean;
+  // String _userNameNullTracker = '';
+  // String _passwordNameNullTracker = '';
+  // Language _selectedDropdownLanguage = Languages.korean;
   Language _selectedDialogLanguage = Languages.korean;
   final String defaultLocale = Platform.localeName;
 

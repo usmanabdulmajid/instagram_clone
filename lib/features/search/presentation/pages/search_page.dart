@@ -27,7 +27,6 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   TabController _tabController;
   String _searchSuffix = "";
   TextEditingController _searchBoxController;
-  bool _dissmissBarrier = false;
 
   bool _likedPost;
 
@@ -157,7 +156,6 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                   return ClipRRect(
                     child: GestureDetector(
                       onLongPressStart: (details) {
-                        //TODO Start OnHoldEvent
                         showDialog(
                           barrierLabel: "Label",
                           context: context,

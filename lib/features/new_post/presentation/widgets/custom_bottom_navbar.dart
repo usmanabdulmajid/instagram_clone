@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utils/colors.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
 
 class CustomBottomNavBar extends StatefulWidget {

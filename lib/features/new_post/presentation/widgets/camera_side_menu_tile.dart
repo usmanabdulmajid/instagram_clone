@@ -12,7 +12,6 @@ class CameraSideMenuTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: onTap,
       child: Container(

@@ -25,7 +25,7 @@ class _HomePostPageState extends State<HomePostPage> {
   TextEditingController commentBoxController;
   ScrollController _controller;
   bool _onAddComment = false;
-  bool _canPostComment = false;
+  // bool _canPostComment = false;
 
   @override
   void initState() {

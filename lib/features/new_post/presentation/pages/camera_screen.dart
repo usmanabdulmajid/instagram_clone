@@ -31,8 +31,6 @@ class _CameraScreenState extends State<CameraScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var brightness = MediaQuery.of(context).platformBrightness;
-    bool darkModeOn = brightness == Brightness.dark;
     var _size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(

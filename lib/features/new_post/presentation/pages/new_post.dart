@@ -359,7 +359,7 @@ class _NewPostState extends State<NewPost>
                     ),
                     // Camera Control button
                     Positioned(
-                      bottom: Sizing.yMargin(context, 7),
+                      bottom: Sizing.yMargin(context, 10),
                       child: Container(
                         width: _size.width,
                         child: Column(
@@ -388,7 +388,7 @@ class _NewPostState extends State<NewPost>
                     //Top camera button bar
                     //This is visible only in NewStoryPage, NewReelsPage, NewLivePage
                     AbsorbPointer(
-                      absorbing: collapseTile,
+                      absorbing: collapseTile || selectedIndex == 3,
                       child: AnimatedOpacity(
                         duration: Duration(milliseconds: 300),
                         opacity: collapseTile && selectedIndex != 3 ? 0.45 : 1,
@@ -487,7 +487,7 @@ class _NewPostState extends State<NewPost>
               child: ConstrainedBox(
                 constraints: BoxConstraints(
                     maxWidth: _size.width,
-                    maxHeight: Sizing.yMargin(context, 7)),
+                    maxHeight: Sizing.yMargin(context, 10)),
                 child: AnimatedContainer(
                   duration: Duration(milliseconds: 300),
                   color: Colors.black.withOpacity(selectedIndex == 0 ? 0 : 1),
@@ -561,7 +561,7 @@ class _NewPostState extends State<NewPost>
             ),
             Positioned(
               left: ksmallSpace,
-              bottom: 0,
+              bottom: 15,
               child: Visibility(
                 visible: selectedIndex != 0,
                 child: Padding(
@@ -590,7 +590,7 @@ class _NewPostState extends State<NewPost>
             ),
             Positioned(
               right: ksmallSpace,
-              bottom: 0,
+              bottom: 15,
               child: Visibility(
                 visible: selectedIndex != 0,
                 child: Padding(
