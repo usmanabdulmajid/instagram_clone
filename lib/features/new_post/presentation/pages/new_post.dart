@@ -517,7 +517,7 @@ class _NewPostState extends State<NewPost>
                               });
                               if (index == 0) {
                                 _bottomNavScrollController.animateTo(0.0,
-                                    duration: Duration(milliseconds: 600),
+                                    duration: Duration(milliseconds: 200),
                                     curve: Curves.easeIn);
                               } else if (index == 1) {
                                 _bottomNavScrollController.animateTo(
@@ -531,7 +531,7 @@ class _NewPostState extends State<NewPost>
                                 _bottomNavScrollController.animateTo(
                                   _bottomNavScrollController
                                           .position.maxScrollExtent /
-                                      1.2,
+                                      1.4,
                                   duration: Duration(milliseconds: 300),
                                   curve: Curves.easeIn,
                                 );
