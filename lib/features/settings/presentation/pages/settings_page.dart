@@ -8,7 +8,7 @@ import 'package:instagram_clone/features/settings/presentation/pages/security_se
 import 'Notifications/notification_page.dart';
 import 'ThemeSettings.dart';
 import 'about.dart';
-import 'account_settings.dart';
+import 'account/account_settings.dart';
 import 'ad_page.dart';
 import 'help.dart';
 
