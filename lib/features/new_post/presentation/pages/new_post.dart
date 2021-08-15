@@ -27,6 +27,7 @@ class _NewPostState extends State<NewPost>
   Future<void> _initailizeCameraFuture;
 
   int _selected = 0;
+  int _flashMode = 0;
 
   List<CameraDescription> cameras;
   void setIndex(int index) {
@@ -210,7 +211,6 @@ class _NewPostState extends State<NewPost>
   @override
   Widget build(BuildContext context) {
     var _size = MediaQuery.of(context).size;
-    print(_size.height);
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -241,7 +241,6 @@ class _NewPostState extends State<NewPost>
                               ConnectionState.done) {
                             return CameraPreview(_cameraController);
                           } else {
-                            print('omo ${snapshot.connectionState}');
                             return Center(
                               child: CircularProgressIndicator(),
                             );
@@ -424,12 +423,28 @@ class _NewPostState extends State<NewPost>
                                   children: [
                                     InkWell(
                                       onTap: () {
-                                        //TODO change flashmode
-                                        _cameraController
-                                            .setFlashMode(FlashMode.auto);
+                                        setState(() {
+                                          if (_flashMode == 0) {
+                                            _cameraController
+                                                .setFlashMode(FlashMode.always);
+                                            _flashMode = 1;
+                                          } else if (_flashMode == 1) {
+                                            _cameraController
+                                                .setFlashMode(FlashMode.auto);
+                                            _flashMode = 2;
+                                          } else {
+                                            _cameraController
+                                                .setFlashMode(FlashMode.off);
+                                            _flashMode = 0;
+                                          }
+                                        });
                                       },
                                       child: Icon(
-                                        Icons.flash_off,
+                                        _flashMode == 0
+                                            ? Icons.flash_off
+                                            : _flashMode == 1
+                                                ? Icons.flash_on
+                                                : Icons.flash_auto,
                                         size: 30.0,
                                       ),
                                     ),
@@ -615,7 +630,6 @@ class _NewPostState extends State<NewPost>
                     ),
                     child: InkWell(
                       onTap: () async {
-                        //TODO flip camera to front or rear
                         setState(() {
                           if (_selected == 0) {
                             _selected = 1;

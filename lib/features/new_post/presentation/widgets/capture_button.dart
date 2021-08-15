@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'custom_ring.dart';
 
 class CaptureButton extends StatelessWidget {
-  final Widget child;
-
   const CaptureButton({this.child});
+
+  final Widget child;
   @override
   Widget build(BuildContext context) {
     return Container(
