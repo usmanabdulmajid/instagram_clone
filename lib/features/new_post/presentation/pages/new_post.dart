@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
+import 'package:instagram_clone/core/utils/sizing.dart';
 import 'package:instagram_clone/features/new_post/presentation/pages/new_live_page.dart';
 import 'package:instagram_clone/features/new_post/presentation/pages/new_post_page.dart';
 import 'package:instagram_clone/features/new_post/presentation/pages/new_reels_page.dart';
@@ -8,6 +9,7 @@ import 'package:instagram_clone/features/new_post/presentation/pages/new_story_p
 import 'package:instagram_clone/features/new_post/presentation/widgets/capture_button.dart';
 import 'package:instagram_clone/features/new_post/presentation/widgets/custom_bottom_navbar.dart';
 
+import 'camera_settings.dart';
 import 'captured_media_page.dart';
 
 class NewPost extends StatefulWidget {
@@ -25,6 +27,7 @@ class _NewPostState extends State<NewPost>
   Future<void> _initailizeCameraFuture;
 
   int _selected = 0;
+  int _flashMode = 0;
 
   List<CameraDescription> cameras;
   void setIndex(int index) {
@@ -38,7 +41,7 @@ class _NewPostState extends State<NewPost>
   AnimationController rotationController;
 
   ScrollController _bottomNavScrollController;
-  double _bottomNavOpacity = 1;
+  bool pauseAutoScroll = false;
 
   @override
   void initState() {
@@ -58,30 +61,32 @@ class _NewPostState extends State<NewPost>
   //Navigating through pages as the offset of the CustomBottomNavBar changes
   void changePages() {
     setState(() {
-      if (_bottomNavScrollController.offset <
-          _bottomNavScrollController.position.maxScrollExtent / 3.2) {
-        selectedIndex = 0;
-        _pageController.jumpToPage(0);
-      } else if (_bottomNavScrollController.offset >=
-          _bottomNavScrollController.position.maxScrollExtent / 2.7) {
-        if (_bottomNavScrollController.offset <=
-            _bottomNavScrollController.position.maxScrollExtent / 2) {
-          if (selectedIndex == 0) {
-            _pageController.jumpToPage(1);
+      if (!pauseAutoScroll) {
+        if (_bottomNavScrollController.offset <
+            _bottomNavScrollController.position.maxScrollExtent / 3.2) {
+          selectedIndex = 0;
+          _pageController.jumpToPage(0);
+        } else if (_bottomNavScrollController.offset >=
+            _bottomNavScrollController.position.maxScrollExtent / 2.7) {
+          if (_bottomNavScrollController.offset <=
+              _bottomNavScrollController.position.maxScrollExtent / 2) {
+            if (selectedIndex == 0) {
+              _pageController.jumpToPage(1);
+            }
+            selectedIndex = 1;
+          } else if (_bottomNavScrollController.offset <=
+              _bottomNavScrollController.position.maxScrollExtent / 1.3) {
+            if (selectedIndex == 0) {
+              _pageController.jumpToPage(1);
+            }
+            selectedIndex = 2;
+          } else if (_bottomNavScrollController.offset <=
+              _bottomNavScrollController.position.maxScrollExtent / 0.8) {
+            if (selectedIndex == 0) {
+              _pageController.jumpToPage(1);
+            }
+            selectedIndex = 3;
           }
-          selectedIndex = 1;
-        } else if (_bottomNavScrollController.offset <=
-            _bottomNavScrollController.position.maxScrollExtent / 1.3) {
-          if (selectedIndex == 0) {
-            _pageController.jumpToPage(1);
-          }
-          selectedIndex = 2;
-        } else if (_bottomNavScrollController.offset <=
-            _bottomNavScrollController.position.maxScrollExtent / 0.8) {
-          if (selectedIndex == 0) {
-            _pageController.jumpToPage(1);
-          }
-          selectedIndex = 3;
         }
       }
     });
@@ -236,7 +241,6 @@ class _NewPostState extends State<NewPost>
                               ConnectionState.done) {
                             return CameraPreview(_cameraController);
                           } else {
-                            print('omo ${snapshot.connectionState}');
                             return Center(
                               child: CircularProgressIndicator(),
                             );
@@ -354,7 +358,7 @@ class _NewPostState extends State<NewPost>
                     ),
                     // Camera Control button
                     Positioned(
-                      bottom: 50.0,
+                      bottom: Sizing.yMargin(context, 10),
                       child: Container(
                         width: _size.width,
                         child: Column(
@@ -382,56 +386,88 @@ class _NewPostState extends State<NewPost>
                     ),
                     //Top camera button bar
                     //This is visible only in NewStoryPage, NewReelsPage, NewLivePage
-                    AnimatedOpacity(
-                      duration: Duration(milliseconds: 300),
-                      opacity: collapseTile && selectedIndex != 3 ? 0.45 : 1,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            InkWell(
-                              onTap: () {},
-                              child: Icon(
-                                Icons.settings,
-                                size: 30.0,
-                              ),
-                            ),
-                            AnimatedContainer(
-                              duration: Duration(milliseconds: 600),
-                              width: selectedIndex == 2
-                                  ? _size.width * 0.75
-                                  : _size.width * 0.175,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  InkWell(
-                                    onTap: () {},
-                                    child: Icon(
-                                      Icons.flash_off,
-                                      size: 30.0,
+                    AbsorbPointer(
+                      absorbing: collapseTile || selectedIndex == 3,
+                      child: AnimatedOpacity(
+                        duration: Duration(milliseconds: 300),
+                        opacity: collapseTile && selectedIndex != 3 ? 0.45 : 1,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 12),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (ctx) => CameraSettingsPage(
+                                        toolSide: leftPosition,
+                                        onChangeCameraToolSide: () {},
+                                      ),
                                     ),
-                                  ),
-                                  //Changes visibility to true when the NewReelsPage is in view ; selectedIndex is equals to 2
-                                  Visibility(
-                                    visible: selectedIndex == 2,
-                                    child: InkWell(
-                                      onTap: () {},
-                                      child: Icon(Icons.airplanemode_active),
+                                  );
+                                },
+                                child: Icon(
+                                  Icons.settings,
+                                  size: 30.0,
+                                ),
+                              ),
+                              AnimatedContainer(
+                                duration: Duration(milliseconds: 600),
+                                width: selectedIndex == 2
+                                    ? _size.width * 0.75
+                                    : _size.width * 0.175,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          if (_flashMode == 0) {
+                                            _cameraController
+                                                .setFlashMode(FlashMode.always);
+                                            _flashMode = 1;
+                                          } else if (_flashMode == 1) {
+                                            _cameraController
+                                                .setFlashMode(FlashMode.auto);
+                                            _flashMode = 2;
+                                          } else {
+                                            _cameraController
+                                                .setFlashMode(FlashMode.off);
+                                            _flashMode = 0;
+                                          }
+                                        });
+                                      },
+                                      child: Icon(
+                                        _flashMode == 0
+                                            ? Icons.flash_off
+                                            : _flashMode == 1
+                                                ? Icons.flash_on
+                                                : Icons.flash_auto,
+                                        size: 30.0,
+                                      ),
                                     ),
-                                  )
-                                ],
+                                    //Changes visibility to true when the NewReelsPage is in view ; selectedIndex is equals to 2
+                                    Visibility(
+                                      visible: selectedIndex == 2,
+                                      child: InkWell(
+                                        onTap: () {},
+                                        child: Icon(Icons.airplanemode_active),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                            InkWell(
-                              onTap: widget.gotoHomePage,
-                              child: Icon(
-                                Icons.close,
-                                size: 30.0,
+                              InkWell(
+                                onTap: widget.gotoHomePage,
+                                child: Icon(
+                                  Icons.close,
+                                  size: 30.0,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -468,8 +504,9 @@ class _NewPostState extends State<NewPost>
               left: 0.0,
               bottom: 0.0,
               child: ConstrainedBox(
-                constraints:
-                    BoxConstraints(maxWidth: _size.width, maxHeight: 60),
+                constraints: BoxConstraints(
+                    maxWidth: _size.width,
+                    maxHeight: Sizing.yMargin(context, 10)),
                 child: AnimatedContainer(
                   duration: Duration(milliseconds: 300),
                   color: Colors.black.withOpacity(selectedIndex == 0 ? 0 : 1),
@@ -492,10 +529,14 @@ class _NewPostState extends State<NewPost>
                             onChanged: (index) {
                               setState(() {
                                 selectedIndex = index;
+                                pauseAutoScroll = true;
+                                Future.delayed(Duration(milliseconds: 350), () {
+                                  pauseAutoScroll = false;
+                                });
                               });
                               if (index == 0) {
                                 _bottomNavScrollController.animateTo(0.0,
-                                    duration: Duration(milliseconds: 600),
+                                    duration: Duration(milliseconds: 200),
                                     curve: Curves.easeIn);
                               } else if (index == 1) {
                                 _bottomNavScrollController.animateTo(
@@ -509,7 +550,7 @@ class _NewPostState extends State<NewPost>
                                 _bottomNavScrollController.animateTo(
                                   _bottomNavScrollController
                                           .position.maxScrollExtent /
-                                      1.3,
+                                      1.4,
                                   duration: Duration(milliseconds: 300),
                                   curve: Curves.easeIn,
                                 );
@@ -517,7 +558,7 @@ class _NewPostState extends State<NewPost>
                                 _bottomNavScrollController.animateTo(
                                   _bottomNavScrollController
                                           .position.maxScrollExtent /
-                                      0.8,
+                                      0.7,
                                   duration: Duration(milliseconds: 300),
                                   curve: Curves.easeIn,
                                 );
@@ -539,7 +580,7 @@ class _NewPostState extends State<NewPost>
             ),
             Positioned(
               left: ksmallSpace,
-              bottom: 0,
+              bottom: 15,
               child: Visibility(
                 visible: selectedIndex != 0,
                 child: Padding(
@@ -568,14 +609,15 @@ class _NewPostState extends State<NewPost>
             ),
             Positioned(
               right: ksmallSpace,
-              bottom: 0,
+              bottom: 15,
               child: Visibility(
                 visible: selectedIndex != 0,
                 child: Padding(
                   padding: const EdgeInsets.all(ksmallSpace),
                   child: Container(
-                    width: 40,
-                    height: 40,
+                    alignment: Alignment.center,
+                    width: 45,
+                    height: 45,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(ksmallSpace),
                       boxShadow: [
@@ -586,9 +628,26 @@ class _NewPostState extends State<NewPost>
                         )
                       ],
                     ),
-                    child: Icon(
-                      Icons.flip_camera_ios_rounded,
-                      size: 40,
+                    child: InkWell(
+                      onTap: () async {
+                        setState(() {
+                          if (_selected == 0) {
+                            _selected = 1;
+                          } else {
+                            _selected = 0;
+                          }
+                        });
+                        var controller = await selectCamera();
+                        setState(() {
+                          _cameraController = controller;
+                          _initailizeCameraFuture =
+                              _cameraController.initialize();
+                        });
+                      },
+                      child: Icon(
+                        Icons.flip_camera_ios_rounded,
+                        size: 45,
+                      ),
                     ),
                   ),
                 ),

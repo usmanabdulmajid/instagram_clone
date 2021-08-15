@@ -46,6 +46,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
             color: darkModeOn ? AppColors.darkStoryGrey : Colors.grey.shade100,
           ),
           child: TextField(
+            controller: _textEditingController,
             onChanged: (value) {
               setState(() {
                 if (value.isNotEmpty) {

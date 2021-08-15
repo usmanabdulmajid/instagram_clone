@@ -56,18 +56,19 @@ class _NotificationPageState extends State<NotificationPage> {
                   onTap: () {},
                 ),
                 Tile(
-                    label: "Pause All",
-                    onTap: () {},
-                    trailingWidget: Switch(
-                      value: _isPauseAll,
-                      onChanged: (value) {
-                        setState(() {
-                          _isPauseAll = !_isPauseAll;
-                        });
-                        value = _isPauseAll;
-                      },
-                      activeColor: Colors.blueAccent,
-                    )),
+                  label: "Pause All",
+                  onTap: () {},
+                  trailingWidget: Switch(
+                    value: _isPauseAll,
+                    onChanged: (value) {
+                      setState(() {
+                        _isPauseAll = !_isPauseAll;
+                      });
+                      value = _isPauseAll;
+                    },
+                    activeColor: Colors.blueAccent,
+                  ),
+                ),
                 Tile(
                   label: "Post, Share and Comments",
                   onTap: () {

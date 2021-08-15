@@ -4,8 +4,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class LocationStoriesArchive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var brightness = MediaQuery.of(context).platformBrightness;
-    bool darkModeOn = brightness == Brightness.dark;
     var _size = MediaQuery.of(context).size;
     return Container(
       width: _size.width,

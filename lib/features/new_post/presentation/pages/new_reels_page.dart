@@ -1,10 +1,6 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/constants.dart';
 import 'package:instagram_clone/features/new_post/presentation/widgets/camera_side_menu_tile.dart';
-import 'package:instagram_clone/features/new_post/presentation/widgets/capture_button.dart';
-
-import 'new_story_page.dart';
 
 class NewReelsPage extends StatefulWidget {
   const NewReelsPage({

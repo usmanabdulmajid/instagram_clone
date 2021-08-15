@@ -29,6 +29,7 @@ class _VideoPostState extends State<VideoPost> with TickerProviderStateMixin {
       ..then(
         (_) => setState(() {}),
       );
+    _initializeVideoPlayerFuture.whenComplete(() => null);
     _controller.addListener(() {
       if (_controller.value.isInitialized && _controller.value.isPlaying) {
         if (!_isDurationVisible) {
