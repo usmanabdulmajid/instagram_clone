@@ -39,6 +39,8 @@ class _StoriesArchiveState extends State<StoriesArchive>
 
   @override
   Widget build(BuildContext context) {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool darkModeOn = brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
