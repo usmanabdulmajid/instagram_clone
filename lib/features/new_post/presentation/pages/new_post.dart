@@ -359,7 +359,7 @@ class _NewPostState extends State<NewPost>
                     ),
                     // Camera Control button
                     Positioned(
-                      bottom: Sizing.yMargin(context, 10),
+                      bottom: Sizing.yMargin(context, 7),
                       child: Container(
                         width: _size.width,
                         child: Column(
