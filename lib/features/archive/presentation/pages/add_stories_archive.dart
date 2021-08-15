@@ -5,6 +5,8 @@ class AddStoriesArchive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _size = MediaQuery.of(context).size;
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool darkModeOn = brightness == Brightness.dark;
     return Container(
       width: _size.width,
       height: _size.height,
