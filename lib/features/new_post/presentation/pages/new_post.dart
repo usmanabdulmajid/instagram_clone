@@ -359,30 +359,22 @@ class _NewPostState extends State<NewPost>
                     ),
                     // Camera Control button
                     Positioned(
-                      bottom: Sizing.yMargin(context, 7),
-                      child: Container(
-                        width: _size.width,
-                        child: Column(
-                          children: [
-                            GestureDetector(
-                              onLongPress: () async {
-                                try {
-                                  await _initailizeCameraFuture;
-                                  await _cameraController.startVideoRecording();
-                                } catch (e) {
-                                  print(e);
-                                }
-                              },
-                              onLongPressUp: () {
-                                onStopVideoRecord();
-                              },
-                              onTap: () {
-                                capturePhoto();
-                              },
-                              child: CaptureButton(),
-                            ),
-                          ],
-                        ),
+                      bottom: Sizing.yMargin(context, 12),
+                      child: CaptureButton(
+                        cameraCaptureLongPress: () async {
+                          try {
+                            await _initailizeCameraFuture;
+                            await _cameraController.startVideoRecording();
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
+                        cameraCaptureLongPressUp: () {
+                          onStopVideoRecord();
+                        },
+                        cameraCaptureTap: () {
+                          capturePhoto();
+                        },
                       ),
                     ),
                     //Top camera button bar

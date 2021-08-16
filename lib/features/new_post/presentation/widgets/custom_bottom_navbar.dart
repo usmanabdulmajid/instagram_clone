@@ -27,7 +27,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       children: [
         ConstrainedBox(
           constraints: BoxConstraints(
-              maxWidth: _size.width, maxHeight: Sizing.yMargin(context, 8)),
+              maxWidth: _size.width, maxHeight: Sizing.yMargin(context, 11)),
           child: AnimatedContainer(
             duration: Duration(milliseconds: 300),
             color: Colors.black.withOpacity(widget.selectedIndex == 0 ? 0 : 1),
@@ -40,7 +40,9 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                      left: ksmallSpace, top: ksmallSpace, bottom: ksmallSpace),
+                      top: ksmallSpace,
+                      left: ksmallSpace,
+                      bottom: kmediumSpace * 1.5),
                   child: Container(
                     padding: EdgeInsets.only(left: kmediumSpace),
                     decoration: BoxDecoration(
@@ -130,7 +132,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                      top: ksmallSpace, bottom: ksmallSpace),
+                      top: ksmallSpace, bottom: kmediumSpace * 1.5),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.black.withOpacity(0.7),
