@@ -478,7 +478,10 @@ class _NewPostState extends State<NewPost>
                                 leftPosition = !leftPosition;
                               });
                             },
-                            child: Icon(Icons.sync_alt_outlined),
+                            child: Icon(
+                              Icons.sync_alt_outlined,
+                              size: klargeIconSize,
+                            ),
                           ),
                         ),
                       ),

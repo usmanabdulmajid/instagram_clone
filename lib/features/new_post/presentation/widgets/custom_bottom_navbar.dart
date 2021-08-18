@@ -40,9 +40,9 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                      top: ksmallSpace,
+                      top: ksmallSpace * 1.5,
                       left: ksmallSpace,
-                      bottom: kmediumSpace * 1.5),
+                      bottom: kmediumSpace * 2),
                   child: Container(
                     padding: EdgeInsets.only(left: kmediumSpace),
                     decoration: BoxDecoration(
@@ -132,7 +132,9 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                      top: ksmallSpace, bottom: kmediumSpace * 1.5),
+                    top: ksmallSpace * 1.5,
+                    bottom: kmediumSpace * 2,
+                  ),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.black.withOpacity(0.7),
