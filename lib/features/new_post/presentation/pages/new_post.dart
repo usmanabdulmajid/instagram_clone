@@ -213,6 +213,7 @@ class _NewPostState extends State<NewPost>
     var _size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
+        extendBody: true,
         body: Stack(
           children: [
             //PageView for 2 pages
@@ -358,30 +359,22 @@ class _NewPostState extends State<NewPost>
                     ),
                     // Camera Control button
                     Positioned(
-                      bottom: Sizing.yMargin(context, 10),
-                      child: Container(
-                        width: _size.width,
-                        child: Column(
-                          children: [
-                            GestureDetector(
-                              onLongPress: () async {
-                                try {
-                                  await _initailizeCameraFuture;
-                                  await _cameraController.startVideoRecording();
-                                } catch (e) {
-                                  print(e);
-                                }
-                              },
-                              onLongPressUp: () {
-                                onStopVideoRecord();
-                              },
-                              onTap: () {
-                                capturePhoto();
-                              },
-                              child: CaptureButton(),
-                            ),
-                          ],
-                        ),
+                      bottom: Sizing.yMargin(context, 12),
+                      child: CaptureButton(
+                        cameraCaptureLongPress: () async {
+                          try {
+                            await _initailizeCameraFuture;
+                            await _cameraController.startVideoRecording();
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
+                        cameraCaptureLongPressUp: () {
+                          onStopVideoRecord();
+                        },
+                        cameraCaptureTap: () {
+                          capturePhoto();
+                        },
                       ),
                     ),
                     //Top camera button bar
@@ -485,7 +478,10 @@ class _NewPostState extends State<NewPost>
                                 leftPosition = !leftPosition;
                               });
                             },
-                            child: Icon(Icons.sync_alt_outlined),
+                            child: Icon(
+                              Icons.sync_alt_outlined,
+                              size: klargeIconSize,
+                            ),
                           ),
                         ),
                       ),
@@ -499,161 +495,69 @@ class _NewPostState extends State<NewPost>
                 });
               },
             ),
-            //The BottomNavBar
-            Positioned(
-              left: 0.0,
-              bottom: 0.0,
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                    maxWidth: _size.width,
-                    maxHeight: Sizing.yMargin(context, 10)),
-                child: AnimatedContainer(
-                  duration: Duration(milliseconds: 300),
-                  color: Colors.black.withOpacity(selectedIndex == 0 ? 0 : 1),
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      left: ksmallSpace,
-                      top: ksmallSpace,
-                      bottom: ksmallSpace,
-                    ),
-                    child: ListView(
-                      controller: _bottomNavScrollController,
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        SizedBox(
-                          width: _size.width / 2.6,
-                        ),
-                        Container(
-                          child: CustomBottomNavBar(
-                            selectedIndex: selectedIndex,
-                            onChanged: (index) {
-                              setState(() {
-                                selectedIndex = index;
-                                pauseAutoScroll = true;
-                                Future.delayed(Duration(milliseconds: 350), () {
-                                  pauseAutoScroll = false;
-                                });
-                              });
-                              if (index == 0) {
-                                _bottomNavScrollController.animateTo(0.0,
-                                    duration: Duration(milliseconds: 200),
-                                    curve: Curves.easeIn);
-                              } else if (index == 1) {
-                                _bottomNavScrollController.animateTo(
-                                  _bottomNavScrollController
-                                          .position.maxScrollExtent /
-                                      2,
-                                  duration: Duration(milliseconds: 300),
-                                  curve: Curves.easeIn,
-                                );
-                              } else if (index == 2) {
-                                _bottomNavScrollController.animateTo(
-                                  _bottomNavScrollController
-                                          .position.maxScrollExtent /
-                                      1.4,
-                                  duration: Duration(milliseconds: 300),
-                                  curve: Curves.easeIn,
-                                );
-                              } else if (index == 3) {
-                                _bottomNavScrollController.animateTo(
-                                  _bottomNavScrollController
-                                          .position.maxScrollExtent /
-                                      0.7,
-                                  duration: Duration(milliseconds: 300),
-                                  curve: Curves.easeIn,
-                                );
-                              }
-                              if (index == 0 || index == 1) {
-                                _pageController.jumpToPage(index);
-                              }
-                            },
-                          ),
-                        ),
-                        SizedBox(
-                          width: _size.width / 4,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: ksmallSpace,
-              bottom: 15,
-              child: Visibility(
-                visible: selectedIndex != 0,
-                child: Padding(
-                  padding: const EdgeInsets.all(ksmallSpace),
-                  child: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      border: Border.all(
-                        color: Colors.white,
-                        width: ksmallSpace / 4,
-                      ),
-                      borderRadius: BorderRadius.circular(ksmallSpace),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black,
-                          offset: Offset(25, 0),
-                          blurRadius: 30,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              right: ksmallSpace,
-              bottom: 15,
-              child: Visibility(
-                visible: selectedIndex != 0,
-                child: Padding(
-                  padding: const EdgeInsets.all(ksmallSpace),
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: 45,
-                    height: 45,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(ksmallSpace),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black,
-                          offset: Offset(-25, 0),
-                          blurRadius: 30,
-                        )
-                      ],
-                    ),
-                    child: InkWell(
-                      onTap: () async {
-                        setState(() {
-                          if (_selected == 0) {
-                            _selected = 1;
-                          } else {
-                            _selected = 0;
-                          }
-                        });
-                        var controller = await selectCamera();
-                        setState(() {
-                          _cameraController = controller;
-                          _initailizeCameraFuture =
-                              _cameraController.initialize();
-                        });
-                      },
-                      child: Icon(
-                        Icons.flip_camera_ios_rounded,
-                        size: 45,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
           ],
+        ),
+        bottomNavigationBar: BottomAppBar(
+          color: Colors.transparent,
+          child: CustomBottomNavBar(
+            selectedIndex: selectedIndex,
+            controller: _bottomNavScrollController,
+            onChanged: (index) {
+              setState(() {
+                selectedIndex = index;
+                pauseAutoScroll = true;
+                Future.delayed(Duration(milliseconds: 350), () {
+                  pauseAutoScroll = false;
+                });
+              });
+              if (index == 0) {
+                _bottomNavScrollController.animateTo(0.0,
+                    duration: Duration(milliseconds: 200),
+                    curve: Curves.easeIn);
+              } else if (index == 1) {
+                _bottomNavScrollController.animateTo(
+                  _bottomNavScrollController.position.maxScrollExtent / 2,
+                  duration: Duration(milliseconds: 300),
+                  curve: Curves.easeIn,
+                );
+              } else if (index == 2) {
+                _bottomNavScrollController.animateTo(
+                  _bottomNavScrollController.position.maxScrollExtent / 1.4,
+                  duration: Duration(milliseconds: 300),
+                  curve: Curves.easeIn,
+                );
+              } else if (index == 3) {
+                _bottomNavScrollController.animateTo(
+                  _bottomNavScrollController.position.maxScrollExtent / 0.7,
+                  duration: Duration(milliseconds: 300),
+                  curve: Curves.easeIn,
+                );
+              }
+              if (index == 0 || index == 1) {
+                _pageController.jumpToPage(index);
+              }
+            },
+            rightSideWidget: InkWell(
+              onTap: () async {
+                setState(() {
+                  if (_selected == 0) {
+                    _selected = 1;
+                  } else {
+                    _selected = 0;
+                  }
+                });
+                var controller = await selectCamera();
+                setState(() {
+                  _cameraController = controller;
+                  _initailizeCameraFuture = _cameraController.initialize();
+                });
+              },
+              child: Icon(
+                Icons.flip_camera_ios_rounded,
+                size: 40.0,
+              ),
+            ),
+          ),
         ),
       ),
     );
