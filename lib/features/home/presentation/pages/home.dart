@@ -147,6 +147,7 @@ class _HomeState extends State<Home> {
               });
             },
           ),
+          
         ),
         Messaging(gotoHomeCallback: gotoHomePost),
       ],
